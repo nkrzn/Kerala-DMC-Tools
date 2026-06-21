@@ -36,6 +36,29 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
 /* PACKAGE SELECTOR */
 .pkg-selector { background: var(--cream-band); border: 1.5px solid var(--gold-soft); border-radius: 3px; padding: 16px 18px; margin-bottom: 20px; }
 .pkg-selector label { font-family: 'Cinzel', serif; font-size: 7px; letter-spacing: 2px; color: var(--muted); display: block; margin-bottom: 8px; }
+
+/* ── MODE TOGGLE ── */
+.mode-toggle { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+.mode-btn { padding:16px; border:1.5px solid rgba(61,12,17,.15); background:var(--ivory); border-radius:4px; cursor:pointer; text-align:left; transition:all .2s; }
+.mode-btn.active { border-color:var(--burgundy); background:rgba(61,12,17,.04); }
+.mode-btn:hover { border-color:var(--gold-soft); }
+.mode-icon { display:block; font-size:18px; color:var(--gold); margin-bottom:6px; }
+.mode-label { display:block; font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; color:var(--burgundy); margin-bottom:3px; }
+.mode-sub { display:block; font-family:'EB Garamond',serif; font-size:13px; font-style:italic; color:var(--muted); }
+
+/* ── CUSTOM DEST BUILDER ── */
+.custom-dest-row { border:1px solid rgba(61,12,17,.12); border-radius:4px; margin-bottom:12px; overflow:hidden; }
+.custom-dest-header { display:grid; grid-template-columns:1fr 100px 36px; gap:8px; align-items:center; padding:12px 14px; background:var(--cream-band); }
+.custom-dest-select { width:100%; background:var(--ivory); border:1px solid rgba(61,12,17,.15); border-radius:3px; padding:11px 14px; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--burgundy); outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B5237'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; }
+.custom-nights-input { font-family:'Cinzel',serif; font-size:13px; letter-spacing:.05em; border:1px solid rgba(61,12,17,.15); padding:11px 8px; background:var(--ivory); color:var(--burgundy); border-radius:3px; text-align:center; width:100%; outline:none; }
+.custom-dest-remove { background:none; border:none; color:var(--muted); cursor:pointer; font-size:18px; line-height:1; padding:4px; }
+.custom-dest-body { padding:12px 14px; background:var(--ivory); border-top:1px solid rgba(61,12,17,.08); }
+.custom-sightseeing { display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; margin-bottom:10px; }
+.custom-sight-item { display:flex; align-items:center; gap:6px; font-family:'EB Garamond',serif; font-size:14px; color:var(--ink); }
+.custom-sight-item input[type=checkbox] { accent-color:var(--burgundy); width:14px; height:14px; }
+.custom-extra-sightseeing { width:100%; padding:8px 10px; font-family:'EB Garamond',serif; font-size:14px; border:1px solid rgba(61,12,17,.12); border-radius:3px; background:var(--ivory); color:var(--ink); margin-top:6px; }
+.custom-field-label { font-family:'Cinzel',serif; font-size:8px; letter-spacing:2px; color:var(--burgundy); margin-bottom:6px; display:block; }
+
 .pkg-selector select { width: 100%; background: var(--ivory); border: 1px solid rgba(61,12,17,.15); border-radius: 3px; padding: 11px 14px; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--burgundy); outline: none; cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B5237'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
 .pkg-meta { display: flex; gap: 20px; margin-top: 10px; }
 .pkg-meta-item { font-family: 'EB Garamond', serif; font-size: 13px; color: var(--muted); font-style: italic; }
@@ -182,7 +205,23 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
 
   <div class="body">
 
-    <!-- PACKAGE -->
+    <!-- MODE TOGGLE -->
+    <div class="sec-title">SELECT MODE</div>
+    <div class="mode-toggle" id="modeToggle">
+      <div class="mode-btn active" id="modeCurated" onclick="switchMode('curated')" style="cursor:pointer;">
+        <span class="mode-icon" style="pointer-events:none;">★</span>
+        <span class="mode-label" style="pointer-events:none;">KERALA CURATED</span>
+        <span class="mode-sub" style="pointer-events:none;">10 fixed packages</span>
+      </div>
+      <div class="mode-btn" id="modeCustom" onclick="switchMode('custom')" style="cursor:pointer;">
+        <span class="mode-icon" style="pointer-events:none;">✦</span>
+        <span class="mode-label" style="pointer-events:none;">CUSTOM PACKAGE</span>
+        <span class="mode-sub" style="pointer-events:none;">Build any itinerary</span>
+      </div>
+    </div>
+
+    <!-- PACKAGE (Curated mode) -->
+    <div id="curatedSection">
     <div class="sec-title">SELECT PACKAGE</div>
     <div class="pkg-selector">
       <label>PACKAGE</label>
@@ -318,6 +357,34 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
     <div class="sec-title">QUOTE SHEET · PRICING</div>
     <!-- HOTEL FIELDS -->
     <div id="hotelFieldsWrap" style="display:none;margin-bottom:20px;">
+
+    </div><!-- /hotelSection -->
+    </div><!-- /curatedSection -->
+
+    <!-- CUSTOM PACKAGE BUILDER -->
+    <div id="customSection" style="display:none;">
+      <div class="sec-title">CUSTOM PACKAGE — BUILD ITINERARY</div>
+      <div style="margin-bottom:16px;">
+        <label class="field-label">PACKAGE / TRIP NAME</label>
+        <input type="text" id="customTripName" class="text-input" placeholder="e.g. Munnar &amp; Alleppey Honeymoon" style="width:100%;padding:10px 14px;font-family:'EB Garamond',serif;font-size:16px;border:1px solid rgba(61,12,17,.15);border-radius:3px;background:var(--ivory);color:var(--ink);text-transform:capitalize;" oninput="buildCustomHotelFields()" autocomplete="off">
+      </div>
+      <div class="sec-title" style="margin-top:20px;">SELECT DESTINATIONS &amp; NIGHTS</div>
+      <p style="font-family:'EB Garamond',serif;font-size:14px;font-style:italic;color:var(--muted);margin-bottom:16px;">Select destinations in order of travel. Itinerary, restaurants, and sightseeing auto-populate per destination.</p>
+      <div id="customDestList"></div>
+      <button onclick="addCustomDest()" style="margin-top:12px;padding:11px 24px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2.5px;color:var(--ivory);background:var(--burgundy);border:none;border-radius:3px;cursor:pointer;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">+ ADD DESTINATION</button>
+      <div id="customSummary" style="margin-top:16px;padding:12px 16px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:3px;display:none;">
+        <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;">ITINERARY SUMMARY</div>
+        <div id="customSummaryText" style="font-family:'EB Garamond',serif;font-size:14px;color:var(--muted);line-height:1.6;"></div>
+      </div>
+      <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <button onclick="generateCustomCurated()" style="padding:16px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--ivory);background:var(--burgundy);border:none;border-radius:3px;cursor:pointer;">KERALA CURATED PDF →</button>
+        <button onclick="generateCustomQuoteSheet()" style="padding:16px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--burgundy);background:transparent;border:1.5px solid var(--burgundy);border-radius:3px;cursor:pointer;">QUOTE SHEET →</button>
+      </div>
+    </div><!-- /customSection -->
+
+    <div id="pricingSection" style="margin-top:24px;border-top:1px solid rgba(61,12,17,.08);padding-top:24px;">
+
+      <div id="hotelSection">
       <div class="sec-title">ACCOMMODATION · SELECT HOTELS</div>
       <p style="font-family:'EB Garamond',serif;font-size:13px;font-style:italic;color:var(--muted);margin-bottom:14px;">Type to search or select from contracted hotels. Leave blank if not yet confirmed.</p>
       <div id="hotelFieldsContainer"></div>
@@ -398,6 +465,7 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
     <div class="btn-wrap">
       <button class="btn btn-secondary" onclick="generateQuote()">Generate Quote Sheet →</button>
     </div>
+    </div><!-- /pricingSection -->
     <div class="status" id="status"></div>
   </div>
 
@@ -405,6 +473,808 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
 </div>
 
 <script>
+const DEST_BANK = {
+  "Kochi": {
+    "zone": "Heritage Coast",
+    "overview": "Kochi is where Kerala meets the world — and has been for 600 years. The Chinese fishing nets along the waterfront, the Dutch palace, the Portuguese church, the Jewish synagogue, the Mattancherry spice lanes: every century left something behind. Fort Kochi is the rarest kind of place — a town that absorbed empire after empire and emerged with its own unhurried character intact. The air smells of salt and cardamom. The evenings are made for walking.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Fort Kochi",
+        "morning": "Arrive Kochi. Transfer to Fort Kochi (30 min from airport). Check in. Walk to the waterfront — Chinese fishing nets at their most photogenic in the late afternoon light.",
+        "afternoon": "Explore the Fort Kochi heritage precinct on foot — Dutch Cemetery, Santa Cruz Basilica, the colonial bungalow lanes. Stop at a café on Burgher Street.",
+        "evening": "Kathakali performance at Kerala Kathakali Centre (book in advance — 6 PM show recommended). Dinner on Princess Street."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Fort Kochi — Full Day",
+        "morning": "Early morning at the Chinese fishing nets before the tourist crowds arrive. Mattancherry Spice Market. Jewish Synagogue (closed Friday and Saturday).",
+        "afternoon": "Kerala Folklore Museum (Thevara) — one of the finest private collections in India. Kochi-Muziris Biennale venues if open.",
+        "evening": "Sunset ferry to Ernakulam and back — 15 minutes each way, ₹5. Dinner at a rooftop on Tower Road."
+      },
+      {
+        "label": "DAY THREE",
+        "route": "Kochi — Day Three",
+        "morning": "Cherai Beach (45 min) — the only beach accessible from Kochi worth visiting. Morning swim, fresh catch breakfast at a shack.",
+        "afternoon": "Paradesi Synagogue, Mattancherry Palace (Dutch Palace).",
+        "evening": "Cooking class at a homestay — Kerala fish curry, appam, stew. Dinner from what you cooked."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Oceanos",
+        "note": "Seafood · waterfront · Fort Kochi — the karimeen pollichathu here is the standard"
+      },
+      {
+        "name": "Dhe Puttu",
+        "note": "Kerala breakfast specialist · puttu and kadala curry · small, no-frills, essential"
+      },
+      {
+        "name": "Old Harbour Hotel Restaurant",
+        "note": "Heritage garden restaurant · best setting in Fort Kochi for a slow dinner"
+      },
+      {
+        "name": "Teapot Café",
+        "note": "Breakfast and light meals · colonial house · Fort Kochi — best coffee in the area"
+      },
+      {
+        "name": "Fusion Bay",
+        "note": "Rooftop · Fort Kochi · multicuisine · reliable for groups"
+      },
+      {
+        "name": "Dal Roti",
+        "note": "North Indian · Ernakulam · for guests who want a break from Kerala cuisine"
+      }
+    ],
+    "sightseeing": [
+      "Chinese Fishing Nets",
+      "Mattancherry Spice Market",
+      "Jewish Synagogue (Paradesi)",
+      "Dutch Palace (Mattancherry)",
+      "Santa Cruz Basilica",
+      "St Francis Church",
+      "Kerala Folklore Museum",
+      "Kathakali Performance",
+      "Cherai Beach",
+      "Kochi-Muziris Biennale venues",
+      "Sunset ferry to Ernakulam",
+      "Cooking class · Kerala cuisine"
+    ]
+  },
+  "Munnar": {
+    "zone": "The Hills",
+    "overview": "At 1,600 metres above sea level, Munnar is where Kerala exhales. The air is cooler here, the light is different — softer, more diffuse — and the landscape rolls in every direction with the particular green that only tea produces. This is the Western Ghats at their most cinematic: endless plantation, morning mist that refuses to lift until noon, and a silence that the modern world has almost entirely forgotten how to make.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "Kochi → Munnar",
+        "morning": "Depart Kochi after breakfast. The drive takes 3.5 hours through the Ghats — stop at Cheeyappara Waterfalls en route. The road from Adimali onwards is the most scenic.",
+        "afternoon": "Arrive Munnar by early afternoon. Check in. Rest. The altitude will ask something of you.",
+        "evening": "First walk through the tea estate surrounding the hotel at sunset. Dinner at the resort."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Munnar — Full Day",
+        "morning": "Early morning tea estate walk before breakfast — the plantation is most beautiful before 8 AM. After breakfast, visit Eravikulam National Park (home of the Nilgiri Tahr) — book tickets online in advance.",
+        "afternoon": "Mattupetty Dam and lake. Tea Museum at Tata Tea Estate — the history of tea in Munnar in one hour.",
+        "evening": "Sunset from Top Station if clear skies. Dinner in town or resort."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Munnar — Day Three",
+        "morning": "Sunrise hike to the Lockhart Gap viewpoint. Visit Chinnar Wildlife Sanctuary (60 km) — dry deciduous forest, different ecosystem entirely.",
+        "afternoon": "Kundala Lake and boating. Or revisit the Eravikulam plateau if Tahr herds are active.",
+        "evening": "Spice garden visit and cooking demonstration. Dinner at resort."
+      },
+      {
+        "label": "THIRD FULL DAY",
+        "route": "Munnar — Day Four",
+        "morning": "Kolukumalai — the highest tea estate in the world (2,100m). 4WD jeep required, book the night before. Sunrise from the estate is extraordinary.",
+        "afternoon": "Marayoor Sandal Forest (90 min) — only natural sandalwood forest in Kerala. Dolmens at Marayoor.",
+        "evening": "Final evening at the hotel. Long dinner."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Rapsy Restaurant",
+        "note": "Kerala meals · budget · local favourite · behind the bus stand"
+      },
+      {
+        "name": "Saravana Bhavan",
+        "note": "South Indian vegetarian · reliable · central Munnar"
+      },
+      {
+        "name": "The Tall Trees Restaurant",
+        "note": "Resort dining · forest setting · Kerala cuisine · quiet"
+      },
+      {
+        "name": "Cloud Street",
+        "note": "Café · light meals · good coffee · Munnar town"
+      },
+      {
+        "name": "Eastend Hotel Restaurant",
+        "note": "Multi-cuisine · comfortable · good for groups or families"
+      }
+    ],
+    "sightseeing": [
+      "Eravikulam National Park (Nilgiri Tahr)",
+      "Tea Museum — Tata Tea Estate",
+      "Mattupetty Dam",
+      "Top Station — highest point",
+      "Cheeyappara Waterfalls (en route from Kochi)",
+      "Echo Point",
+      "Kundala Lake",
+      "Indo-Swiss Livestock Project",
+      "Kolukumalai Estate — sunrise",
+      "Marayoor Sandalwood Forest",
+      "Chinnar Wildlife Sanctuary",
+      "Lockhart Gap viewpoint",
+      "Tea estate morning walk"
+    ]
+  },
+  "Thekkady": {
+    "zone": "The Spice Forest",
+    "overview": "Thekkady is where Kerala meets the wild. The Periyar Tiger Reserve surrounds the town — 925 square kilometres of protected forest where gaur, sambar, wild boar, and elephant move through teak and rosewood at their own pace. The spice gardens that line every road into Thekkady produce cardamom, pepper, vanilla, and cinnamon at source. The air here is heavier with green, thicker with scent.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Thekkady",
+        "morning": "Depart from previous destination. The drive passes through the Ghats — stop at a living spice plantation en route.",
+        "afternoon": "Arrive Thekkady. Check in. Short rest, then a guided walk through the Periyar buffer zone at dusk — best time for wildlife.",
+        "evening": "Traditional Kathakali performance in the village (2 hours). Book through your hotel."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Thekkady — Full Day",
+        "morning": "Periyar Lake boat safari at dawn (6:30 AM) — the lake is mirror-still in the morning and elephant herds come to the shore. Book through the Forest Department.",
+        "afternoon": "Spice garden tour — a proper guided walk through a working plantation. Afternoon at leisure.",
+        "evening": "Kalaripayattu martial arts demonstration (7 PM). Dinner at a spice garden restaurant."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Thekkady — Day Three",
+        "morning": "Nature walk inside Periyar Tiger Reserve with a trained naturalist (4 hours, book through Forest Department — limited slots).",
+        "afternoon": "Pandikuzhi waterfalls or cooking class — Kerala spice cuisine.",
+        "evening": "Bamboo rafting on Periyar Lake if available. Farewell dinner at the hotel."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Spice Village Restaurant (CGH Earth)",
+        "note": "The finest dining in Thekkady · set in a living spice garden · dinner reservations recommended"
+      },
+      {
+        "name": "Ebony's Restaurant",
+        "note": "Rooftop · multicuisine · good views over the valley"
+      },
+      {
+        "name": "Chrissie's Café",
+        "note": "Café · sandwiches and light meals · Fort Road · popular with long-stay guests"
+      },
+      {
+        "name": "Hotel Maharaja",
+        "note": "Kerala meals · thali · local · very cheap · authentic"
+      },
+      {
+        "name": "Coffee Inn",
+        "note": "Backpacker staple · good breakfast · cheap and reliable"
+      }
+    ],
+    "sightseeing": [
+      "Periyar Lake Boat Safari (dawn)",
+      "Periyar Tiger Reserve Nature Walk",
+      "Living Spice Plantation Tour",
+      "Kalaripayattu Performance",
+      "Kathakali Performance",
+      "Bamboo Rafting — Periyar Lake",
+      "Pandikuzhi Waterfalls",
+      "Cardamom Hills Village Walk",
+      "Mangaladevi Temple (seasonal)"
+    ]
+  },
+  "Alleppey": {
+    "zone": "The Backwaters",
+    "overview": "Alleppey is Kerala's most famous address for good reason — the backwater network here stretches 1,500 kilometres and connects 44 rivers, lakes, and lagoons into a landscape unlike anything else in India. A houseboat on these waters is not a luxury — it is a way of seeing. The canal villages, the toddy shops on stilts, the morning coir-weaving: none of this is visible from a road. It only reveals itself to those who travel on water.",
+    "days": [
+      {
+        "label": "HOUSEBOAT CHECK-IN",
+        "route": "→ Alleppey · Houseboat",
+        "morning": "Transfer to Alleppey. Board the houseboat at the jetty by noon. Meet your crew — cook, captain, deckhand.",
+        "afternoon": "Afternoon cruise through the village canals. Watch life on the banks — laundry, fishing, children, coconut palms. Anchor in an open lagoon as the sun drops.",
+        "evening": "Sunset from the upper deck. The cook prepares Kerala fish curry, appam, prawn masala — all aboard. Night at anchor in the backwaters."
+      },
+      {
+        "label": "HOUSEBOAT DAY",
+        "route": "Alleppey Backwaters — Full Day",
+        "morning": "Dawn on the backwaters — the mist, the fishing boats, the silence. Breakfast on the upper deck. Morning cruise through Vembanad Lake.",
+        "afternoon": "Village stop — walk through a coir village or visit a local toddy shop. Afternoon cruise back toward Alleppey.",
+        "evening": "Disembark at sunset. Transfer onward or overnight in Alleppey town."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Chakara Restaurant (Raheem Residency)",
+        "note": "The finest table in Alleppey · seafood · heritage hotel · reserve in advance"
+      },
+      {
+        "name": "Thaff Restaurant",
+        "note": "Seafood · Canal Road · local favourite · karimeen and prawns"
+      },
+      {
+        "name": "Martin's Corner",
+        "note": "Seafood · legendary · the karimeen here is the best in Alleppey · long queues at lunch"
+      },
+      {
+        "name": "Mushroom Restaurant",
+        "note": "Budget · Kerala thali · reliable · near the bus stand"
+      }
+    ],
+    "sightseeing": [
+      "Houseboat cruise — Vembanad Lake",
+      "Village canal cruise",
+      "Alleppey Beach (sunrise)",
+      "Punnamada Lake",
+      "Coir Village walk",
+      "Kuttanad — below sea-level paddy fields",
+      "Krishnapuram Palace (30 km south)",
+      "Marari Beach (15 km north)"
+    ]
+  },
+  "Kumarakom": {
+    "zone": "The Backwaters",
+    "overview": "Kumarakom sits on the eastern shore of Vembanad Lake where the backwaters are at their widest and most unhurried. The Bird Sanctuary here draws Siberian storks and egrets from November to February. The heritage properties along the lake edge are some of the finest addresses in Kerala. Kumarakom is for people who want the backwater experience without the bustle of Alleppey.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Kumarakom",
+        "morning": "Transfer to Kumarakom from previous destination. Check in by noon. First afternoon at leisure — the resort will be reason enough.",
+        "afternoon": "Evening boat ride on Vembanad Lake from the resort jetty. Sunset over the water is unhurried here.",
+        "evening": "Dinner at the resort. The backwater properties here have exceptional kitchen teams."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Kumarakom — Full Day",
+        "morning": "Kumarakom Bird Sanctuary at dawn (best November to February) — walking trail through the mangroves. Breakfast back at the resort.",
+        "afternoon": "Canoe tour through the narrow village canals — different from the main lake. Village life at close range.",
+        "evening": "Sunset from the resort deck. Ayurvedic treatment at the spa if desired. Long dinner."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Kumarakom — Day Three",
+        "morning": "Sunrise fishing with local fishermen — arranged through the resort. Back for breakfast.",
+        "afternoon": "Day trip to Kottayam town (20 km) — Valiapally Church (1550 AD), Cheriapally Church. Rubber plantation drive.",
+        "evening": "Final evening on the water. Cooking demonstration — Kerala appam and stew."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Kumarakom Lake Resort Restaurant",
+        "note": "The best lakefront dining in Kerala · extensive Kerala cuisine · outdoor terrace"
+      },
+      {
+        "name": "Coconut Lagoon Restaurant (CGH Earth)",
+        "note": "Heritage dining · boat access only · traditional Kerala recipes"
+      },
+      {
+        "name": "The Zuri Kumarakom Restaurant",
+        "note": "Contemporary · poolside and lakefront options · multicuisine"
+      },
+      {
+        "name": "Baker's Street",
+        "note": "Café · Kottayam town · 20 km · good for a day trip lunch"
+      }
+    ],
+    "sightseeing": [
+      "Kumarakom Bird Sanctuary",
+      "Vembanad Lake sunset cruise",
+      "Village canoe tour",
+      "Kottayam Churches (Valiapally · Cheriapally)",
+      "Rubber plantation drive",
+      "Pathiramanal Island (migratory birds)",
+      "Aruvikkuzhi Waterfall (20 km)"
+    ]
+  },
+  "Wayanad": {
+    "zone": "The Forest North",
+    "overview": "Wayanad is the Kerala that tourists often miss — a high plateau at 900 metres covered in coffee, cardamom, and dense forest. The Wayanad Wildlife Sanctuary is home to elephant, gaur, and leopard. The tribal communities here have lived in these forests for thousands of years. Wayanad is slower than Munnar, less visited than Thekkady, and completely its own thing.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Wayanad",
+        "morning": "Transfer to Wayanad (3.5 hours from Kozhikode or 4 hours from Mysore). The Thamarassery Ghat road has 13 hairpin bends — stop for tea at the viewpoint.",
+        "afternoon": "Arrive and check in. Short drive to Banasura Sagar Dam — largest earthen dam in India.",
+        "evening": "Dinner at the resort. Wayanad nights are cold — request a bonfire if your property offers it."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Wayanad — Full Day",
+        "morning": "Chembra Peak trek (2,100m) — starts at 7 AM, 4-hour return hike, mandatory guide from Forest Department. Heart-shaped lake at the summit.",
+        "afternoon": "Edakkal Caves — Neolithic rock carvings from 5,000 years ago. The climb is 45 minutes. Arrive before 3 PM.",
+        "evening": "Bamboo village or tribal craft market in Kalpetta. Dinner in town or at resort."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Wayanad — Day Three",
+        "morning": "Wayanad Wildlife Sanctuary — jeep safari at dawn (Muthanga or Tholpetty range). Best elephant sightings in Kerala outside Periyar.",
+        "afternoon": "Thirunelli Temple (38 km) — one of Kerala's most sacred Vishnu temples, in a valley surrounded by forest.",
+        "evening": "Coffee plantation walk at the resort or nearby estate. Sunset from Vythiri viewpoint."
+      },
+      {
+        "label": "THIRD FULL DAY",
+        "route": "Wayanad — Day Four",
+        "morning": "Kuruva Island (Kabani River) — uninhabited river island accessible only by bamboo raft. Dense forest, birds, river.",
+        "afternoon": "Soochippara (Sentinel Rock) Waterfalls — 100m drop into a pool. Swimming allowed.",
+        "evening": "Local market in Sultan Bathery. Handicrafts, tribal honey, black pepper at source."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Vythiri Resort Restaurant",
+        "note": "Treetop dining · Kerala and continental · the best setting in Wayanad"
+      },
+      {
+        "name": "Pepper County Restaurant",
+        "note": "Multicuisine · Kalpetta · reliable for groups and families"
+      },
+      {
+        "name": "Olive Garden",
+        "note": "South Indian · Kalpetta · local favourite · Kerala thali"
+      },
+      {
+        "name": "Coffee Trails Restaurant",
+        "note": "Coffee estate setting · light meals · good coffee naturally"
+      }
+    ],
+    "sightseeing": [
+      "Chembra Peak trek",
+      "Edakkal Caves (Neolithic rock art)",
+      "Wayanad Wildlife Sanctuary jeep safari",
+      "Banasura Sagar Dam",
+      "Kuruva Island bamboo raft",
+      "Soochippara Waterfalls",
+      "Thirunelli Temple",
+      "Thamarassery Ghat viewpoint",
+      "Tribal village visit",
+      "Coffee and cardamom plantation walk"
+    ]
+  },
+  "Kovalam": {
+    "zone": "The Southern Coast",
+    "overview": "Kovalam is three beaches separated by rocky headlands. The real Kovalam is found at the edges — the clifftop Ayurveda resorts at Chowara, the rocks at the southern end where the lighthouse stands, the mornings before the beach fills. The Arabian Sea here is calmer than the east coast and warmer than anywhere in North India.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "Trivandrum → Kovalam",
+        "morning": "Arrive Trivandrum airport. Transfer to Kovalam (30 min). Check in. First view of the Arabian Sea.",
+        "afternoon": "Walk the beach crescent to the lighthouse. Swim in the calm water at the northern end. First coconut on the beach.",
+        "evening": "Sunset from the lighthouse rocks. Seafood dinner on the beach."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Kovalam — Full Day",
+        "morning": "Padmanabhaswamy Temple, Trivandrum (30 min). Napier Museum and Zoo complex.",
+        "afternoon": "Vizhinjam Mosque and harbour (3 km south). Vizhinjam rock cave temple — 8th century.",
+        "evening": "Ayurvedic treatment at one of the clifftop resorts. Dinner with lighthouse view."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Kovalam — Day Three",
+        "morning": "Poovar (30 km south) — where the Neyyar River meets the sea through a narrow golden beach. Boat into the estuary.",
+        "afternoon": "Kanyakumari (90 min) — the southernmost tip of India. Three seas meet. Vivekananda Rock Memorial.",
+        "evening": "Back to Kovalam. Long walk on the beach. Final Ayurveda session."
+      },
+      {
+        "label": "THIRD FULL DAY",
+        "route": "Kovalam — Day Four",
+        "morning": "Niraamaya Surya Samudra clifftop walk. Morning yoga if offered.",
+        "afternoon": "Backwater boat ride from Poovar estuary. Halcyon Castle gardens.",
+        "evening": "Sunset on the beach. Last seafood dinner."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Suprabhatham",
+        "note": "South Indian breakfast · the best idli in Trivandrum · open from 7 AM · cheap and essential"
+      },
+      {
+        "name": "Fusion Restaurant",
+        "note": "Seafood · Lighthouse Beach promenade · reliable · good catch daily"
+      },
+      {
+        "name": "Rockholm Restaurant",
+        "note": "Clifftop · heritage property · Kerala cuisine · reserve for sunset dinner"
+      },
+      {
+        "name": "Whispering Palms",
+        "note": "Beachfront · casual · good for lunch after swimming"
+      },
+      {
+        "name": "Coffee Temple",
+        "note": "Café · light meals · Lighthouse Beach · good for breakfast"
+      }
+    ],
+    "sightseeing": [
+      "Lighthouse Beach",
+      "Kovalam Lighthouse climb",
+      "Padmanabhaswamy Temple (Trivandrum)",
+      "Napier Museum",
+      "Vizhinjam Rock Cave Temple",
+      "Poovar estuary boat ride",
+      "Kanyakumari (southernmost tip)",
+      "Ayurvedic treatment at clifftop resort",
+      "Clifftop walk — Niraamaya Surya Samudra",
+      "Morning yoga session"
+    ]
+  },
+  "Varkala": {
+    "zone": "The Cliff Coast",
+    "overview": "Varkala is built on a laterite cliff 15 metres above the Arabian Sea, and the cliff is the town. The promenade along the top is lined with cafés, yoga studios, and Ayurveda centres. Below the cliff is a beach of startling beauty — the water is cleaner here than anywhere else on the Kerala coast.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Varkala",
+        "morning": "Transfer to Varkala. Check in to clifftop property. Walk to the cliff edge for the first view.",
+        "afternoon": "Descend to the beach. Swim. Walk south to the black rock outcrop at the southern end.",
+        "evening": "Sunset from the cliff. Dinner at a clifftop café."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Varkala — Full Day",
+        "morning": "Janardhana Swami Temple at sunrise — the 2,000-year-old Vishnu temple on the cliff. Morning puja is at 5:30 AM.",
+        "afternoon": "Kappil Beach (8 km north) — where the Edava-Nadayara Lake meets the sea. Quieter than Varkala. Backwater boat ride.",
+        "evening": "Yoga class on the cliff. Ayurvedic foot massage. Dinner at a restaurant on the north cliff."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Varkala — Day Three",
+        "morning": "Anjengo Fort (20 km south) — the first British East India Company outpost in Kerala.",
+        "afternoon": "Sivagiri Mutt (4 km) — the ashram of Sri Narayana Guru, Kerala's great social reformer.",
+        "evening": "Final sunset on the cliff. Long dinner."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Café del Mar",
+        "note": "Clifftop · sunset views · good seafood · popular · arrive early for a window seat"
+      },
+      {
+        "name": "The Treatment",
+        "note": "North cliff · multicuisine · reliable · good for groups"
+      },
+      {
+        "name": "Darjeeling Café",
+        "note": "North cliff · healthy food · good coffee · young crowd"
+      },
+      {
+        "name": "Juice Shack",
+        "note": "Fresh juices · light meals · beach level · post-swim staple"
+      },
+      {
+        "name": "Sree Padmanabha",
+        "note": "Kerala meals · town · local · cheap and good · thali lunch"
+      }
+    ],
+    "sightseeing": [
+      "Varkala Cliff promenade walk",
+      "Varkala Beach swim",
+      "Janardhana Swami Temple",
+      "Kappil Beach and backwater",
+      "Sivagiri Mutt",
+      "Anjengo Fort",
+      "Morning yoga on the cliff",
+      "Ayurveda treatment",
+      "Sunset from the cliff edge"
+    ]
+  },
+  "Kannur": {
+    "zone": "Malabar North",
+    "overview": "Kannur is the home of Theyyam — the possession ritual of North Kerala in which performers become gods. From October to May, Theyyam performances happen in temple forecourts across the district every night. Kannur is also a weaving town: the handloom weavers have supplied fabric to the world for centuries.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Kannur",
+        "morning": "Transfer to Kannur. Check in. Walk to Payyambalam Beach — the cleanest beach in Kannur.",
+        "afternoon": "St Angelo Fort — Portuguese fort on the headland (1505). The view north toward Malabar is exceptional.",
+        "evening": "Theyyam inquiry — ask your hotel which temple is performing tonight. Theyyam starts after 10 PM and can run until dawn."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Kannur — Full Day",
+        "morning": "Dharmadam Island — uninhabited island 200m off the coast, accessible by foot at low tide. Morning birds and silence.",
+        "afternoon": "Kannur Handloom Weavers' Colony — watch the looms in action. Purchase directly from the weavers.",
+        "evening": "Theyyam performance if available. Dinner at hotel."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "MVK Restaurant",
+        "note": "Malabar Muslim cuisine · biryani · pathiri · the best in Kannur"
+      },
+      {
+        "name": "Hotel Malabar",
+        "note": "Kerala thali · lunch · reliable · town centre"
+      },
+      {
+        "name": "Mascot Beach Restaurant",
+        "note": "Hotel restaurant · seafood · beachfront · good for dinner"
+      },
+      {
+        "name": "Paragon Restaurant",
+        "note": "Kozhikode franchise · biryani · multicuisine · reliable"
+      }
+    ],
+    "sightseeing": [
+      "Theyyam ritual performance (Oct–May)",
+      "St Angelo Fort",
+      "Payyambalam Beach",
+      "Dharmadam Island",
+      "Kannur Handloom Weavers' Colony",
+      "Parassinikadavu Serpent Boat Race (seasonal)",
+      "Muzhappilangad Drive-in Beach (15 km)"
+    ]
+  },
+  "Bekal": {
+    "zone": "Malabar North",
+    "overview": "Bekal Fort is the largest fort in Kerala — a 40-acre laterite structure on a headland that juts into the Arabian Sea. The North Kerala coast here is less developed than the south: longer beaches, fewer tourists, and a quieter version of coastal Kerala. The backwaters at Bekal are navigable by small boat and almost entirely undiscovered.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Bekal",
+        "morning": "Transfer to Bekal from Kannur (1 hour). Check in. Walk to Bekal Fort immediately — the afternoon light on the laterite is exceptional.",
+        "afternoon": "Bekal Fort — the keyhole window with the sea view. Walk the ramparts.",
+        "evening": "Kappil Beach backwater — sunset boat ride on the backwater."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Bekal — Full Day",
+        "morning": "Nityananda Ashram (Kanhangad, 12 km) — the cave ashram of Swami Nityananda.",
+        "afternoon": "Ananthapura Lake Temple (30 km inland) — the only lake temple in Kerala, on a small island.",
+        "evening": "Bekal Backwater boat ride at sunset. Dinner at the resort — Malabar seafood is the best in Kerala."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Neeleshwar Hermitage Restaurant",
+        "note": "The finest table in North Kerala · boutique resort · Malabar cuisine · book in advance"
+      },
+      {
+        "name": "Nandanam Restaurant",
+        "note": "Kerala thali · Kasaragod town · local favourite"
+      },
+      {
+        "name": "Hotel Sudharsan",
+        "note": "Fish curry and rice · cheap · authentic · near the fort"
+      }
+    ],
+    "sightseeing": [
+      "Bekal Fort",
+      "Kappil Beach backwater sunset",
+      "Ananthapura Lake Temple",
+      "Nityananda Ashram (Kanhangad)",
+      "Bekal Backwater boat ride",
+      "Pallikere Beach (beside the fort)"
+    ]
+  },
+  "Vagamon": {
+    "zone": "The Meadow Hills",
+    "overview": "Vagamon is a hill station at 1,100 metres — an elevated plateau of pine forests, meadows, and mist. There are no tea estates here: the landscape is more open than Munnar, more pastoral, and considerably quieter. Vagamon is for people who want altitude without the crowds.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Vagamon",
+        "morning": "Transfer to Vagamon (3.5 hours from Kochi or 2 hours from Kottayam).",
+        "afternoon": "Arrive and check in. Walk to Vagamon Meadows — open grassland with pine forest fringe. The silence is the main attraction.",
+        "evening": "Sunset from the meadows. Dinner at the resort. Vagamon nights are cold."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Vagamon — Full Day",
+        "morning": "Murugan Hill trek (2 hours return). Paragliding is available from the meadows from October to May.",
+        "afternoon": "Kurisumala Ashram (6 km) — a Cistercian monastery at 1,300 metres with extraordinary valley views.",
+        "evening": "Pine forest walk at sunset. Dinner and campfire if your property offers it."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Vagamon — Day Three",
+        "morning": "Peerumedu (20 km) — a quieter plateau with cardamom estates and Elappara viewpoint.",
+        "afternoon": "Illikkal Kallu — a monolithic rock formation (1,580m) accessible by jeep and short hike.",
+        "evening": "Last evening in the meadows. Slow dinner."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Elango's",
+        "note": "Kerala meals · local · cheap · Vagamon town · the most authentic option"
+      },
+      {
+        "name": "Elagon Resort Restaurant",
+        "note": "Meadowland setting · Kerala and continental · reliable"
+      },
+      {
+        "name": "Misty Valley Restaurant",
+        "note": "Budget · multicuisine · town centre · good for lunch"
+      }
+    ],
+    "sightseeing": [
+      "Vagamon Meadows walk",
+      "Murugan Hill trek",
+      "Paragliding (Oct–May)",
+      "Kurisumala Ashram",
+      "Thangalpara Rock viewpoint",
+      "Pine forest walk",
+      "Illikkal Kallu monolith",
+      "Peerumedu plateau drive"
+    ]
+  },
+  "Marari": {
+    "zone": "The Coconut Coast",
+    "overview": "Marari is a beach that exists before tourism arrived. The fishing village of Mararikulam sits behind it — catamarans at dawn, nets drying on the sand, the smell of smoked fish. The beach itself stretches uninterrupted for several kilometres in both directions, backed by an unbroken line of coconut palms.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Marari Beach",
+        "morning": "Transfer to Marari (15 min from Alleppey or 90 min from Kochi). Check in. Walk to the beach immediately.",
+        "afternoon": "Afternoon on the beach. Swim. Walk south toward the fishing village and watch the boats come in.",
+        "evening": "Sunset on the beach. Dinner at the resort."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Marari — Full Day",
+        "morning": "Walk into Mararikulam village at dawn — fishermen sorting the catch, catamarans pulling up on the sand.",
+        "afternoon": "Couples Ayurveda at the resort spa (90 min). Afternoon by the pool or on the beach.",
+        "evening": "Private candlelit beach dinner if arranged through the resort."
+      },
+      {
+        "label": "SECOND FULL DAY",
+        "route": "Marari — Day Three",
+        "morning": "Bicycle tour through the village lanes — rice paddies, church, toddy shop, coir yard.",
+        "afternoon": "Day trip to Alleppey (15 km) — canal cruise, coir museum, Ambalapuzha temple.",
+        "evening": "Last beach sunset. Long dinner."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Marari Beach Resort Restaurant (CGH Earth)",
+        "note": "Heritage homestead · best Kerala seafood on the coast · open to non-guests with reservation"
+      },
+      {
+        "name": "Xandari Pearl Restaurant",
+        "note": "Organic garden produce · light cuisine · villa property · excellent breakfast"
+      },
+      {
+        "name": "Martin's Corner",
+        "note": "Seafood · Alleppey (15 km) · legendary · the karimeen here is the best in Alleppey"
+      }
+    ],
+    "sightseeing": [
+      "Marari Beach walk",
+      "Mararikulam fishing village at dawn",
+      "Couples Ayurveda at resort",
+      "Bicycle tour through village",
+      "Candlelit beach dinner",
+      "Day trip to Alleppey (15 km)",
+      "Coconut palm grove walk"
+    ]
+  },
+  "Trivandrum": {
+    "zone": "The Capital",
+    "overview": "Thiruvananthapuram is the capital of Kerala and one of the few Indian cities where the old centre still has a heartbeat. The Padmanabhaswamy Temple is the most important Vishnu shrine in Kerala. The Napier Museum, the Zoo, the Government Arts College: all are colonial-era buildings of real quality.",
+    "days": [
+      {
+        "label": "ARRIVAL / TRANSIT",
+        "route": "Trivandrum",
+        "morning": "Arrive Trivandrum airport. Transfer to hotel (20 min). Check in.",
+        "afternoon": "Padmanabhaswamy Temple — men must wear dhoti (available for hire at the gate). Napier Museum (closes at 5 PM).",
+        "evening": "Museum Road walk. Dinner in the Kowdiar or Vazhuthacaud area."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Suprabhatham",
+        "note": "South Indian breakfast · the best idli in Trivandrum · open from 7 AM · cheap and essential"
+      },
+      {
+        "name": "Ariya Nivaas",
+        "note": "Kerala vegetarian thali · lunch · local institution"
+      },
+      {
+        "name": "Villa Maya",
+        "note": "Fine dining · Dutch colonial building · best dinner in Trivandrum · reserve in advance"
+      },
+      {
+        "name": "Cherries & Berries",
+        "note": "Café · Kowdiar · light meals · good coffee · good for a break"
+      }
+    ],
+    "sightseeing": [
+      "Padmanabhaswamy Temple",
+      "Napier Museum",
+      "Kuthiramalika Palace Museum",
+      "Trivandrum Zoo",
+      "Shanmugham Beach (evening walk)",
+      "Kerala Government Arts College building"
+    ]
+  },
+  "Poovar": {
+    "zone": "The Southern Tip",
+    "overview": "Poovar is where the Neyyar River meets the Arabian Sea through a narrow lagoon, separated from the ocean by a thin strip of golden beach. The island is accessible only by boat — no roads, no cars. The floating cottages on the river and the beach villas on the sea side are the only accommodation.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Poovar Island",
+        "morning": "Transfer from Kovalam or Trivandrum (30 min by road, then boat). Board the resort boat from the jetty.",
+        "afternoon": "Arrive at the floating cottages or beach villa. Afternoon at leisure — the river is calm enough to swim in, the beach is 200 metres away.",
+        "evening": "Sunset boat ride on the Neyyar estuary. Dinner at the resort."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Poovar Island Resort Restaurant",
+        "note": "The only real option on the island · seafood · fresh · no alternative needed"
+      },
+      {
+        "name": "Halcyon Castle Restaurant",
+        "note": "Heritage property · garden dining · good for lunch on the day of arrival"
+      }
+    ],
+    "sightseeing": [
+      "Neyyar estuary boat ride",
+      "Poovar Golden Beach walk",
+      "Floating cottage experience",
+      "Sunrise on the estuary",
+      "Neyyar Dam (20 km inland) — optional day trip"
+    ]
+  },
+  "Kozhikode": {
+    "zone": "Malabar Heritage",
+    "overview": "Calicut — Kozhikode — was where Vasco da Gama landed in 1498 and found a city that was already the spice capital of the world. The city that remains is a working Malabar port town with a food culture that is arguably the finest in Kerala: the Malabar biryani, the fish molee, the halwa from Sweet Meat Street are all genuinely their own thing.",
+    "days": [
+      {
+        "label": "ARRIVAL DAY",
+        "route": "→ Kozhikode",
+        "morning": "Arrive Calicut airport. Transfer to hotel (30 min). Check in.",
+        "afternoon": "Kappad Beach (16 km) — the exact point where Vasco da Gama landed on May 20 1498. Small monument marks it.",
+        "evening": "Sweet Meat Street (SM Street) — the spice and halwa market. Dinner at a Malabar biryani restaurant."
+      },
+      {
+        "label": "FULL DAY",
+        "route": "Kozhikode — Full Day",
+        "morning": "Beypore (10 km) — the ancient Arab dhow-building yard. The same families have been building urus here for 1,500 years.",
+        "afternoon": "Pazhassiraja Museum. Tali Temple. Kuttichira Mosque — the 14th century Mishkal Mosque.",
+        "evening": "Kozhikode Beach pier walk. Dinner at Zain's Hotel for the best biryani in Calicut."
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Zain's Hotel",
+        "note": "Malabar biryani · the benchmark · lunch only · closes when the biryani runs out · arrive by 1 PM"
+      },
+      {
+        "name": "Paragon Restaurant",
+        "note": "Kozhikode institution · seafood · biryani · multicuisine · reliable for dinner"
+      },
+      {
+        "name": "Salkara",
+        "note": "Beypore · seafood · casual · by the dhow yard"
+      },
+      {
+        "name": "Bombay Hotel",
+        "note": "Halwa and snacks · SM Street · the original Kozhikode halwa source"
+      }
+    ],
+    "sightseeing": [
+      "Kappad Beach — Vasco da Gama landing point",
+      "Beypore dhow-building yard",
+      "Sweet Meat Street (SM Street)",
+      "Mishkal Mosque (Kuttichira)",
+      "Kozhikode Beach pier walk",
+      "Pazhassiraja Museum",
+      "Tali Temple",
+      "Mananchira Square"
+    ]
+  }
+};
+
 const PKG_INCLUSIONS = {
   "Classic Kerala": "<div class=\"incl-grid\">\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/></svg>\n        <span class=\"incl-lbl\">5 NIGHTS<br>ACCOMMODATION</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>\n        <span class=\"incl-lbl\">DAILY<br>BREAKFAST</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><rect x=\"2\" y=\"7\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\"/></svg>\n        <span class=\"incl-lbl\">PREMIUM<br>HOUSEBOAT</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"/><polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"/><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"/></svg>\n        <span class=\"incl-lbl\">PRIVATE AC<br>TRANSPORT</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l.99-.99a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>\n        <span class=\"incl-lbl\">AIRPORT<br>TRANSFERS</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg>\n        <span class=\"incl-lbl\">ALL<br>SIGHTSEEING</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>\n        <span class=\"incl-lbl\">24/7<br>CONCIERGE</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M18 8h1a4 4 0 0 1 0 8h-1\"/><path d=\"M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z\"/><line x1=\"6\" y1=\"1\" x2=\"6\" y2=\"4\"/><line x1=\"10\" y1=\"1\" x2=\"10\" y2=\"4\"/><line x1=\"14\" y1=\"1\" x2=\"14\" y2=\"4\"/></svg>\n        <span class=\"incl-lbl\">ALL MEALS<br>ON BOARD</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z\"/><path d=\"M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12\"/></svg>\n        <span class=\"incl-lbl\">SPICE<br>PLANTATION</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/></svg>\n        <span class=\"incl-lbl\">TEA ESTATE<br>& FACTORY</span>\n      </div>\n    </div>",
   "Kerala Honeymoon": "<div class=\"incl-grid\">\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/></svg>\n        <span class=\"incl-lbl\">5 NIGHTS<br>ACCOMMODATION</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>\n        <span class=\"incl-lbl\">DAILY<br>BREAKFAST</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><rect x=\"2\" y=\"7\" width=\"20\" height=\"14\" rx=\"2\"/><path d=\"M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16\"/></svg>\n        <span class=\"incl-lbl\">PRIVATE<br>HOUSEBOAT</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"/><polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"/><circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"/><circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"/></svg>\n        <span class=\"incl-lbl\">PRIVATE AC<br>TRANSPORT</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l.99-.99a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>\n        <span class=\"incl-lbl\">AIRPORT<br>TRANSFERS</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><line x1=\"21\" y1=\"21\" x2=\"16.65\" y2=\"16.65\"/></svg>\n        <span class=\"incl-lbl\">ALL<br>SIGHTSEEING</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2\"/><circle cx=\"12\" cy=\"7\" r=\"4\"/></svg>\n        <span class=\"incl-lbl\">24/7<br>CONCIERGE</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M18 8h1a4 4 0 0 1 0 8h-1\"/><path d=\"M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z\"/><line x1=\"6\" y1=\"1\" x2=\"6\" y2=\"4\"/><line x1=\"10\" y1=\"1\" x2=\"10\" y2=\"4\"/><line x1=\"14\" y1=\"1\" x2=\"14\" y2=\"4\"/></svg>\n        <span class=\"incl-lbl\">ALL MEALS<br>ON BOARD</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><path d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"/></svg>\n        <span class=\"incl-lbl\">COUPLES<br>ABHYANGA SPA</span>\n      </div>\n      <div class=\"incl-cell\">\n        <svg class=\"incl-icon\" width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.2\"><polygon points=\"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2\"/></svg>\n        <span class=\"incl-lbl\">CANDLELIT<br>BEACH DINNER</span>\n      </div>\n    </div>",
@@ -5566,6 +6436,324 @@ document.addEventListener('click', e => {
     document.getElementById('cityDropdown').style.display = 'none';
   }
 });
+
+// ── MODE SWITCHING ────────────────────────────────────────────────────────
+function switchMode(mode) {
+  const curated = document.getElementById('curatedSection');
+  const custom = document.getElementById('customSection');
+  const btnCurated = document.getElementById('modeCurated');
+  const btnCustom = document.getElementById('modeCustom');
+  if (mode === 'curated') {
+    curated.style.display = 'block';
+    custom.style.display = 'none';
+    btnCurated.classList.add('active');
+    btnCustom.classList.remove('active');
+    var hs = document.getElementById('hotelSection');
+    if (hs) hs.style.display = 'block';
+    var ps2 = document.getElementById('pricingSection');
+    if (ps2) ps2.style.display = 'block';
+  } else {
+    curated.style.display = 'none';
+    custom.style.display = 'block';
+    btnCurated.classList.remove('active');
+    btnCustom.classList.add('active');
+    var hs2 = document.getElementById('hotelSection');
+    if (hs2) hs2.style.display = 'none';
+    var ps = document.getElementById('pricingSection');
+    if (ps) ps.style.display = 'none';
+    var dl = document.getElementById('customDestList');
+    if (dl && dl.children.length === 0) {
+      addCustomDest();
+    }
+  }
+}
+
+// ── CUSTOM DESTINATION BUILDER ────────────────────────────────────────────
+var customDestCount = 0;
+
+function addCustomDest() {
+  customDestCount++;
+  const id = customDestCount;
+  const destList = document.getElementById('customDestList');
+  if (!destList) { console.error('customDestList not found'); return; }
+  const destNames = Object.keys(DEST_BANK);
+  const options = destNames.map(d => `<option value="${d}">${d}</option>`).join('');
+
+  const row = document.createElement('div');
+  row.className = 'custom-dest-row';
+  row.id = 'destRow_' + id;
+  row.innerHTML = `
+    <div class="custom-dest-header">
+      <div class="lux-select" id="destSelWrap_${id}" style="flex:1;">
+        <div class="lux-select-display field-select" id="destSelDisplay_${id}" onclick="toggleDestDrop(${id})" style="font-size:18px;font-weight:600;color:var(--burgundy);background:var(--ivory);">
+          <span id="destSelText_${id}" style="color:rgba(42,27,18,.3);font-style:italic;font-weight:400;">— Select destination —</span>
+          <span class="lux-select-arrow">◆</span>
+        </div>
+        <div class="lux-select-dropdown" id="destSelDrop_${id}" style="display:none;"></div>
+      </div>
+      <input type="number" class="custom-nights-input" id="destNights_${id}" min="1" max="99" value="1" placeholder="N" onchange="updateCustomSummary()">
+      <button class="custom-dest-remove" onclick="removeCustomDest(${id})">×</button>
+    </div>
+    <div class="custom-dest-body" id="destBody_${id}" style="display:none;">
+      <span class="custom-field-label">SIGHTSEEING — select what applies for this guest</span>
+      <div class="custom-sightseeing" id="destSight_${id}"></div>
+      <input type="text" class="custom-extra-sightseeing" id="destExtra_${id}" placeholder="Add additional sightseeing not listed above...">
+    </div>`;
+  // Populate dropdown options
+  const drop = document.getElementById('destSelDrop_' + id);
+  Object.keys(DEST_BANK).forEach(dest => {
+    const item = document.createElement('div');
+    item.className = 'lux-select-option';
+    item.textContent = dest;
+    item.onclick = () => selectDest(id, dest);
+    drop.appendChild(item);
+  });
+  destList.appendChild(row);
+  updateCustomSummary();
+}
+
+function removeCustomDest(id) {
+  const row = document.getElementById('destRow_' + id);
+  if (row) row.remove();
+  updateCustomSummary();
+}
+
+function onDestChange(id, dest) {
+  if (!dest) dest = (document.getElementById('destSelWrap_' + id) ? document.getElementById('destSelWrap_' + id).dataset.value : '') || '';
+  const body = document.getElementById('destBody_' + id);
+  const sightDiv = document.getElementById('destSight_' + id);
+  if (!dest || !DEST_BANK[dest]) { body.style.display = 'none'; return; }
+  body.style.display = 'block';
+  const sightList = DEST_BANK[dest].sightseeing || [];
+  sightDiv.innerHTML = sightList.map((s, i) =>
+    `<label class="custom-sight-item"><input type="checkbox" id="sight_${id}_${i}" checked> ${s}</label>`
+  ).join('');
+  updateCustomSummary();
+}
+
+function updateCustomSummary() {
+  const rows = document.querySelectorAll('.custom-dest-row');
+  const summary = document.getElementById('customSummary');
+  const summaryText = document.getElementById('customSummaryText');
+  if (rows.length === 0) { summary.style.display = 'none'; return; }
+  let parts = [];
+  let totalNights = 0;
+  rows.forEach(row => {
+    const id = row.id.replace('destRow_', '');
+    const destW = document.getElementById('destSelWrap_' + id);
+    const nights = document.getElementById('destNights_' + id);
+    if (destW && destW.dataset.value && nights) {
+      const n = parseInt(nights.value) || 1;
+      totalNights += n;
+      parts.push(destW.dataset.value + ' · ' + n + 'N');
+    }
+  });
+  if (parts.length === 0) { summary.style.display = 'none'; return; }
+  summary.style.display = 'block';
+  summaryText.textContent = parts.join('  →  ') + '  ·  Total: ' + totalNights + ' Nights ' + (totalNights + 1) + ' Days';
+}
+
+function getCustomPackageData() {
+  const rows = document.querySelectorAll('.custom-dest-row');
+  const tripName = document.getElementById('customTripName').value || 'Custom Kerala Package';
+  let destinations = [];
+  rows.forEach(row => {
+    const id = row.id.replace('destRow_', '');
+    const destWrapper = document.getElementById('destSelWrap_' + id);
+    const nightsEl = document.getElementById('destNights_' + id);
+    if (!destWrapper || !destWrapper.dataset.value) return;
+    const dest = destWrapper.dataset.value;
+    const nights = parseInt(nightsEl.value) || 1;
+    const sightItems = document.querySelectorAll(`#destSight_${id} input[type=checkbox]:checked`);
+    const selectedSight = Array.from(sightItems).map(cb => cb.parentElement.textContent.trim());
+    const extraSight = document.getElementById('destExtra_' + id).value;
+    if (extraSight.trim()) selectedSight.push(...extraSight.split(',').map(s => s.trim()).filter(Boolean));
+    destinations.push({ dest, nights, sightseeing: selectedSight });
+  });
+  return { tripName, destinations };
+}
+
+function buildCustomCuratedPDF() {
+  const data = getCustomPackageData();
+  if (data.destinations.length === 0) { alert('Please add at least one destination.'); return; }
+  // Build the custom itinerary HTML using the destination bank
+  let dayNum = 0;
+  let itineraryHTML = '';
+  let allRestaurants = {};
+  let totalNights = data.destinations.reduce((s, d) => s + d.nights, 0);
+  let routeStops = data.destinations.map(d => d.dest);
+
+  data.destinations.forEach(destData => {
+    const bank = DEST_BANK[destData.dest];
+    if (!bank) return;
+    // Collect restaurants
+    (bank.restaurants || []).forEach(r => { allRestaurants[r.name] = r; });
+    // Build days
+    for (let n = 0; n < destData.nights; n++) {
+      dayNum++;
+      const dayIdx = Math.min(n, bank.days.length - 1);
+      const day = bank.days[dayIdx];
+      // Build sightseeing tags
+      const tags = destData.sightseeing.slice(0, 5).map(s =>
+        `<span class="tag">${s.toUpperCase().replace(/[^A-Z0-9&·\- ]/g,'')}</span>`
+      ).join('');
+      itineraryHTML += `
+  <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
+    <div class="day-top">
+      <div class="day-num" style="color:var(--gold);opacity:.55;">${String(dayNum).padStart(2,'0')}</div>
+      <div class="day-info">
+        <span class="day-label" style="color:var(--gold);">${day.label || 'D A Y  ' + dayNum}</span>
+        <h3 class="day-title" style="color:var(--ivory);">${day.route || destData.dest}</h3>
+        <span class="day-hotel" style="color:rgba(240,234,214,.25);">${destData.dest.toUpperCase()}</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-blocks">
+        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span><div><span class="time-label" style="color:var(--gold);">M O R N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${day.morning || ''}</span></div></div>
+        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">◐</span><div><span class="time-label" style="color:var(--gold);">A F T E R N O O N</span><span class="time-text" style="color:rgba(240,234,214,.65);">${day.afternoon || ''}</span></div></div>
+        <div class="time-block" style="border-bottom:none;"><span class="time-icon" style="color:rgba(240,234,214,.5);">☾</span><div><span class="time-label" style="color:var(--gold);">E V E N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${day.evening || ''}</span></div></div>
+      </div>
+      <div class="tags">${tags}</div>
+    </div>
+  </div>`;
+    }
+  });
+
+  // Build Eat Drink Remember section
+  let eatHTML = '<section class="food-page"><div class="pg-header"><span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span><span class="phn">—</span><span class="phr">[[REF_SPACED]]</span></div><div class="food-hero"><span class="food-chapter">E A T &nbsp;·&nbsp; D R I N K &nbsp;·&nbsp; R E M E M B E R</span><h2 class="food-title">Where to <em>Eat</em></h2><div class="food-rule"></div></div><div class="food-grid">';
+  Object.values(allRestaurants).forEach(r => {
+    eatHTML += `<div class="food-item"><div class="food-name">${r.name}</div><div class="food-note">${r.note}</div></div>`;
+  });
+  eatHTML += '</div></section>';
+
+  return { itineraryHTML, eatHTML, totalNights, routeStops, tripName: data.tripName };
+}
+
+function generateCustomCurated() {
+  const data = getCustomPackageData();
+  if (data.destinations.length === 0) { alert('Please add at least one destination.'); return; }
+
+  // Get guest details from the form
+  const custName = document.getElementById('custName').value || 'Personalised upon enquiry.';
+  const city = document.getElementById('city').value || '';
+  const pax = document.getElementById('pax').value || '2';
+  const startDate = document.getElementById('startDate').value;
+  const endDate = document.getElementById('endDate').value;
+  const refSuffix = document.getElementById('refSuffix').value || '000';
+  const validUntil = document.getElementById('validUntil').value;
+
+  const built = buildCustomCuratedPDF();
+  const totalNights = built.totalNights;
+  const totalDays = totalNights + 1;
+  const routeStops = built.routeStops;
+  const tripName = built.tripName;
+
+  // Format dates
+  const fmtDate = (d) => { if(!d) return ''; const dt = new Date(d); return dt.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); };
+  const travelDates = startDate ? fmtDate(startDate) + (endDate ? ' — ' + fmtDate(endDate) : '') : 'Dates to be confirmed';
+  const ref = 'QUO-KDMC-' + new Date().getFullYear() + '-' + refSuffix.padStart(3,'0');
+  const validStr = validUntil ? fmtDate(validUntil) : '';
+
+  // Build route strip
+  const routeStripHTML = routeStops.map((stop, i) => {
+    const bank = DEST_BANK[stop];
+    const nights = data.destinations[i] ? data.destinations[i].nights : 1;
+    return `<div class="route-stop"><div class="route-city">${stop.toUpperCase()}</div><div class="route-nights">${nights}N</div></div>${i < routeStops.length-1 ? '<div class="route-arr">→</div>' : ''}`;
+  }).join('');
+
+  // Build parts name (first word normal, rest italic gold)
+  const nameParts = tripName.trim().split(' ');
+  const titleFirst = nameParts[0];
+  const titleRest = nameParts.slice(1).join(' ');
+
+  // Use the shared curated template but override the PKG sections
+  let html = CURATED_TEMPLATE;
+
+  // Replace all standard placeholders
+  html = html.split('[[PKG_NAME]]').join(tripName);
+  html = html.split('[[PKG_TITLE_MAIN]]').join(titleFirst);
+  html = html.split('[[PKG_TITLE_EM]]').join(titleRest);
+  html = html.split('[[PKG_TITLE_END]]').join('');
+  html = html.split('[[PKG_SUBTITLE]]').join('A Kerala Journey · Curated for You');
+  html = html.split('[[STAT_DAYS]]').join(totalNights);
+  html = html.split('[[STAT_LABEL]]').join('N I G H T S &nbsp;·&nbsp; ' + totalDays + ' &nbsp;D A Y S');
+  html = html.split('[[DEST_COUNT]]').join(String(routeStops.length));
+  html = html.split('[[PKG_DURATION]]').join(totalNights + 'N/' + totalDays + 'D');
+  html = html.split('[[CUSTOMER_NAME]]').join(custName);
+  html = html.split('[[CITY]]').join(city);
+  html = html.split('[[PAX_COUNT]]').join(pax);
+  html = html.split('[[TRAVEL_DATES]]').join(travelDates);
+  html = html.split('[[REF_NUM]]').join(ref);
+  html = html.split('[[REF_SPACED]]').join(ref.split('').join(' '));
+  html = html.split('[[VALID_UNTIL]]').join(validStr);
+
+  // Route strip
+  const routeHTML = `<div class="route-strip">${routeStripHTML}</div>`;
+  html = html.split('[[ROUTE_STOPS]]').join(routeHTML);
+
+  // Package intro
+  const introText = 'A journey through ' + routeStops.join(', ') + ' — ' + totalNights + ' nights curated to your preferences. Each destination has been selected for what it offers your particular travel style. The itinerary below is a starting point; your Kerala DMC representative will refine every detail before departure.';
+  html = html.split('[[PKG_INTRO]]').join(`<p>${introText}</p>`);
+
+  // Inject itinerary + eat sections
+  html = html.split('[[PKG_ITINERARY]]').join(built.itineraryHTML + built.eatHTML);
+
+  // Inclusions — use generic Kerala set
+  const genericInclusions = PKG_INCLUSIONS["Classic Kerala"] || '';
+  html = html.split('[[PKG_INCLUSIONS]]').join(genericInclusions);
+
+  // Airport based on first destination
+  const firstDest = routeStops[0];
+  const airport = PKG_AIRPORT[firstDest] || PKG_AIRPORT["Kochi"] || "Cochin International Airport (COK)";
+  html = html.split('[[AIRPORT]]').join(airport);
+  html = html.split('[[TRANSPORT]]').join('Private AC Vehicle Throughout');
+  html = html.split('[[SUB]]').join('All transfers included');
+
+  // Practical notes — use standard
+  html = html.split('[[PRACTICAL_NOTES]]').join('');
+
+  // Where you'll rest — blank for custom (no pricing hotels set)
+  html = html.split('[[PRICE_HOTELS_4S]]').join('Hotels to be confirmed based on your tier selection.');
+  html = html.split('[[PRICE_HOTELS_5S]]').join('Hotels to be confirmed based on your tier selection.');
+  html = html.split('[[PRICE_OPT_NAME_4S]]').join(tripName + ' — Premium');
+  html = html.split('[[PRICE_OPT_NAME_5S]]').join(tripName + ' — Luxury');
+
+  const w = window.open('', '_blank');
+  w.document.write(html);
+  w.document.close();
+}
+
+function generateCustomQuoteSheet() {
+  const data = getCustomPackageData();
+  if (data.destinations.length === 0) { alert('Please add at least one destination.'); return; }
+  // Switch to curated mode temporarily, generate quote, then switch back
+  // Actually: just call the existing generateQuote function directly
+  // It reads from the form fields which the user has filled in
+  if (typeof generateQuote === 'function') {
+    generateQuote();
+  } else {
+    alert('Please fill in the pricing details and use the Quote Sheet section below.');
+  }
+}
+
+function toggleDestDrop(id) {
+  const drop = document.getElementById('destSelDrop_' + id);
+  const isOpen = drop.style.display !== 'none';
+  // Close all other destination dropdowns
+  document.querySelectorAll('[id^="destSelDrop_"]').forEach(d => d.style.display = 'none');
+  drop.style.display = isOpen ? 'none' : 'block';
+}
+
+function selectDest(id, dest) {
+  document.getElementById('destSelText_' + id).textContent = dest;
+  document.getElementById('destSelText_' + id).style.color = 'var(--burgundy)';
+  document.getElementById('destSelText_' + id).style.fontStyle = 'normal';
+  document.getElementById('destSelText_' + id).style.fontWeight = '600';
+  document.getElementById('destSelDrop_' + id).style.display = 'none';
+  // Store value on wrapper for later reading
+  document.getElementById('destSelWrap_' + id).dataset.value = dest;
+  onDestChange(id, dest);
+}
 
 </script>
 </body>
