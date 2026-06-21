@@ -47,8 +47,8 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
 .mode-sub { display:block; font-family:'EB Garamond',serif; font-size:13px; font-style:italic; color:var(--muted); }
 
 /* ── CUSTOM DEST BUILDER ── */
-.custom-dest-row { border:1px solid rgba(61,12,17,.12); border-radius:4px; margin-bottom:12px; overflow:hidden; }
-.custom-dest-header { display:grid; grid-template-columns:1fr 100px 36px; gap:8px; align-items:center; padding:12px 14px; background:var(--cream-band); }
+.custom-dest-row { border:1px solid rgba(61,12,17,.12); border-radius:4px; margin-bottom:12px; overflow:visible; position:relative; }
+.custom-dest-header { display:grid; grid-template-columns:1fr 100px 36px; gap:8px; align-items:center; padding:12px 14px; background:var(--cream-band); position:relative; overflow:visible; }
 .custom-dest-select { width:100%; background:var(--ivory); border:1px solid rgba(61,12,17,.15); border-radius:3px; padding:11px 14px; font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:600; color:var(--burgundy); outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B5237'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; }
 .custom-nights-input { font-family:'Cinzel',serif; font-size:13px; letter-spacing:.05em; border:1px solid rgba(61,12,17,.15); padding:11px 8px; background:var(--ivory); color:var(--burgundy); border-radius:3px; text-align:center; width:100%; outline:none; }
 .custom-dest-remove { background:none; border:none; color:var(--muted); cursor:pointer; font-size:18px; line-height:1; padding:4px; }
@@ -347,6 +347,14 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
         </div>
       </div>
     </div>
+    <div style="margin-bottom:12px;">
+      <label class="field-label">BOOKING TYPE</label>
+      <div style="display:flex;gap:0;border:1px solid rgba(61,12,17,.15);border-radius:3px;overflow:hidden;margin-top:6px;">
+        <button id="btnDirectFixed" onclick="setBookingType('direct')" style="flex:1;padding:10px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;border:none;cursor:pointer;background:var(--burgundy);color:var(--ivory);">★ DIRECT</button>
+        <button id="btnAgentFixed" onclick="setBookingType('agent')" style="flex:1;padding:10px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;border:none;cursor:pointer;background:var(--cream);color:var(--muted);">◆ AGENT</button>
+      </div>
+      <p id="bookingTypeNoteFixed" style="font-family:'EB Garamond',serif;font-size:12px;font-style:italic;color:var(--muted);margin-top:6px;">Direct: Akbar branding shown. Agent: all branding removed.</p>
+    </div>
     <div class="btn-wrap" style="margin-bottom:0;">
       <button class="btn btn-primary" onclick="generateCurated()">Generate Kerala Curated →</button>
     </div>
@@ -377,8 +385,18 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
         <div id="customSummaryText" style="font-family:'EB Garamond',serif;font-size:14px;color:var(--muted);line-height:1.6;"></div>
       </div>
       <div style="margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <button onclick="generateCustomCurated()" style="padding:16px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--ivory);background:var(--burgundy);border:none;border-radius:3px;cursor:pointer;">KERALA CURATED PDF →</button>
-        <button onclick="generateCustomQuoteSheet()" style="padding:16px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--burgundy);background:transparent;border:1.5px solid var(--burgundy);border-radius:3px;cursor:pointer;">QUOTE SHEET →</button>
+        <div style="margin-bottom:12px;">
+          <label class="field-label">BOOKING TYPE</label>
+          <div style="display:flex;gap:0;border:1px solid rgba(61,12,17,.15);border-radius:3px;overflow:hidden;margin-top:6px;">
+            <button id="btnDirect" onclick="setBookingType('direct')" style="flex:1;padding:10px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;border:none;cursor:pointer;background:var(--burgundy);color:var(--ivory);transition:all .2s;">★ DIRECT</button>
+            <button id="btnAgent" onclick="setBookingType('agent')" style="flex:1;padding:10px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;border:none;cursor:pointer;background:var(--cream);color:var(--muted);transition:all .2s;">◆ AGENT</button>
+          </div>
+          <p id="bookingTypeNote" style="font-family:'EB Garamond',serif;font-size:12px;font-style:italic;color:var(--muted);margin-top:6px;">Direct: Akbar branding included in Kerala Curated PDF.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;">
+          <button onclick="generateCustomCurated()" style="padding:13px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--ivory);background:var(--burgundy);border:none;border-radius:3px;cursor:pointer;">KERALA CURATED PDF →</button>
+          <button onclick="generateCustomQuoteSheet()" style="padding:13px;font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;color:var(--burgundy);background:transparent;border:1.5px solid var(--burgundy);border-radius:3px;cursor:pointer;">QUOTE SHEET →</button>
+        </div>
       </div>
     </div><!-- /customSection -->
 
@@ -473,6 +491,629 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
 </div>
 
 <script>
+const HOTEL_DB = {
+  "Alleppey": [
+    {
+      "name": "Lemon Tree Vembanad Lake Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Ramada Alleppey",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Punnamada Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Aveda Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Citrus Retreats",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Pagoda Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Keys Select Aishwarya",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Palm Grove Lake Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Abad Whispering Palms",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Raheem Residency",
+      "stars": "Heritage"
+    }
+  ],
+  "Kochi": [
+    {
+      "name": "Grand Hyatt Kochi Bolgatty",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Taj Malabar Resort & Spa",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Crowne Plaza Kochi",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Kochi Marriott",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Le Méridien Kochi",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Holiday Inn Cochin",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Radisson Blu Kochi",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Fragrant Nature Kochi",
+      "stars": "4 Star"
+    },
+    {
+      "name": "The Gokulam Park Kochi",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Trident Cochin",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Brunton Boatyard (CGH Earth)",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Old Harbour Hotel",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Forte Kochi",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Eighth Bastion (CGH Earth)",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Abad Atrium",
+      "stars": "3 Star"
+    },
+    {
+      "name": "The Avenue Regent",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Park Residency",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Gokulam Grand",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Casino Hotel (CGH Earth)",
+      "stars": "3 Star"
+    }
+  ],
+  "Munnar": [
+    {
+      "name": "Fragrant Nature Munnar",
+      "stars": "5 Star"
+    },
+    {
+      "name": "SpiceTree Munnar",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Parakkat Nature Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Chandys Windy Woods",
+      "stars": "5 Star"
+    },
+    {
+      "name": "The Panoramic Getaway",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Sterling Munnar",
+      "stars": "4 Star"
+    },
+    {
+      "name": "The Tall Trees",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Misty Mountain Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Blackberry Hills",
+      "stars": "4 Star"
+    },
+    {
+      "name": "KTDC Tea County",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Olive Brook",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Munnar Tea Country",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Abad Copper Castle",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Tea Valley Resort",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Greenwoods (Camphor)",
+      "stars": "3 Star"
+    }
+  ],
+  "Thekkady": [
+    {
+      "name": "Spice Village (CGH Earth)",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Carmelia Haven",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Elephant Court",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Cardamom County",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Greenwoods Premium",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Shalimar Spice Garden",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Tree Top",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Wild Corridor",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Spice Jungle Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Greenwoods Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Michael's Inn",
+      "stars": "3 Star"
+    },
+    {
+      "name": "KTDC Aranya Nivas",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Periyar House",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Ambadi",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Claus Garden",
+      "stars": "3 Star"
+    }
+  ],
+  "Kovalam": [
+    {
+      "name": "The Leela Kovalam",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Taj Green Cove Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "The Raviz Kovalam",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Vivanta Trivandrum",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Estuary Sarovar Portico",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Uday Samudra",
+      "stars": "4 Star"
+    },
+    {
+      "name": "The Travancore Heritage",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Turtle on the Beach",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Beach & Lake Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "KTDC Hotel Samudra",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Somatheeram Ayurveda Resort",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Manaltheeram Ayurveda",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Niraamaya Surya Samudra",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Travancore Ayurveda",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Hotel Sea Face",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Rockholm",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Thushara",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Palm Shore",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Jeevan Ayurvedic Beach Resort",
+      "stars": "3 Star"
+    }
+  ],
+  "Kumarakom": [
+    {
+      "name": "Kumarakom Lake Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Vivanta Kumarakom (Taj)",
+      "stars": "5 Star"
+    },
+    {
+      "name": "The Zuri Kumarakom",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Coconut Lagoon (CGH Earth)",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Aveda Kumarakom",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Backwater Ripples",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Lake Canopy",
+      "stars": "4 Star"
+    },
+    {
+      "name": "KTDC Waterscapes",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Cinnamon Lakeside",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Whispering Palms",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Kumarakom Tropicana",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Tharavadu Heritage",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Illikkalam Lakeside",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Arackal Lake Resort",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Lakesong",
+      "stars": "3 Star"
+    }
+  ],
+  "Marari": [
+    {
+      "name": "Xandari Pearl Marari",
+      "stars": "5 Star"
+    },
+    {
+      "name": "KTDC Marari",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Marari Sands Beach Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Abad Turtle Beach",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Marari Beach Resort (CGH Earth)",
+      "stars": "Heritage"
+    },
+    {
+      "name": "Marari Villas",
+      "stars": "Boutique"
+    }
+  ],
+  "Poovar": [
+    {
+      "name": "Poovar Island Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Estuary Island Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Isola Di Cocco Ayurvedic Resort",
+      "stars": "4 Star"
+    }
+  ],
+  "Trivandrum": [
+    {
+      "name": "Hilton Garden Inn Trivandrum",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Hycinth by Sparsa",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Residency Tower",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Mascot Hotel (KTDC)",
+      "stars": "3 Star"
+    }
+  ],
+  "Varkala": [
+    {
+      "name": "Gateway Varkala (Taj)",
+      "stars": "Boutique"
+    },
+    {
+      "name": "Niraamaya Retreats Varkala",
+      "stars": "Boutique"
+    },
+    {
+      "name": "Hindustan Beach Retreat",
+      "stars": "Boutique"
+    },
+    {
+      "name": "Akhil Beach Resort",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Clafouti Beach Resort",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Bamboo Village",
+      "stars": "3 Star"
+    }
+  ],
+  "Wayanad": [
+    {
+      "name": "Vythiri Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Wayanad Wilderness Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Banasura Hill Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Vivanta Wayanad (Taj)",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Windflower Resort",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Vythiri Village",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Mountain Shadows",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Wayanad Silverwoods",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Rain Forest Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Fringe Ford",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Issacs Hilton",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Green Gates",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Pepper Trail",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Hotel Woodlands",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Sterling Wayanad",
+      "stars": "3 Star"
+    }
+  ],
+  "Bekal": [
+    {
+      "name": "Taj Bekal Resort & Spa",
+      "stars": "5 Star"
+    },
+    {
+      "name": "The Lalit Resort & Spa Bekal",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Neeleshwar Hermitage",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Bekal Heritage",
+      "stars": "3 Star"
+    }
+  ],
+  "Kannur": [
+    {
+      "name": "Malabar Ocean Front Resort & Spa",
+      "stars": "5 Star"
+    },
+    {
+      "name": "Mascot Beach Resort Kannur",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Kanan Beach Resort",
+      "stars": "4 Star"
+    },
+    {
+      "name": "The Blue Bay Beach Resort",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Ezhara Beach Resort",
+      "stars": "3 Star"
+    }
+  ],
+  "Kozhikode": [
+    {
+      "name": "Hyatt Regency Kozhikode",
+      "stars": "5 Star"
+    },
+    {
+      "name": "The Gateway Beach Road Calicut (Taj)",
+      "stars": "4 Star"
+    },
+    {
+      "name": "The Raviz Kadavu Calicut",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Beaches Resort Calicut",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Hotel Malabar Palace",
+      "stars": "3 Star"
+    }
+  ],
+  "Marayoor": [
+    {
+      "name": "Sandal Forest Resort Marayoor",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Forest Canopy Marayoor",
+      "stars": "3 Star"
+    }
+  ],
+  "Vagamon": [
+    {
+      "name": "Elagon Resort Vagamon",
+      "stars": "4 Star"
+    },
+    {
+      "name": "Misty Mountain Resort Vagamon",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Vagamon Heights",
+      "stars": "3 Star"
+    },
+    {
+      "name": "Le Vista Resort Vagamon",
+      "stars": "3 Star"
+    }
+  ]
+};
+
 const DEST_BANK = {
   "Kochi": {
     "zone": "Heritage Coast",
@@ -1555,7 +2196,15 @@ document.addEventListener("click", e => {
   }
   // Close luxury dropdowns
   document.querySelectorAll(".lux-select-dropdown").forEach(d => {
-    if (!d.closest(".lux-select").contains(e.target)) {
+    const wrap = d.closest(".lux-select");
+    if (!wrap || !wrap.contains(e.target)) {
+      d.style.display = "none";
+    }
+  });
+  // Close hotel dropdowns
+  document.querySelectorAll('[id^="hotelSelDrop_"]').forEach(d => {
+    const wrap = d.closest(".lux-select");
+    if (!wrap || !wrap.contains(e.target)) {
       d.style.display = "none";
     }
   });
@@ -1583,7 +2232,7 @@ const CURATED_TEMPLATE = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kerala · A Private Journey · Akbar Kerala DMC</title>
+<title>[[BRAND_TITLE]]</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
@@ -1851,11 +2500,18 @@ body { font-family: var(--f-body); background: var(--espresso); color: var(--esp
   white-space: nowrap;
 }
 .route-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(201,168,76,.5), rgba(201,168,76,.15), rgba(201,168,76,.5));
-  margin: 17px 10px 0;
-  align-self: flex-start;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 12px;
+  padding-top: 2px;
+  color: rgba(201,168,76,.55);
+  font-size: 13px;
+  font-family: serif;
+  flex-shrink: 0;
+}
+.route-line::after {
+  content: '→';
 }
 
 .inv-quote {
@@ -2254,14 +2910,14 @@ h3.day-title { font-style: italic; font-weight: 300; }
 <!-- ══ PAGE 1 · COVER ══ -->
 <section class="cover">
   <div class="cover-nav">
-    <div class="nav-brand">A K B A R &nbsp; K E R A L A &nbsp; D M C</div>
+    <div class="nav-brand">[[BRAND_NAV]]</div>
     <div class="nav-right">
 
     </div>
   </div>
 
   <div class="cover-hero">
-    <p class="cover-eyebrow">A N &nbsp; A K B A R &nbsp; K E R A L A &nbsp; D M C &nbsp; C U R A T I O N</p>
+    <p class="cover-eyebrow">[[BRAND_EYEBROW]]</p>
     <h1 class="cover-title"><em>Kerala,</em> <span>Curated.</span></h1>
     <p class="cover-sub">[[PKG_NAME]]</p>
     <div class="cover-rule"></div>
@@ -2307,7 +2963,7 @@ h3.day-title { font-style: italic; font-weight: 300; }
 <!-- ══ PAGE 2 · THE INVITATION ══ -->
 <section class="invitation-page">
   <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">02</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -2354,86 +3010,12 @@ h3.day-title { font-style: italic; font-weight: 300; }
 
 
 [[PKG_ITINERARY]]
-<!-- ══ EAT, DRINK ══ -->
-<section class="food-page">
-  <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
-    <span class="phn">07</span>
-    <span class="phr">[[REF_SPACED]]</span>
-  </div>
-
-  <div class="food-hero">
-    <span class="food-chapter">C H A P T E R &nbsp; F I V E</span>
-    <h2 class="food-title">Eat, Drink, <em>Remember</em></h2>
-    <div class="food-rule"></div>
-    <p class="food-intro">Kerala's cuisine is one of the most complex and underrated in India. Hand-picked restaurants by destination — each selected for quality, authenticity, and the kind of meal that becomes a travel memory.</p>
-  </div>
-
-  <div class="food-grid">
-    <div class="food-dest-col">
-      <div class="food-dest-hdr">K O C H I</div>
-      <div class="food-item">
-        <div class="food-name">The Rice Boat</div>
-        <div class="food-desc">On the Vembanad lagoon — Kerala seafood in a converted rice barge. The karimeen pollichathu (pearl spot in banana leaf) is essential.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Fusion Bay</div>
-        <div class="food-desc">Fort Kochi's most reliable modern Kerala restaurant. Good for the first night — familiar without being generic.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Malabar Junction</div>
-        <div class="food-desc">Inside the Malabar House hotel. Colonial courtyard setting, strong wine list, Indo-European menu done thoughtfully.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Grand Pavilion (Grand Hotel)</div>
-        <div class="food-desc">The best traditional Kerala sadya (banana leaf feast) in the city — ideal for lunch before the mountain drive.</div>
-      </div>
-    </div>
-    <div class="food-dest-col">
-      <div class="food-dest-hdr">M U N N A R &nbsp;&amp;&nbsp; T H E K K A D Y</div>
-      <div class="food-item">
-        <div class="food-name">Rapsy Restaurant</div>
-        <div class="food-desc">Munnar town's best local restaurant — Kerala meals on banana leaves, fresh hill vegetables, and the lightest fish fry in the high ranges.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Eastend Hotel Restaurant</div>
-        <div class="food-desc">Reliable, central, and honest — Kerala thali lunches that fuel a full afternoon of sightseeing without the tourist markup.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Spice Village Restaurant</div>
-        <div class="food-desc">The finest dining in Thekkady — sourced from the property's own spice garden, cooked over wood, and served in an open-air jungle setting.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Chrissie's Café</div>
-        <div class="food-desc">Thekkady's best casual stop — wood-fired pizza, Kerala snacks, excellent filter coffee. Good for a light dinner after the Periyar boat ride.</div>
-      </div>
-    </div>
-    <div class="food-dest-col">
-      <div class="food-dest-hdr">A L L E P P E Y &nbsp;&amp;&nbsp; K U M A R A K O M</div>
-      <div class="food-item">
-        <div class="food-name">On Board (Houseboat)</div>
-        <div class="food-desc">Your cook prepares every meal to order — specify preferences at boarding. The prawn curry, coconut rice, and mango pickle combination is unmissable.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Thaff Restaurant</div>
-        <div class="food-desc">Alleppey's best standalone restaurant for a final meal ashore — rooftop setting, strong seafood menu, good for the evening before boarding.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Baker's Street</div>
-        <div class="food-desc">The most reliable breakfast spot in Alleppey town — Kerala puttu, appam with stew, and the freshest coconut chutney.</div>
-      </div>
-      <div class="food-item">
-        <div class="food-name">Kumarakom Lake Resort Restaurant</div>
-        <div class="food-desc">Clay-pot cooking at its finest — the karimeen and the duck roast are the dishes to order. Lakeview dining at sunset is an experience in itself.</div>
-      </div>
-    </div>
-  </div>
-</section>
+[[FOOD_SECTION]]
 
 <!-- ══ PRACTICAL NOTES ══ -->
 <section class="practical-page">
   <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">08</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -2498,7 +3080,7 @@ h3.day-title { font-style: italic; font-weight: 300; }
 <!-- ══ PRICING PAGE ══ -->
 <section class="pricing-page">
   <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">09</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -2635,25 +3217,25 @@ h3.day-title { font-style: italic; font-weight: 300; }
   </div>
 
   <div class="closing-contact">
-    <span>Contact your Akbar travel consultant</span>
+    <span>[[BRAND_CONTACT]]</span>
     <span></span>
   </div>
 
   <div class="closing-quote">
-    <blockquote>From the house of Akbar — a legacy of trust, now dedicated to crafting private journeys across Kerala. Seven days here will remind you why you travel.</blockquote>
+    <blockquote>[[BRAND_QUOTE]]</blockquote>
   </div>
 
   <div class="closing-brand">
-    <div class="cb-sub" style="font-size:10px;letter-spacing:.3em;color:rgba(201,168,76,.5);">K E R A L A &nbsp;·&nbsp; C O C H I N &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</div>
+    <div class="cb-sub" style="font-size:10px;letter-spacing:.3em;color:rgba(201,168,76,.5);">[[BRAND_FOOTER]]</div>
   </div>
 
   <div class="closing-links">
-    <span>Contact your Akbar travel consultant</span>
+    <span>[[BRAND_CONTACT]]</span>
     <span></span>
   </div>
 
   <div class="closing-footer">
-    <p>© &nbsp; A K B A R &nbsp; G R O U P</p>
+    <p>[[BRAND_COPYRIGHT]]</p>
   </div>
 </section>
 
@@ -2667,7 +3249,7 @@ const PKG_CONTENT = {
   "Kerala Honeymoon": `<!-- ══ PAGE 3 · TWO WORLDS ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -3035,7 +3617,7 @@ const PKG_CONTENT = {
   "Kerala Family": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -3319,7 +3901,7 @@ const PKG_CONTENT = {
   "Luxury Kerala": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -3635,7 +4217,7 @@ const PKG_CONTENT = {
   "Ayurveda & Wellness": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -3960,7 +4542,7 @@ const PKG_CONTENT = {
   "Monsoon Ayurveda": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -4285,7 +4867,7 @@ const PKG_CONTENT = {
   "Sacred South": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -4526,7 +5108,7 @@ const PKG_CONTENT = {
   "Malabar & Theyyam Trail": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -4767,7 +5349,7 @@ const PKG_CONTENT = {
   "Wild & Offbeat Kerala": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -5008,7 +5590,7 @@ const PKG_CONTENT = {
   "Kerala Short Escape": `<!-- ══ PAGE 3 ══ -->
 <section class="lands-page">
     <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">[[REF_SPACED]]</span>
   </div>
@@ -5207,7 +5789,7 @@ const PKG_CONTENT = {
   "Classic Kerala": `<!-- ══ PAGE 3 · TWO LANDS ══ -->
 <section class="lands-page">
   <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">03</span>
     <span class="phr">Q U O - K D M C - 2 0 2 6 - 0 4 7</span>
   </div>
@@ -5263,7 +5845,7 @@ const PKG_CONTENT = {
   </div>
 
   <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">04</span>
     <span class="phr">Q U O - K D M C - 2 0 2 6 - 0 4 7</span>
   </div>
@@ -5433,7 +6015,7 @@ const PKG_CONTENT = {
   </div>
 
   <div class="pg-header">
-    <span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span>
+    <span class="phl">[[BRAND_HEADER]]</span>
     <span class="phn">05</span>
     <span class="phr">Q U O - K D M C - 2 0 2 6 - 0 4 7</span>
   </div>
@@ -5805,6 +6387,7 @@ function generateCurated() {
   // Inject package-specific itinerary content
   const pkgContent = PKG_CONTENT[pkgName2] || PKG_CONTENT["Classic Kerala"] || "";
   html = html.split("[[PKG_ITINERARY]]").join(pkgContent);
+  html = html.split("[[FOOD_SECTION]]").join(''); // food already inside PKG_CONTENT
 
   // Inject package-specific route strip
   var destCount = PKG_DEST_COUNT[pkgName2] || 5;
@@ -5862,6 +6445,7 @@ function generateCurated() {
     ".cl-refdate { font-family: var(--f-display); font-size: 11px; color: rgba(240,234,214,.4); margin-top: 4px; }"
   );
 
+  html = applyBranding(html);
   const win = window.open("","_blank");
   win.document.write(html);
   win.document.close();
@@ -5999,7 +6583,7 @@ table.pt tr.tot td.v{font-family:"Cormorant Garamond",serif;font-size:30px;font-
   </table>
 </div>
 <div class="ftr">
-  <div class="fc">Contact your Akbar travel consultant</div>
+  <div class="fc">[[BRAND_CONTACT]]</div>
   <div class="fn">AKBAR GROUP · KERALA DMC</div>
 </div>
 </body></html>`;
@@ -6473,41 +7057,107 @@ var customDestCount = 0;
 
 function addCustomDest() {
   customDestCount++;
-  const id = customDestCount;
-  const destList = document.getElementById('customDestList');
-  if (!destList) { console.error('customDestList not found'); return; }
-  const destNames = Object.keys(DEST_BANK);
-  const options = destNames.map(d => `<option value="${d}">${d}</option>`).join('');
+  var id = customDestCount;
+  var destList = document.getElementById('customDestList');
+  if (!destList) { return; }
 
-  const row = document.createElement('div');
+  // Build row entirely with createElement — no innerHTML template literals
+  var row = document.createElement('div');
   row.className = 'custom-dest-row';
   row.id = 'destRow_' + id;
-  row.innerHTML = `
-    <div class="custom-dest-header">
-      <div class="lux-select" id="destSelWrap_${id}" style="flex:1;">
-        <div class="lux-select-display field-select" id="destSelDisplay_${id}" onclick="toggleDestDrop(${id})" style="font-size:18px;font-weight:600;color:var(--burgundy);background:var(--ivory);">
-          <span id="destSelText_${id}" style="color:rgba(42,27,18,.3);font-style:italic;font-weight:400;">— Select destination —</span>
-          <span class="lux-select-arrow">◆</span>
-        </div>
-        <div class="lux-select-dropdown" id="destSelDrop_${id}" style="display:none;"></div>
-      </div>
-      <input type="number" class="custom-nights-input" id="destNights_${id}" min="1" max="99" value="1" placeholder="N" onchange="updateCustomSummary()">
-      <button class="custom-dest-remove" onclick="removeCustomDest(${id})">×</button>
-    </div>
-    <div class="custom-dest-body" id="destBody_${id}" style="display:none;">
-      <span class="custom-field-label">SIGHTSEEING — select what applies for this guest</span>
-      <div class="custom-sightseeing" id="destSight_${id}"></div>
-      <input type="text" class="custom-extra-sightseeing" id="destExtra_${id}" placeholder="Add additional sightseeing not listed above...">
-    </div>`;
-  // Populate dropdown options
-  const drop = document.getElementById('destSelDrop_' + id);
-  Object.keys(DEST_BANK).forEach(dest => {
-    const item = document.createElement('div');
-    item.className = 'lux-select-option';
+
+  // Header
+  var header = document.createElement('div');
+  header.className = 'custom-dest-header';
+
+  // Lux select wrapper
+  var selWrap = document.createElement('div');
+  selWrap.className = 'lux-select';
+  selWrap.id = 'destSelWrap_' + id;
+  selWrap.style.flex = '1';
+
+  var selDisplay = document.createElement('div');
+  selDisplay.className = 'lux-select-display field-select';
+  selDisplay.id = 'destSelDisplay_' + id;
+  selDisplay.style.cssText = 'font-size:16px;font-weight:400;color:var(--ink);background:var(--cream);cursor:pointer;';
+  selDisplay.onclick = function() { toggleDestDrop(id); };
+
+  var selText = document.createElement('span');
+  selText.id = 'destSelText_' + id;
+  selText.textContent = '— Select destination —';
+  selText.style.cssText = 'color:rgba(42,27,18,.3);font-style:italic;font-weight:400;';
+
+  var selArrow = document.createElement('span');
+  selArrow.className = 'lux-select-arrow';
+  selArrow.textContent = '◆';
+
+  selDisplay.appendChild(selText);
+  selDisplay.appendChild(selArrow);
+
+  var selDrop = document.createElement('div');
+  selDrop.className = 'lux-select-dropdown';
+  selDrop.id = 'destSelDrop_' + id;
+  selDrop.style.display = 'none';
+
+  // Populate dropdown
+  Object.keys(DEST_BANK).forEach(function(dest) {
+    var item = document.createElement('div');
+    item.className = 'lux-select-item';
     item.textContent = dest;
-    item.onclick = () => selectDest(id, dest);
-    drop.appendChild(item);
+    item.onclick = (function(d) { return function() { selectDest(id, d); }; })(dest);
+    selDrop.appendChild(item);
   });
+
+  selWrap.appendChild(selDisplay);
+  selWrap.appendChild(selDrop);
+
+  // Nights input
+  var nightsInput = document.createElement('input');
+  nightsInput.type = 'number';
+  nightsInput.className = 'custom-nights-input';
+  nightsInput.id = 'destNights_' + id;
+  nightsInput.min = '1';
+  nightsInput.max = '99';
+  nightsInput.value = '1';
+  nightsInput.placeholder = 'N';
+  nightsInput.onchange = function() { updateCustomSummary(); };
+
+  // Remove button
+  var removeBtn = document.createElement('button');
+  removeBtn.className = 'custom-dest-remove';
+  removeBtn.textContent = '×';
+  removeBtn.onclick = (function(rid) { return function() { removeCustomDest(rid); }; })(id);
+
+  header.appendChild(selWrap);
+  header.appendChild(nightsInput);
+  header.appendChild(removeBtn);
+
+  // Body (sightseeing)
+  var body = document.createElement('div');
+  body.className = 'custom-dest-body';
+  body.id = 'destBody_' + id;
+  body.style.display = 'none';
+
+  var sightLabel = document.createElement('span');
+  sightLabel.className = 'custom-field-label';
+  sightLabel.textContent = 'SIGHTSEEING — select what applies for this guest';
+
+  var sightDiv = document.createElement('div');
+  sightDiv.className = 'custom-sightseeing';
+  sightDiv.id = 'destSight_' + id;
+
+  var extraInput = document.createElement('input');
+  extraInput.type = 'text';
+  extraInput.className = 'custom-extra-sightseeing';
+  extraInput.id = 'destExtra_' + id;
+  extraInput.placeholder = 'Add additional sightseeing not listed above...';
+
+  body.appendChild(sightLabel);
+  body.appendChild(sightDiv);
+  body.appendChild(extraInput);
+
+  row.appendChild(header);
+  row.appendChild(body);
   destList.appendChild(row);
   updateCustomSummary();
 }
@@ -6528,7 +7178,120 @@ function onDestChange(id, dest) {
   sightDiv.innerHTML = sightList.map((s, i) =>
     `<label class="custom-sight-item"><input type="checkbox" id="sight_${id}_${i}" checked> ${s}</label>`
   ).join('');
+  // Hotel selector
+  buildHotelSelector(id, dest);
   updateCustomSummary();
+}
+
+function buildHotelSelector(id, dest) {
+  // Remove existing hotel selector if any
+  var existing = document.getElementById('hotelSel_' + id);
+  if (existing) existing.remove();
+
+  var hotels = HOTEL_DB[dest];
+  if (!hotels || hotels.length === 0) return;
+
+  // Group by tier
+  var tiers = {};
+  hotels.forEach(function(h) {
+    var t = h.stars;
+    if (!tiers[t]) tiers[t] = [];
+    tiers[t].push(h.name);
+  });
+
+  var wrap = document.createElement('div');
+  wrap.id = 'hotelSel_' + id;
+  wrap.style.cssText = 'margin-top:12px;padding-top:12px;border-top:1px solid rgba(61,12,17,.08);';
+
+  var lbl = document.createElement('span');
+  lbl.className = 'custom-field-label';
+  lbl.textContent = 'SELECT HOTEL';
+  lbl.style.marginBottom = '8px';
+  wrap.appendChild(lbl);
+
+  // Lux dropdown for hotel
+  var selWrap = document.createElement('div');
+  selWrap.className = 'lux-select';
+  selWrap.id = 'hotelSelWrap_' + id;
+  selWrap.style.marginTop = '8px';
+
+  var selDisplay = document.createElement('div');
+  selDisplay.className = 'lux-select-display field-select';
+  selDisplay.id = 'hotelSelDisplay_' + id;
+  selDisplay.style.cursor = 'pointer';
+  selDisplay.onclick = function(e) { e.stopPropagation(); toggleHotelDrop(id); };
+
+  var selText = document.createElement('span');
+  selText.id = 'hotelSelText_' + id;
+  selText.textContent = '— Select hotel —';
+  selText.style.cssText = 'color:rgba(42,27,18,.3);font-style:italic;font-weight:400;';
+
+  var selArrow = document.createElement('span');
+  selArrow.className = 'lux-select-arrow';
+  selArrow.textContent = '◆';
+
+  selDisplay.appendChild(selText);
+  selDisplay.appendChild(selArrow);
+
+  var selDrop = document.createElement('div');
+  selDrop.className = 'lux-select-dropdown';
+  selDrop.id = 'hotelSelDrop_' + id;
+  selDrop.style.display = 'none';
+
+  // Tier order
+  var tierOrder = ['5 Star', '4 Star', 'Heritage', 'Boutique', '3 Star'];
+  tierOrder.forEach(function(tier) {
+    if (!tiers[tier]) return;
+    // Tier header
+    var hdr = document.createElement('div');
+    hdr.style.cssText = 'padding:8px 18px 4px;font-family:var(--f-caps);font-size:8px;letter-spacing:2px;color:var(--gold);background:rgba(61,12,17,.04);border-bottom:1px solid rgba(61,12,17,.06);';
+    hdr.textContent = tier.toUpperCase();
+    selDrop.appendChild(hdr);
+
+    tiers[tier].forEach(function(hotelName) {
+      var item = document.createElement('div');
+      item.className = 'lux-select-item';
+      item.textContent = hotelName;
+      item.dataset.tier = tier;
+      item.onclick = (function(n, t) {
+        return function() { selectHotel(id, n, t); };
+      })(hotelName, tier);
+      selDrop.appendChild(item);
+    });
+  });
+
+  selWrap.appendChild(selDisplay);
+  selWrap.appendChild(selDrop);
+  wrap.appendChild(selWrap);
+
+  // Star badge shown after selection
+  var badge = document.createElement('div');
+  badge.id = 'hotelBadge_' + id;
+  badge.style.cssText = 'display:none;margin-top:6px;font-family:var(--f-caps);font-size:8px;letter-spacing:1.5px;color:var(--gold);';
+  wrap.appendChild(badge);
+
+  document.getElementById('destBody_' + id).appendChild(wrap);
+}
+
+function toggleHotelDrop(id) {
+  var drop = document.getElementById('hotelSelDrop_' + id);
+  if (!drop) return;
+  // Close all other dropdowns
+  document.querySelectorAll('[id^="hotelSelDrop_"],[id^="destSelDrop_"]').forEach(function(d) {
+    if (d.id !== 'hotelSelDrop_' + id) d.style.display = 'none';
+  });
+  drop.style.display = drop.style.display === 'none' ? 'block' : 'none';
+}
+
+function selectHotel(id, name, tier) {
+  var textEl = document.getElementById('hotelSelText_' + id);
+  var drop = document.getElementById('hotelSelDrop_' + id);
+  var badge = document.getElementById('hotelBadge_' + id);
+  var wrap = document.getElementById('hotelSelWrap_' + id);
+  if (textEl) { textEl.textContent = name; textEl.style.cssText = 'color:var(--burgundy);font-style:normal;font-weight:600;'; }
+  if (drop) drop.style.display = 'none';
+  if (wrap) { wrap.dataset.hotel = name; wrap.dataset.tier = tier; }
+  if (badge) { badge.textContent = tier.toUpperCase(); badge.style.display = 'block'; }
 }
 
 function updateCustomSummary() {
@@ -6555,7 +7318,8 @@ function updateCustomSummary() {
 
 function getCustomPackageData() {
   const rows = document.querySelectorAll('.custom-dest-row');
-  const tripName = document.getElementById('customTripName').value || 'Custom Kerala Package';
+  const rawName = document.getElementById('customTripName').value || 'Custom Kerala Package';
+  const tripName = rawName.replace(/\b\w/g, c => c.toUpperCase());
   let destinations = [];
   rows.forEach(row => {
     const id = row.id.replace('destRow_', '');
@@ -6568,7 +7332,10 @@ function getCustomPackageData() {
     const selectedSight = Array.from(sightItems).map(cb => cb.parentElement.textContent.trim());
     const extraSight = document.getElementById('destExtra_' + id).value;
     if (extraSight.trim()) selectedSight.push(...extraSight.split(',').map(s => s.trim()).filter(Boolean));
-    destinations.push({ dest, nights, sightseeing: selectedSight });
+    const hotelWrap = document.getElementById('hotelSelWrap_' + id);
+    const hotel = hotelWrap ? (hotelWrap.dataset.hotel || '') : '';
+    const hotelTier = hotelWrap ? (hotelWrap.dataset.tier || '') : '';
+    destinations.push({ dest, nights, sightseeing: selectedSight, hotel, hotelTier });
   });
   return { tripName, destinations };
 }
@@ -6593,12 +7360,19 @@ function buildCustomCuratedPDF() {
       dayNum++;
       const dayIdx = Math.min(n, bank.days.length - 1);
       const day = bank.days[dayIdx];
-      // Build sightseeing tags
-      const tags = destData.sightseeing.slice(0, 5).map(s =>
+      // Build sightseeing tags — rotate through list so each day shows different tags
+      const allSight = destData.sightseeing.length > 0 ? destData.sightseeing : (bank.sightseeing || []);
+      const tagStart = (n * 3) % Math.max(allSight.length, 1);
+      const dayTags = allSight.slice(tagStart, tagStart + 3).concat(allSight.slice(0, Math.max(0, tagStart + 3 - allSight.length)));
+      const tags = dayTags.slice(0, 4).map(s =>
         `<span class="tag">${s.toUpperCase().replace(/[^A-Z0-9&·\- ]/g,'')}</span>`
       ).join('');
+      // Alternate day background: dark burgundy for arrival/transit days, dark forest for in-destination days
+      const dayBg = n === 0
+        ? 'background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%)'
+        : (n % 2 === 0 ? 'background:linear-gradient(105deg,#1C2E1A 0%,#0f1a0e 100%)' : 'background:linear-gradient(105deg,#1A2535 0%,#0e1520 100%)');
       itineraryHTML += `
-  <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
+  <div class="day-block" style="${dayBg};padding:22px 40px;">
     <div class="day-top">
       <div class="day-num" style="color:var(--gold);opacity:.55;">${String(dayNum).padStart(2,'0')}</div>
       <div class="day-info">
@@ -6619,12 +7393,25 @@ function buildCustomCuratedPDF() {
     }
   });
 
-  // Build Eat Drink Remember section
-  let eatHTML = '<section class="food-page"><div class="pg-header"><span class="phl">K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P</span><span class="phn">—</span><span class="phr">[[REF_SPACED]]</span></div><div class="food-hero"><span class="food-chapter">E A T &nbsp;·&nbsp; D R I N K &nbsp;·&nbsp; R E M E M B E R</span><h2 class="food-title">Where to <em>Eat</em></h2><div class="food-rule"></div></div><div class="food-grid">';
-  Object.values(allRestaurants).forEach(r => {
-    eatHTML += `<div class="food-item"><div class="food-name">${r.name}</div><div class="food-note">${r.note}</div></div>`;
-  });
-  eatHTML += '</div></section>';
+  // Build Eat Drink Remember section — grouped by destination
+  let eatHTML = '<section class="food-page"><div class="pg-header"><span class="phl">[[BRAND_HEADER]]</span><span class="phn">—</span><span class="phr">[[REF_SPACED]]</span></div><div class="food-hero"><span class="food-chapter">E A T &nbsp;·&nbsp; D R I N K &nbsp;·&nbsp; R E M E M B E R</span><h2 class="food-title">Where to <em>Eat</em></h2><div class="food-rule"></div><p class="food-intro">Kerala\'s cuisine is one of the most complex and underrated in India. Hand-picked restaurants by destination — each selected for quality, authenticity, and the kind of meal that becomes a travel memory.</p></div>';
+  // Per-destination restaurant columns
+  const destWithFood = data.destinations.filter(d => DEST_BANK[d.dest] && (DEST_BANK[d.dest].restaurants || []).length > 0);
+  if (destWithFood.length > 0) {
+    const colCount = Math.min(destWithFood.length, 3);
+    eatHTML += '<div class="food-dest-grid" style="display:grid;grid-template-columns:repeat(' + colCount + ',1fr);gap:0;border:1px solid rgba(61,12,17,.1);">';
+    destWithFood.forEach(d => {
+      const rests = DEST_BANK[d.dest].restaurants || [];
+      eatHTML += '<div class="food-dest-col" style="padding:0;">';
+      eatHTML += '<div class="food-dest-hdr" style="background:#3D0C11;color:var(--ivory);font-family:var(--f-caps);font-size:9px;letter-spacing:2px;padding:12px 20px;">' + d.dest.toUpperCase() + '</div>';
+      rests.forEach(r => {
+        eatHTML += '<div class="food-item" style="padding:16px 20px;border-bottom:1px solid rgba(61,12,17,.07);"><div class="food-name">' + r.name + '</div><div class="food-note">' + r.note + '</div></div>';
+      });
+      eatHTML += '</div>';
+    });
+    eatHTML += '</div>';
+  }
+  eatHTML += '</section>';
 
   return { itineraryHTML, eatHTML, totalNights, routeStops, tripName: data.tripName };
 }
@@ -6656,9 +7443,10 @@ function generateCustomCurated() {
 
   // Build route strip
   const routeStripHTML = routeStops.map((stop, i) => {
-    const bank = DEST_BANK[stop];
     const nights = data.destinations[i] ? data.destinations[i].nights : 1;
-    return `<div class="route-stop"><div class="route-city">${stop.toUpperCase()}</div><div class="route-nights">${nights}N</div></div>${i < routeStops.length-1 ? '<div class="route-arr">→</div>' : ''}`;
+    const stopEl = '<div class="stop"><div class="stop-name">' + stop.toUpperCase() + '</div><div class="stop-night">' + nights + 'N</div></div>';
+    const lineEl = i < routeStops.length - 1 ? '<div class="route-line"></div>' : '';
+    return stopEl + lineEl;
   }).join('');
 
   // Build parts name (first word normal, rest italic gold)
@@ -6688,7 +7476,7 @@ function generateCustomCurated() {
   html = html.split('[[VALID_UNTIL]]').join(validStr);
 
   // Route strip
-  const routeHTML = `<div class="route-strip">${routeStripHTML}</div>`;
+  const routeHTML = '<div class="route-stops">' + routeStripHTML + '</div>';
   html = html.split('[[ROUTE_STOPS]]').join(routeHTML);
 
   // Package intro
@@ -6697,9 +7485,11 @@ function generateCustomCurated() {
 
   // Inject itinerary + eat sections
   html = html.split('[[PKG_ITINERARY]]').join(built.itineraryHTML + built.eatHTML);
+  html = html.split('[[FOOD_SECTION]]').join(''); // custom eatHTML already injected above
 
   // Inclusions — use generic Kerala set
-  const genericInclusions = PKG_INCLUSIONS["Classic Kerala"] || '';
+  // Build generic inclusions for custom package
+  const genericInclusions = '<div class="incl-grid"><div class="incl-cell"><svg class="incl-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="incl-lbl">' + totalNights + ' NIGHTS<br>ACCOMMODATION</span></div><div class="incl-cell"><svg class="incl-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="incl-lbl">DAILY<br>BREAKFAST</span></div><div class="incl-cell"><svg class="incl-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span class="incl-lbl">PRIVATE AC<br>TRANSPORT</span></div><div class="incl-cell"><svg class="incl-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.72a16 16 0 0 0 6.29 6.29l.99-.99a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="incl-lbl">AIRPORT<br>TRANSFERS</span></div><div class="incl-cell"><svg class="incl-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span class="incl-lbl">ALL<br>SIGHTSEEING</span></div><div class="incl-cell"><svg class="incl-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span class="incl-lbl">24/7<br>CONCIERGE</span></div></div>';
   html = html.split('[[PKG_INCLUSIONS]]').join(genericInclusions);
 
   // Airport based on first destination
@@ -6707,17 +7497,28 @@ function generateCustomCurated() {
   const airport = PKG_AIRPORT[firstDest] || PKG_AIRPORT["Kochi"] || "Cochin International Airport (COK)";
   html = html.split('[[AIRPORT]]').join(airport);
   html = html.split('[[TRANSPORT]]').join('Private AC Vehicle Throughout');
-  html = html.split('[[SUB]]').join('All transfers included');
+  html = html.split('[[TRANSPORT_SUB]]').join('All transfers included');
 
   // Practical notes — use standard
   html = html.split('[[PRACTICAL_NOTES]]').join('');
 
   // Where you'll rest — blank for custom (no pricing hotels set)
-  html = html.split('[[PRICE_HOTELS_4S]]').join('Hotels to be confirmed based on your tier selection.');
-  html = html.split('[[PRICE_HOTELS_5S]]').join('Hotels to be confirmed based on your tier selection.');
-  html = html.split('[[PRICE_OPT_NAME_4S]]').join(tripName + ' — Premium');
-  html = html.split('[[PRICE_OPT_NAME_5S]]').join(tripName + ' — Luxury');
+  // Build hotel list per destination for Where You'll Rest
+  const hotelLines4s = data.destinations.map(d => {
+    if (!d.hotel) return '<div style="color:rgba(42,27,18,.4);font-style:italic;">' + d.dest + ' — To be confirmed</div>';
+    const tier = d.hotelTier || '';
+    const is5s = tier.includes('5');
+    const isHeritage = tier.includes('Heritage') || tier.includes('Boutique');
+    // For 4S show 4-star or heritage; for 5S show 5-star or heritage
+    const show4s = !is5s || isHeritage;
+    return '<div style="margin-bottom:6px;"><strong style="font-family:var(--f-display);font-size:15px;">' + d.dest + '</strong> &nbsp;<span style="font-size:12px;color:rgba(42,27,18,.5);">' + tier + '</span><br><span style="font-size:14px;">' + d.hotel + '</span></div>';
+  }).join('');
+  html = html.split('[[PRICE_HOTELS_4S]]').join(hotelLines4s);
+  html = html.split('[[PRICE_HOTELS_5S]]').join(hotelLines4s);
+  html = html.split('[[PRICE_OPT_NAME_4S]]').join(tripName + ' — Selected Hotels');
+  html = html.split('[[PRICE_OPT_NAME_5S]]').join(tripName + ' — Selected Hotels');
 
+  html = applyBranding(html);
   const w = window.open('', '_blank');
   w.document.write(html);
   w.document.close();
@@ -6726,14 +7527,199 @@ function generateCustomCurated() {
 function generateCustomQuoteSheet() {
   const data = getCustomPackageData();
   if (data.destinations.length === 0) { alert('Please add at least one destination.'); return; }
-  // Switch to curated mode temporarily, generate quote, then switch back
-  // Actually: just call the existing generateQuote function directly
-  // It reads from the form fields which the user has filled in
-  if (typeof generateQuote === 'function') {
-    generateQuote();
-  } else {
-    alert('Please fill in the pricing details and use the Quote Sheet section below.');
+
+  // Read shared form fields
+  const name     = (document.getElementById('custName').value.trim() || '—').replace(/\b\w/g, c => c.toUpperCase());
+  const startIso = document.getElementById('startDate').value;
+  const endIso   = document.getElementById('endDate').value;
+  const dates    = fmtRange(startIso, endIso) || '—';
+  const pax      = document.getElementById('pax').value.trim() || '—';
+  const ref      = fullRef();
+  const validIso = document.getElementById('validUntil').value;
+  const validFmt = fmtDate(validIso) || '—';
+  const issueFmt = fmtDate(TODAY.toISOString().split('T')[0]);
+  const city     = document.getElementById('city').value.trim() || '—';
+
+  const tripName = data.tripName;
+  const words = tripName.split(' ');
+  const last = words.pop();
+  const rest = words.join(' ');
+
+  const totalNights = data.destinations.reduce((s, d) => s + d.nights, 0);
+  const totalDays = totalNights + 1;
+  const duration = totalNights + 'N / ' + totalDays + 'D';
+
+  // Hotel list from custom selections
+  const hotelRows = data.destinations.map((d, i) => {
+    const hotel = d.hotel || 'To be confirmed';
+    const tier  = d.hotelTier || '';
+    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:10px 16px;background:' + (i%2===0 ? 'var(--cream)' : 'var(--cream-band)') + ';border-bottom:1px solid rgba(61,12,17,.06);">' +
+      '<span style="font-family:Cinzel,serif;font-size:7px;letter-spacing:1.5px;color:var(--muted);">' + d.dest.toUpperCase() + (tier ? '  \xB7  ' + tier : '') + '</span>' +
+      '<span style="font-family:EB Garamond,serif;font-size:15px;color:var(--ink);font-style:italic;">' + hotel + '</span>' +
+    '</div>';
+  }).join('');
+
+  // Read pricing fields (shared with fixed package section)
+  const ppp   = document.getElementById('ppp')        ? document.getElementById('ppp').value.trim()        : '';
+  const ss    = document.getElementById('singleSupp') ? document.getElementById('singleSupp').value.trim() : '';
+  const crAmt = document.getElementById('childRate')  ? document.getElementById('childRate').value.trim()  : '';
+  const crAge = document.getElementById('childAge')   ? document.getElementById('childAge').value.trim()   : '';
+  const cr    = crAmt ? (crAge ? crAmt + ' · ' + crAge : crAmt) : '—';
+  const pkgv  = document.getElementById('pkgValue')   ? document.getElementById('pkgValue').value.trim()   : '';
+  const gst   = document.getElementById('gst')        ? document.getElementById('gst').value.trim()        : '';
+  const gt    = document.getElementById('grandTotal') ? document.getElementById('grandTotal').value.trim() : '';
+
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--burgundy:#3D0C11;--burgundy-deep:#2C0A0E;--gold:#C9A84C;--gold-soft:#B8973F;--ivory:#F6EFE0;--cream:#F3E9D6;--cream-band:#EBDFC6;--ink:#2A1B12;--muted:#6B5237;}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+body{font-family:"EB Garamond",serif;background:var(--ivory);color:var(--ink);width:900px;margin:0 auto;}
+.hdr{background:var(--burgundy-deep);padding:20px 40px;display:flex;justify-content:space-between;align-items:center;}
+.hdr-brand{font-family:"Cinzel",serif;font-size:8px;letter-spacing:3px;color:var(--gold);}
+.hdr-doc{font-family:"Cinzel",serif;font-size:8px;letter-spacing:3px;color:rgba(246,239,224,.35);}
+.hero{background:var(--burgundy);padding:24px 40px;display:flex;justify-content:space-between;align-items:flex-end;border-bottom:3px solid var(--gold-soft);}
+.hero-title{font-family:"Cinzel",serif;font-size:26px;font-weight:600;color:var(--ivory);letter-spacing:.03em;line-height:1.1;}
+.hero-title span{color:var(--gold);}
+.hero-ref{text-align:right;}
+.hero-refnum{font-family:"Cinzel",serif;font-size:12px;letter-spacing:.1em;color:var(--ivory);}
+.hero-refdate{font-family:"EB Garamond",serif;font-size:13px;color:rgba(246,239,224,.55);font-style:italic;margin-top:3px;}
+.body{padding:26px 40px;}
+.prep{font-family:"Cinzel",serif;font-size:9px;letter-spacing:2.5px;color:var(--burgundy);margin-bottom:6px;}
+.prep-name{font-family:"EB Garamond",serif;font-size:24px;color:var(--ink);margin-bottom:20px;}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(61,12,17,.1);border-radius:3px;overflow:hidden;margin-bottom:24px;}
+.si{padding:14px 16px;border-right:1px solid rgba(61,12,17,.1);background:var(--cream);}
+.si:last-child{border-right:none;}
+.si-lbl{font-family:"Cinzel",serif;font-size:8px;letter-spacing:1.5px;color:var(--burgundy);margin-bottom:4px;display:block;}
+.si-val{font-family:"EB Garamond",serif;font-size:16px;color:var(--ink);line-height:1.3;}
+.sec{font-family:"Cinzel",serif;font-size:9.5px;letter-spacing:2.5px;color:var(--burgundy);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid rgba(61,12,17,.1);}
+table.pt{width:100%;border-collapse:collapse;margin-bottom:4px;}
+table.pt tr{border-bottom:1px solid rgba(61,12,17,.07);}
+table.pt td{padding:9px 0;font-family:"EB Garamond",serif;font-size:17px;}
+table.pt td.l{color:var(--muted);}
+table.pt td.v{text-align:right;font-weight:500;}
+table.pt tr.tot td{font-family:"Cinzel",serif;font-size:10px;letter-spacing:.05em;padding:14px 0;border-top:2px solid var(--gold-soft);border-bottom:none;color:var(--burgundy);}
+table.pt tr.tot td.v{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:600;letter-spacing:0;}
+.pay{background:var(--cream-band);border:1px solid rgba(61,12,17,.1);border-radius:3px;padding:16px 22px;margin-bottom:18px;}
+.pay-t{font-family:"Cinzel",serif;font-size:9px;letter-spacing:2.5px;color:var(--burgundy);margin-bottom:12px;}
+.pay-g{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+.pi{padding-right:18px;border-right:1px solid rgba(61,12,17,.1);margin-right:18px;}
+.pi:last-child{border-right:none;margin-right:0;padding-right:0;}
+.pi-pct{font-family:"Cormorant Garamond",serif;font-size:30px;font-weight:600;color:var(--burgundy);line-height:1;}
+.pi-lbl{font-family:"Cinzel",serif;font-size:6.5px;letter-spacing:1.5px;color:var(--muted);margin-top:4px;display:block;}
+.pi-note{font-family:"EB Garamond",serif;font-size:13px;color:var(--muted);font-style:italic;margin-top:2px;}
+.valid-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid rgba(61,12,17,.1);}
+.vl{font-family:"Cinzel",serif;font-size:7px;letter-spacing:2px;color:var(--muted);}
+.vv{font-family:"Cormorant Garamond",serif;font-size:17px;color:var(--burgundy);font-style:italic;}
+.ftr{background:var(--burgundy-deep);padding:14px 40px;display:flex;justify-content:space-between;align-items:center;margin-top:22px;}
+.fc{font-family:"EB Garamond",serif;font-size:13px;color:rgba(246,239,224,.55);font-style:italic;}
+.fn{font-family:"Cinzel",serif;font-size:6.5px;letter-spacing:1.5px;color:rgba(246,239,224,.2);}
+</style></head><body>
+<div class="hdr"><div class="hdr-brand">AKBAR KERALA DMC · AKBAR GROUP</div><div class="hdr-doc">PRICE QUOTATION</div></div>
+<div class="hero">
+  <div class="hero-title">${rest} <span>${last}</span></div>
+  <div class="hero-ref"><div class="hero-refnum">${ref}</div><div class="hero-refdate">Issued ${issueFmt}</div></div>
+</div>
+<div class="body">
+  <div class="prep">PREPARED FOR</div>
+  <div class="prep-name">${name}</div>
+  <div class="summary">
+    <div class="si"><span class="si-lbl">TRAVEL DATES</span><div class="si-val">${dates}</div></div>
+    <div class="si"><span class="si-lbl">TRAVELLERS</span><div class="si-val">${pax}</div></div>
+    <div class="si"><span class="si-lbl">DURATION</span><div class="si-val">${duration}</div></div>
+    <div class="si"><span class="si-lbl">DESTINATIONS</span><div class="si-val">${data.destinations.length}</div></div>
+  </div>
+  ${hotelRows ? '<div class="sec" style="margin-bottom:14px;">ACCOMMODATION</div><div style="border:1px solid rgba(61,12,17,.1);border-radius:3px;overflow:hidden;margin-bottom:20px;">' + hotelRows + '</div>' : ''}
+  <div class="sec">PRICING BREAKDOWN</div>
+  <table class="pt">
+    <tr><td class="l">Price per person · twin sharing</td><td class="v">₹${ppp||'—'}</td></tr>
+    ${ss ? '<tr><td class="l">Single supplement</td><td class="v">₹'+ss+'</td></tr>' : ''}
+    <tr><td class="l">Child rate</td><td class="v">₹${cr}</td></tr>
+    <tr><td class="l">Package value (excl. GST)</td><td class="v">₹${pkgv||'—'}</td></tr>
+    <tr><td class="l">GST 5%</td><td class="v">₹${gst||'—'}</td></tr>
+    <tr class="tot"><td class="l">GRAND TOTAL</td><td class="v">₹${gt||'—'}</td></tr>
+  </table>
+  <div class="pay">
+    <div class="pay-t">PAYMENT SCHEDULE</div>
+    <div class="pay-g">
+      <div class="pi"><div class="pi-pct">25%</div><span class="pi-lbl">ON CONFIRMATION</span><div class="pi-note">Booking secured</div></div>
+      <div class="pi"><div class="pi-pct">50%</div><span class="pi-lbl">45 DAYS PRIOR</span><div class="pi-note">Hotel releases held</div></div>
+      <div class="pi"><div class="pi-pct">25%</div><span class="pi-lbl">ON ARRIVAL</span><div class="pi-note">Balance clearance</div></div>
+    </div>
+  </div>
+  <div class="valid-row"><span class="vl">QUOTATION VALID UNTIL</span><span class="vv">${validFmt}</span></div>
+</div>
+<div class="ftr">
+  <span class="fc">Kerala DMC · dmc.kerala@akbartravels.com · +91 89433 96444</span>
+  <span class="fn">AKBAR KERALA DMC · INTERNAL USE ONLY</span>
+</div>
+</body></html>`;
+
+  try {
+    const win = window.open('', '_blank');
+    if (!win) {
+      const blob = new Blob([html], {type: 'text/html'});
+      window.location.href = URL.createObjectURL(blob);
+    } else {
+      win.document.write(html);
+      win.document.close();
+    }
+  } catch(e) {
+    console.error('Quote error:', e);
   }
+}
+
+// ── BOOKING TYPE ────────────────────────────────────────────────────────────
+var bookingType = 'direct'; // 'direct' or 'agent'
+
+function setBookingType(type) {
+  bookingType = type;
+  // Update all toggle buttons
+  ['btnDirect','btnDirectFixed'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.background = type === 'direct' ? 'var(--burgundy)' : 'var(--cream)';
+    el.style.color = type === 'direct' ? 'var(--ivory)' : 'var(--muted)';
+  });
+  ['btnAgent','btnAgentFixed'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.style.background = type === 'agent' ? 'var(--burgundy)' : 'var(--cream)';
+    el.style.color = type === 'agent' ? 'var(--ivory)' : 'var(--muted)';
+  });
+  var note = type === 'direct'
+    ? 'Direct: Akbar branding included in Kerala Curated PDF.'
+    : 'Agent: All Akbar branding removed from Kerala Curated PDF.';
+  ['bookingTypeNote','bookingTypeNoteFixed'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = note;
+  });
+}
+
+function applyBranding(html) {
+  if (bookingType === 'agent') {
+    // Strip all brand references
+    html = html.split('[[BRAND_HEADER]]').join('');
+    html = html.split('[[BRAND_NAV]]').join('');
+    html = html.split('[[BRAND_EYEBROW]]').join('');
+    html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey');
+    html = html.split('[[BRAND_CONTACT]]').join('Contact your travel consultant');
+    html = html.split('[[BRAND_QUOTE]]').join('A journey through Kerala — crafted with care and an intimate knowledge of this singular destination.');
+    html = html.split('[[BRAND_COPYRIGHT]]').join('');
+    html = html.split('[[BRAND_FOOTER]]').join('');
+  } else {
+    // Direct: restore full branding
+    html = html.split('[[BRAND_HEADER]]').join('K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
+    html = html.split('[[BRAND_NAV]]').join('A K B A R &nbsp; K E R A L A &nbsp; D M C');
+    html = html.split('[[BRAND_EYEBROW]]').join('A N &nbsp; A K B A R &nbsp; K E R A L A &nbsp; D M C &nbsp; C U R A T I O N');
+    html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey · Akbar Kerala DMC');
+    html = html.split('[[BRAND_CONTACT]]').join('Contact your Akbar travel consultant');
+    html = html.split('[[BRAND_QUOTE]]').join('From the house of Akbar — a legacy of trust, now dedicated to crafting private journeys across Kerala. Seven days here will remind you why you travel.');
+    html = html.split('[[BRAND_COPYRIGHT]]').join('© &nbsp; A K B A R &nbsp; G R O U P');
+    html = html.split('[[BRAND_FOOTER]]').join('K E R A L A &nbsp;·&nbsp; C O C H I N &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
+  }
+  return html;
 }
 
 function toggleDestDrop(id) {
