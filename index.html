@@ -333,6 +333,7 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
           <option value="">Select Category</option>
           <option value="Premium 4★">Premium 4★</option>
           <option value="Luxury 5★">Luxury 5★</option>
+              <option value="Mixed (Custom)">Mixed (Custom)</option>
         </select>
         <div class="lux-select" id="categoryCustom">
           <div class="lux-select-display field-select" id="categoryDisplay">
@@ -521,6 +522,7 @@ function onPkgChange() {
     {lbl:"BUDGET 3★", price:pkg.p3, cat:"Budget 3★"},
     {lbl:"PREMIUM 4★", price:pkg.p4, cat:"Premium 4★"},
     {lbl:"LUXURY 5★", price:pkg.p5, cat:"Luxury 5★"},
+    {lbl:"MIXED (CUSTOM)", price:0, cat:"Mixed (Custom)"},
   ];
   const grid = document.getElementById("autoPriceGrid");
   grid.innerHTML = "";
@@ -529,7 +531,8 @@ function onPkgChange() {
     const d = document.createElement("div");
     const off = t.price === 0;
     d.className = "auto-price-btn" + (off ? " auto-price-disabled" : "");
-    d.innerHTML = `<div class="auto-price-tier">${t.lbl}</div><div class="auto-price-val">${off ? "N/A" : "₹" + inr(t.price)}</div><div style="font-family:'EB Garamond',serif;font-size:11px;color:var(--muted);font-style:italic;margin-top:2px;">per person</div>`;
+    const displayVal = t.cat === "Mixed (Custom)" ? "Custom" : (off ? "N/A" : "₹" + inr(t.price));
+    d.innerHTML = `<div class="auto-price-tier">${t.lbl}</div><div class="auto-price-val">${displayVal}</div><div style="font-family:'EB Garamond',serif;font-size:11px;color:var(--muted);font-style:italic;margin-top:2px;">${t.cat === "Mixed (Custom)" ? "enter price below" : "per person"}</div>`;
     if (!off) d.onclick = () => {
       document.querySelectorAll(".auto-price-btn").forEach(b => b.classList.remove("active"));
       d.classList.add("active");
@@ -538,8 +541,15 @@ function onPkgChange() {
       document.getElementById("categoryText").textContent = t.cat;
       document.getElementById("categoryText").style.color = "var(--ink)";
       document.getElementById("categoryText").style.fontStyle = "normal";
-      document.getElementById("ppp").value = inr(t.price);
-      autoCalcQuote();
+      if (t.cat === "Mixed (Custom)") {
+        document.getElementById("ppp").value = "";
+        document.getElementById("ppp").placeholder = "Enter custom price";
+        autoCalcQuote();
+      } else {
+        document.getElementById("ppp").value = inr(t.price);
+        document.getElementById("ppp").placeholder = "";
+        autoCalcQuote();
+      }
     };
     grid.appendChild(d);
   });
