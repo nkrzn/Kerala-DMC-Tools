@@ -227,7 +227,7 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
       <label>PACKAGE</label>
       <select id="pkgSelect" onchange="onPkgChange()">
         <option value="">— Select a package —</option>
-        <option value="Classic Kerala|6N/7D|Year-round|22500|34000|62000">01 · Classic Kerala — 6N/7D</option>
+        <option value="Classic Kerala|5N/6D|Year-round|22500|34000|62000">01 · Classic Kerala — 5N/6D</option>
         <option value="Kerala Honeymoon|5N/6D|Year-round|24000|36500|68000">02 · Kerala Honeymoon — 5N/6D</option>
         <option value="Kerala Family|5N/6D|Year-round|21000|32000|58000">03 · Kerala Family — 5N/6D</option>
         <option value="Luxury Kerala|5N/6D|Year-round|0|52000|95000">04 · Luxury Kerala — 5N/6D</option>
@@ -464,6 +464,10 @@ body { font-family: 'EB Garamond', serif; background: #d8cdb6; color: var(--ink)
           <div class="price-wrap" style="flex:1;"><div class="price-sym">₹</div><input type="text" id="childRate" onblur="fmtPriceBlur(this)" onfocus="fmtPriceFocus(this)" class="price-input" placeholder="12,000" style="border-radius:0 3px 3px 0;"></div>
           <input type="text" id="childAge" class="price-input" placeholder="Ages 5–11" style="flex:1;background:var(--cream);border:1px solid rgba(61,12,17,.15);border-radius:3px;padding:10px 14px;font-family:'EB Garamond',serif;font-size:16px;color:var(--ink);">
         </div>
+      </div>
+      <div class="field">
+        <label>Transport Cost (per person)</label>
+        <div class="price-wrap"><div class="price-sym">₹</div><input type="text" id="transportCost" onblur="fmtPriceBlur(this);autoCalcQuote()" onfocus="fmtPriceFocus(this)" oninput="autoCalcQuote()" class="price-input" placeholder="Leave blank if N/A"></div>
       </div>
       <div class="field">
         <label>Package Value (excl. GST)</label>
@@ -844,7 +848,7 @@ const HOTEL_DB = {
       "stars": "5 Star"
     },
     {
-      "name": "The Zuri Kumarakom",
+      "name": "Coconut Lagoon CGH Earth",
       "stars": "5 Star"
     },
     {
@@ -1088,7 +1092,7 @@ const HOTEL_DB = {
   ],
   "Kozhikode": [
     {
-      "name": "Hyatt Regency Kozhikode",
+      "name": "The Raviz Kadavu Calicut",
       "stars": "5 Star"
     },
     {
@@ -1967,7 +1971,7 @@ const PKG_AIRPORT = {
 };
 
 const PACKAGES = {
-  "Classic Kerala":          {dur:"6N/7D", season:"Year-round", p3:22500, p4:34000, p5:62000},
+  "Classic Kerala":          {dur:"5N/6D", season:"Year-round", p3:22500, p4:34000, p5:62000},
   "Kerala Honeymoon":        {dur:"5N/6D", season:"Year-round", p3:24000, p4:36500, p5:68000},
   "Kerala Family":           {dur:"5N/6D", season:"Year-round", p3:21000, p4:32000, p5:58000},
   "Luxury Kerala":           {dur:"5N/6D", season:"Year-round", p3:0,     p4:52000, p5:95000},
@@ -6141,72 +6145,23 @@ const PKG_CONTENT = {
   </div>
 
   <!-- DAY 6 -->
-  <div class="day-block">
-    <div class="day-top">
-      <div class="day-num">06</div>
-      <div class="day-info">
-        <span class="day-label">D A Y &nbsp; S I X</span>
-        <h3 class="day-title">Alleppey → Kumarakom</h3>
-        <span class="day-hotel">K U M A R A K O M &nbsp; L A K E &nbsp; R E S O R T &nbsp;·&nbsp; 5 ★</span>
-      </div>
-    </div>
-    <p class="day-mood">"Disembark into the most beautiful morning in the backwaters — mist on the water, kingfishers skimming the canal, and the softest possible arrival at Kumarakom."</p>
-    <div class="day-body">
-      <div class="time-blocks">
-        <div class="time-block">
-          <span class="time-icon">☼</span>
-          <div>
-            <span class="time-label">M O R N I N G</span>
-            <span class="time-text">Breakfast on board as the boat moves through the early morning backwaters. Disembark by 9am. Transfer to Kumarakom on the shores of Vembanad Lake — India's longest lake. Check in at the resort and rest.</span>
-          </div>
-        </div>
-        <div class="time-block">
-          <span class="time-icon">◐</span>
-          <div>
-            <span class="time-label">A F T E R N O O N</span>
-            <span class="time-text">Kumarakom Bird Sanctuary walk at dawn — 14 hectares of reclaimed land that draws Siberian storks, darters, herons, and egrets year-round. Afternoon at leisure at the resort — pool, spa, or simply the lakeshore. The Kumarakom Lake Resort's water villa experience is one of the finest in South India.</span>
-          </div>
-        </div>
-        <div class="time-block">
-          <span class="time-icon">☾</span>
-          <div>
-            <span class="time-label">E V E N I N G</span>
-            <span class="time-text">Sunset from the lakeshore. Dinner at the resort's signature restaurant — Kerala's tradition of cooking in clay pots over wood fire. The karimeen (pearl spot fish) prepared here is legendary. An evening of absolute stillness before departure.</span>
-          </div>
-        </div>
-      </div>
-      <div class="day-meta">
-        <div class="meta-item"><span class="meta-key">D R I V E</span><span class="meta-val">Alleppey → Kumarakom · 1 hr</span></div>
-        <div class="meta-item"><span class="meta-key">P H O T O</span><span class="meta-val">Bird sanctuary at dawn · Vembanad Lake sunset</span></div>
-        <div class="meta-item"><span class="meta-key">O P T I O N A L</span><span class="meta-val">Ayurvedic massage at the resort spa</span></div>
-      </div>
-      <div class="tags">
-        <span class="tag">B R E A K F A S T &nbsp; O N &nbsp; B O A R D</span>
-        <span class="tag">B I R D &nbsp; S A N C T U A R Y</span>
-        <span class="tag">L A K E S I D E &nbsp; R E S O R T</span>
-        <span class="tag">S P A</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- DAY 7 -->
   <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
     <div class="day-top">
-      <div class="day-num" style="color:var(--gold);opacity:.55;">07</div>
+      <div class="day-num" style="color:var(--gold);opacity:.55;">06</div>
       <div class="day-info">
         <span class="day-label" style="color:var(--gold);">F A R E W E L L</span>
-        <h3 class="day-title" style="color:var(--ivory);">Kumarakom → Departure</h3>
+        <h3 class="day-title" style="color:var(--ivory);">Alleppey → Departure</h3>
         <span class="day-hotel" style="color:rgba(240,234,214,.25);">C O C H I N &nbsp; I N T E R N A T I O N A L &nbsp; A I R P O R T</span>
       </div>
     </div>
-    <p class="day-mood" style="color:rgba(240,234,214,.5);border-bottom-color:rgba(201,168,76,.08);">"Kerala leaves slowly — through backwater mist, through spice-scented air, and through the particular quiet it gives to those who move through it with intention."</p>
+    <p class="day-mood" style="color:rgba(240,234,214,.5);border-bottom-color:rgba(201,168,76,.08);">"You leave with five nights of Kerala in your memory — the tea at altitude, the spice forest, the houseboat at sunrise, and the particular stillness of the backwaters at dusk."</p>
     <div class="day-body">
       <div class="time-blocks">
         <div class="time-block" style="border-bottom-color:rgba(201,168,76,.06);">
           <span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span>
           <div>
             <span class="time-label" style="color:var(--gold);">M O R N I N G</span>
-            <span class="time-text" style="color:rgba(240,234,214,.65);">Final breakfast at the resort. Last walk by the lakeshore. Checkout by 11am. Private transfer to Cochin International Airport — approximately 2.5 hours. Reach airport 3 hours before departure for international flights.</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">Final breakfast on board as the houseboat glides through the morning backwaters. Disembark by 9am. Private transfer to Cochin International Airport — approximately 1.5 hours. Reach airport 3 hours before departure for international flights.</span>
           </div>
         </div>
         <div class="time-block" style="border-bottom:none;">
@@ -6220,7 +6175,7 @@ const PKG_CONTENT = {
       <div class="day-meta" style="border-color:rgba(201,168,76,.1);">
         <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);">
           <span class="meta-key" style="color:var(--gold);">D R I V E</span>
-          <span class="meta-val" style="color:rgba(240,234,214,.6);">Kumarakom → COK · 2.5 hrs</span>
+          <span class="meta-val" style="color:rgba(240,234,214,.6);">Alleppey → COK · 1.5 hrs</span>
         </div>
         <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);">
           <span class="meta-key" style="color:var(--gold);">T I P</span>
@@ -6232,7 +6187,7 @@ const PKG_CONTENT = {
         </div>
       </div>
       <div class="tags">
-        <span class="tag">B R E A K F A S T</span>
+        <span class="tag">B R E A K F A S T &nbsp; O N &nbsp; B O A R D</span>
         <span class="tag">A I R P O R T &nbsp; T R A N S F E R</span>
       </div>
     </div>
@@ -6241,7 +6196,7 @@ const PKG_CONTENT = {
 };
 
 
-const PKG_DEST_COUNT = {"Classic Kerala": 5, "Kerala Honeymoon": 4, "Kerala Family": 4, "Luxury Kerala": 3, "Ayurveda & Wellness": 2, "Monsoon Ayurveda": 2, "Sacred South": 4, "Malabar & Theyyam Trail": 4, "Wild & Offbeat Kerala": 4, "Kerala Short Escape": 3};
+const PKG_DEST_COUNT = {"Classic Kerala": 4, "Kerala Honeymoon": 4, "Kerala Family": 4, "Luxury Kerala": 3, "Ayurveda & Wellness": 2, "Monsoon Ayurveda": 2, "Sacred South": 4, "Malabar & Theyyam Trail": 4, "Wild & Offbeat Kerala": 4, "Kerala Short Escape": 3};
 
 const PKG_INTROS = {
   "Classic Kerala": "There is a corner of India that moves at a different speed. Where colonial-era spice warehouses give way to mirror-still backwaters, where the air thickens with cardamom as you climb into the high ranges, and where a houseboat moored in silence on the Vembanad Lake becomes the most luxurious address you have ever had. This is Kerala \u2014 and this journey moves through its most beautiful chapters.",
@@ -6258,8 +6213,8 @@ const PKG_INTROS = {
 
 const PKG_PRICING_HOTELS = {
   "Classic Kerala": {
-    "h4": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOCHI</span>Brunton Boatyard \u00b7 Heritage</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">MUNNAR</span>Sterling Munnar \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">THEKKADY</span>Cardamom County \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">ALLEPPEY</span>Premium Kettuvallam \u00b7 Houseboat</div>",
-    "h5": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOCHI</span>Old Harbour Hotel \u00b7 Heritage</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">MUNNAR</span>SpiceTree Munnar \u00b7 Boutique</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">THEKKADY</span>Spice Village CGH Earth \u00b7 5\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">ALLEPPEY</span>Heritage Kettuvallam \u00b7 Houseboat</div>",
+    "h4": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOCHI</span>Gokulam Park Ernakulam \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">MUNNAR</span>Sterling Munnar \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">THEKKADY</span>Cardamom County \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">ALLEPPEY</span>Premium Kettuvallam \u00b7 Houseboat</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KUMARAKOM</span>Backwater Ripples \u00b7 4\u2605</div>",
+    "h5": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOCHI</span>Brunton Boatyard CGH Earth \u00b7 Heritage</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">MUNNAR</span>SpiceTree Munnar \u00b7 Boutique</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">THEKKADY</span>Spice Village CGH Earth \u00b7 5\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">ALLEPPEY</span>Heritage Kettuvallam \u00b7 Houseboat</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KUMARAKOM</span>Coconut Lagoon CGH Earth \u00b7 5\u2605</div>",
     "name4": "Classic Kerala \u2014 Premium",
     "name5": "Classic Kerala \u2014 Luxury"
   },
@@ -6289,7 +6244,7 @@ const PKG_PRICING_HOTELS = {
   },
   "Monsoon Ayurveda": {
     "h4": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOVALAM</span>Somatheeram Ayurveda Resort \u00b7 Heritage</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KUMARAKOM</span>KTDC Waterscapes \u00b7 4\u2605</div>",
-    "h5": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOVALAM</span>Niraamaya Surya Samudra \u00b7 Heritage</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KUMARAKOM</span>The Zuri Kumarakom \u00b7 5\u2605</div>",
+    "h5": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOVALAM</span>Niraamaya Surya Samudra \u00b7 Heritage</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KUMARAKOM</span>Coconut Lagoon CGH Earth \u00b7 5\u2605</div>",
     "name4": "Monsoon Ayurveda \u2014 Premium",
     "name5": "Monsoon Ayurveda \u2014 Luxury"
   },
@@ -6300,8 +6255,8 @@ const PKG_PRICING_HOTELS = {
     "name5": "Sacred South \u2014 Luxury"
   },
   "Malabar & Theyyam Trail": {
-    "h4": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOZHIKODE</span>The Raviz Kadavu Calicut \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KANNUR</span>Mascot Beach Resort \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">BEKAL</span>Bekal Heritage \u00b7 3\u2605+</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">WAYANAD</span>Vythiri Village \u00b7 4\u2605</div>",
-    "h5": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOZHIKODE</span>Hyatt Regency Kozhikode \u00b7 5\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KANNUR</span>Malabar Ocean Front \u00b7 5\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">BEKAL</span>Neeleshwar Hermitage \u00b7 Boutique</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">WAYANAD</span>Vythiri Resort \u00b7 5\u2605</div>",
+    "h4": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOZHIKODE</span>Gokulam Park Kozhikode \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KANNUR</span>Mascot Beach Resort \u00b7 4\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">BEKAL</span>Bekal Heritage \u00b7 3\u2605+</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">WAYANAD</span>Vythiri Village \u00b7 4\u2605</div>",
+    "h5": "<div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KOZHIKODE</span>The Raviz Kadavu \u00b7 5\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">KANNUR</span>Malabar Ocean Front \u00b7 5\u2605</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">BEKAL</span>Neeleshwar Hermitage \u00b7 Boutique</div>\n          <div class=\"price-hotel-item\"><span class=\"price-hotel-dest\">WAYANAD</span>Vythiri Resort \u00b7 5\u2605</div>",
     "name4": "Malabar & Theyyam Trail \u2014 Premium",
     "name5": "Malabar & Theyyam Trail \u2014 Luxury"
   },
@@ -6320,8 +6275,9 @@ const PKG_PRICING_HOTELS = {
 };
 
 const PKG_ROUTES = {
-  "Classic Kerala": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">COCHIN</div><div class=\"stop-night\">Night 1</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 2\u20133</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">THEKKADY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 5</div></div>",
-  "Kerala Honeymoon": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 1\u20132</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">THEKKADY</div><div class=\"stop-night\">Night 3</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MARARI</div><div class=\"stop-night\">Night 5</div></div>",
+  "Classic Kerala": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">COCHIN</div><div class=\"stop-night\">Night 1</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 2\u20133</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">THEKKADY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY · HOUSEBOAT</div><div class=\"stop-night\">Night 5</div></div>",
+  
+"Kerala Honeymoon": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 1\u20132</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">THEKKADY</div><div class=\"stop-night\">Night 3</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MARARI</div><div class=\"stop-night\">Night 5</div></div>",
   "Kerala Family": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">KOCHI</div><div class=\"stop-night\">Night 1</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 2\u20133</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MARARI</div><div class=\"stop-night\">Night 5</div></div>",
   "Luxury Kerala": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">KOCHI</div><div class=\"stop-night\">Nights 1\u20132</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">KUMARAKOM</div><div class=\"stop-night\">Nights 3\u20134</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">HOUSEBOAT</div><div class=\"stop-night\">Night 5</div></div>",
   "Ayurveda & Wellness": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">TRIVANDRUM</div><div class=\"stop-night\">Night 1</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">KOVALAM</div><div class=\"stop-night\">Nights 2\u20136</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">DEPARTURE</div><div class=\"stop-night\">Day 7</div></div>",
@@ -6494,6 +6450,7 @@ function generateQuote() {
   const crAmt    = document.getElementById("childRate").value.trim();
   const crAge    = document.getElementById("childAge") ? document.getElementById("childAge").value.trim() : "";
   const cr       = crAmt ? (crAge ? crAmt + " · " + crAge : crAmt) : "—";
+  const transport = document.getElementById("transportCost") ? document.getElementById("transportCost").value.trim() : "";
   const pkgv     = document.getElementById("pkgValue").value.trim();
   const gst      = document.getElementById("gst").value.trim();
   const gt       = document.getElementById("grandTotal").value.trim();
@@ -6581,6 +6538,7 @@ table.pt tr.tot td.v{font-family:"Cormorant Garamond",serif;font-size:30px;font-
     <tr><td class="l">Price per person · twin sharing</td><td class="v">₹${ppp||"—"}</td></tr>
     ${ss?`<tr><td class="l">Single supplement</td><td class="v">₹${ss}</td></tr>`:""}
     ${cr?`<tr><td class="l">Child rate</td><td class="v">₹${cr}</td></tr>`:""}
+    ${transport?`<tr><td class="l">Transport · per person</td><td class="v">₹${transport}</td></tr>`:""}
     <tr><td class="l">Package value (excl. GST)</td><td class="v">₹${pkgv||"—"}</td></tr>
     <tr><td class="l">GST 5%</td><td class="v">₹${gst||"—"}</td></tr>
     <tr class="tot"><td>GRAND TOTAL</td><td class="v">₹${gt||"—"}</td></tr>
@@ -6744,11 +6702,13 @@ function initCustomSelect(nativeId, displayId, textId, dropdownId, onChange, def
 function autoCalcQuote() {
   const pppRaw = document.getElementById("ppp").value.replace(/,/g, "").trim();
   const paxRaw = document.getElementById("pax").value.replace(/[^0-9]/g, "").trim();
+  const transportRaw = document.getElementById("transportCost") ? document.getElementById("transportCost").value.replace(/,/g, "").trim() : "";
   const ppp = parseFloat(pppRaw);
   const pax = parseFloat(paxRaw) || 1;
+  const transport = parseFloat(transportRaw) || 0;
   if (!ppp) return;
 
-  const pkgVal = Math.round(ppp * pax);
+  const pkgVal = Math.round((ppp * pax) + (transport * pax));
   const gst = Math.round(pkgVal * 0.05);
   const grand = pkgVal + gst;
 
@@ -6775,7 +6735,7 @@ const ALL_HOTELS = {
   "Munnar": ["Fragrant Nature Munnar","SpiceTree Munnar","Parakkat Nature Resort","Chandys Windy Woods","The Panoramic Getaway","Sterling Munnar","The Tall Trees","Misty Mountain Resort","Blackberry Hills","KTDC Tea County","Haze & Kites Resort"],
   "Thekkady": ["Spice Village (CGH Earth)","Carmelia Haven","Elephant Court","Cardamom County","Greenwoods Premium","Shalimar Spice Garden","Tree Top","Wild Corridor","Spice Jungle Resort","Greenwoods Resort"],
   "Alleppey": ["Lemon Tree Vembanad Lake Resort","Ramada Alleppey","Punnamada Resort","Aveda Resort","Citrus Retreats","Pagoda Resort","Keys Select Aishwarya","Palm Grove Lake Resort","Abad Whispering Palms","Raheem Residency","Carnoustie Ayurveda & Wellness Resort","Marari Beach Bungalow"],
-  "Kumarakom": ["Kumarakom Lake Resort","Vivanta Kumarakom (Taj)","The Zuri Kumarakom","Coconut Lagoon (CGH Earth)","Aveda Kumarakom","Backwater Ripples","Lake Canopy","KTDC Waterscapes","Cinnamon Lakeside","Whispering Palms"],
+  "Kumarakom": ["Kumarakom Lake Resort","Vivanta Kumarakom (Taj)","Coconut Lagoon CGH Earth","Coconut Lagoon (CGH Earth)","Aveda Kumarakom","Backwater Ripples","Lake Canopy","KTDC Waterscapes","Cinnamon Lakeside","Whispering Palms"],
   "Kovalam": ["The Leela Kovalam","Taj Green Cove Resort","The Raviz Kovalam","Vivanta Trivandrum","Estuary Sarovar Portico","Uday Samudra","The Travancore Heritage","Turtle on the Beach","Somatheeram Ayurveda Resort","Niraamaya Surya Samudra","Manaltheeram Ayurveda","Travancore Ayurveda"],
   "Varkala": ["Gateway Varkala (Taj)","Niraamaya Retreats Varkala","Hindustan Beach Retreat"],
   "Wayanad": ["Vythiri Resort","Wayanad Wilderness Resort","Banasura Hill Resort","Vivanta Wayanad (Taj)","Windflower Resort","Vythiri Village","Mountain Shadows","Wayanad Silverwoods","Rain Forest Resort","Fringe Ford","Parisons Plantation Experiences"],
@@ -6784,7 +6744,7 @@ const ALL_HOTELS = {
   "Poovar": ["Poovar Island Resort","Estuary Island Resort","Isola Di Cocco Ayurvedic Resort"],
   "Bekal": ["Taj Bekal Resort & Spa","The Lalit Resort & Spa Bekal","Neeleshwar Hermitage"],
   "Kannur": ["Malabar Ocean Front Resort & Spa","Mascot Beach Resort Kannur","Kanan Beach Resort"],
-  "Kozhikode": ["Hyatt Regency Kozhikode","The Gateway Beach Road Calicut (Taj)","The Raviz Kadavu Calicut","Beaches Resort Calicut"],
+  "Kozhikode": ["The Raviz Kadavu Calicut","The Gateway Beach Road Calicut (Taj)","The Raviz Kadavu Calicut","Beaches Resort Calicut"],
   "Vagamon": ["Elagon Resort Vagamon"],
   "Marayoor": ["Sandal Forest Resort Marayoor","Forest Canopy Marayoor"],
 };
@@ -6795,7 +6755,6 @@ const PACKAGE_HOTELS = {
     {dest:"Munnar", nights:"2N", hotels: ALL_HOTELS["Munnar"]},
     {dest:"Thekkady", nights:"1N", hotels: ALL_HOTELS["Thekkady"]},
     {dest:"Alleppey · Houseboat", nights:"1N", hotels: ["Premium Kettuvallam (2 Bedroom)","Heritage Kettuvallam (1 Bedroom)","The Oberoi Motor Vessel Vrinda"].concat(ALL_HOTELS["Alleppey"])},
-    {dest:"Kumarakom", nights:"1N", hotels: ALL_HOTELS["Kumarakom"]},
   ],
   "Kerala Honeymoon": [
     {dest:"Munnar", nights:"2N", hotels: ALL_HOTELS["Munnar"]},
@@ -7093,7 +7052,7 @@ function switchMode(mode) {
     var hs2 = document.getElementById('hotelSection');
     if (hs2) hs2.style.display = 'none';
     var ps = document.getElementById('pricingSection');
-    if (ps) ps.style.display = 'none';
+    if (ps) ps.style.display = 'block';
     var dl = document.getElementById('customDestList');
     if (dl && dl.children.length === 0) {
       addCustomDest();
@@ -7313,6 +7272,36 @@ function buildHotelSelector(id, dest) {
   selWrap.appendChild(selDrop);
   wrap.appendChild(selWrap);
 
+  // Manual hotel entry field
+  var manualWrap = document.createElement('div');
+  manualWrap.style.cssText = 'margin-top:8px;';
+
+  var manualLbl = document.createElement('span');
+  manualLbl.style.cssText = 'font-family:var(--f-caps);font-size:8px;letter-spacing:1.5px;color:var(--muted);display:block;margin-bottom:4px;';
+  manualLbl.textContent = 'OR TYPE HOTEL NAME MANUALLY';
+
+  var manualInput = document.createElement('input');
+  manualInput.type = 'text';
+  manualInput.id = 'hotelManual_' + id;
+  manualInput.placeholder = 'Hotel name (if not in list above)';
+  manualInput.style.cssText = 'width:100%;padding:10px 14px;font-family:\'EB Garamond\',serif;font-size:16px;color:var(--ink);background:var(--cream);border:1px solid rgba(61,12,17,.15);border-radius:3px;box-sizing:border-box;';
+  manualInput.oninput = function() {
+    var pos = this.selectionStart;
+    this.value = this.value.replace(/\b\w/g, c => c.toUpperCase());
+    this.setSelectionRange(pos, pos);
+    // If manual typed, clear dropdown selection
+    if (this.value.trim()) {
+      var txt = document.getElementById('hotelSelText_' + id);
+      var badge = document.getElementById('hotelBadge_' + id);
+      if (txt) { txt.textContent = '— Select hotel —'; txt.style.color = 'rgba(42,27,18,.3)'; txt.style.fontStyle = 'italic'; }
+      if (badge) badge.style.display = 'none';
+    }
+  };
+
+  manualWrap.appendChild(manualLbl);
+  manualWrap.appendChild(manualInput);
+  wrap.appendChild(manualWrap);
+
   // Star badge shown after selection
   var badge = document.createElement('div');
   badge.id = 'hotelBadge_' + id;
@@ -7337,10 +7326,12 @@ function selectHotel(id, name, tier) {
   var drop = document.getElementById('hotelSelDrop_' + id);
   var badge = document.getElementById('hotelBadge_' + id);
   var wrap = document.getElementById('hotelSelWrap_' + id);
+  var manualEl = document.getElementById('hotelManual_' + id);
   if (textEl) { textEl.textContent = name; textEl.style.cssText = 'color:var(--burgundy);font-style:normal;font-weight:600;'; }
   if (drop) drop.style.display = 'none';
   if (wrap) { wrap.dataset.hotel = name; wrap.dataset.tier = tier; }
   if (badge) { badge.textContent = tier.toUpperCase(); badge.style.display = 'block'; }
+  if (manualEl) manualEl.value = '';
 }
 
 function updateCustomSummary() {
@@ -7382,8 +7373,10 @@ function getCustomPackageData() {
     const extraSight = document.getElementById('destExtra_' + id).value;
     if (extraSight.trim()) selectedSight.push(...extraSight.split(',').map(s => s.trim()).filter(Boolean));
     const hotelWrap = document.getElementById('hotelSelWrap_' + id);
-    const hotel = hotelWrap ? (hotelWrap.dataset.hotel || '') : '';
-    const hotelTier = hotelWrap ? (hotelWrap.dataset.tier || '') : '';
+    const manualHotel = document.getElementById('hotelManual_' + id);
+    const manualVal = manualHotel ? manualHotel.value.trim() : '';
+    const hotel = manualVal || (hotelWrap ? (hotelWrap.dataset.hotel || '') : '');
+    const hotelTier = manualVal ? 'Manual Entry' : (hotelWrap ? (hotelWrap.dataset.tier || '') : '');
     destinations.push({ dest, nights, sightseeing: selectedSight, hotel, hotelTier });
   });
   return { tripName, destinations };
@@ -7614,6 +7607,7 @@ function generateCustomQuoteSheet() {
   const crAmt = document.getElementById('childRate')  ? document.getElementById('childRate').value.trim()  : '';
   const crAge = document.getElementById('childAge')   ? document.getElementById('childAge').value.trim()   : '';
   const cr    = crAmt ? (crAge ? crAmt + ' · ' + crAge : crAmt) : '—';
+  const transport = document.getElementById('transportCost') ? document.getElementById('transportCost').value.trim() : '';
   const pkgv  = document.getElementById('pkgValue')   ? document.getElementById('pkgValue').value.trim()   : '';
   const gst   = document.getElementById('gst')        ? document.getElementById('gst').value.trim()        : '';
   const gt    = document.getElementById('grandTotal') ? document.getElementById('grandTotal').value.trim() : '';
@@ -7685,6 +7679,7 @@ table.pt tr.tot td.v{font-family:"Cormorant Garamond",serif;font-size:30px;font-
     <tr><td class="l">Price per person · twin sharing</td><td class="v">₹${ppp||'—'}</td></tr>
     ${ss ? '<tr><td class="l">Single supplement</td><td class="v">₹'+ss+'</td></tr>' : ''}
     <tr><td class="l">Child rate</td><td class="v">₹${cr}</td></tr>
+    ${transport ? '<tr><td class="l">Transport · per person</td><td class="v">₹'+transport+'</td></tr>' : ''}
     <tr><td class="l">Package value (excl. GST)</td><td class="v">₹${pkgv||'—'}</td></tr>
     <tr><td class="l">GST 5%</td><td class="v">₹${gst||'—'}</td></tr>
     <tr class="tot"><td class="l">GRAND TOTAL</td><td class="v">₹${gt||'—'}</td></tr>
@@ -7764,7 +7759,7 @@ function applyBranding(html) {
     html = html.split('[[BRAND_EYEBROW]]').join('A N &nbsp; A K B A R &nbsp; K E R A L A &nbsp; D M C &nbsp; C U R A T I O N');
     html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey · Akbar Kerala DMC');
     html = html.split('[[BRAND_CONTACT]]').join('Contact your Akbar travel consultant');
-    html = html.split('[[BRAND_QUOTE]]').join('From the house of Akbar — a legacy of trust, now dedicated to crafting private journeys across Kerala. Seven days here will remind you why you travel.');
+    html = html.split('[[BRAND_QUOTE]]').join('From the house of Akbar — a legacy of trust, now dedicated to crafting private journeys across Kerala. Six days here will remind you why you travel.');
     html = html.split('[[BRAND_COPYRIGHT]]').join('© &nbsp; A K B A R &nbsp; G R O U P');
     html = html.split('[[BRAND_FOOTER]]').join('K E R A L A &nbsp;·&nbsp; C O C H I N &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
   }
