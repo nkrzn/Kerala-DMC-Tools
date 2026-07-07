@@ -3833,12 +3833,54 @@ const PKG_CONTENT = {
       <div class="ch-subs">M A R A R I</div>
     </div>
   </div>
+  <div class="day-block">
+    <div class="day-top">
+      <div class="day-num">05</div>
+      <div class="day-info">
+        <span class="day-label">D A Y &nbsp; F I V E</span>
+        <h3 class="day-title">Alleppey → Marari</h3>
+        <span class="day-hotel">M A R A R I &nbsp; B E A C H &nbsp; R E S O R T &nbsp;·&nbsp; 4 ★ / 5 ★</span>
+      </div>
+    </div>
+    <p class="day-mood">"Marari is the family beach — wide, calm, and safe for children, with the kind of easy afternoons that end a Kerala trip properly."</p>
+    <div class="day-body">
+      <div class="time-blocks">
+        <div class="time-block">
+          <span class="time-icon">☼</span>
+          <div>
+            <span class="time-label">M O R N I N G</span>
+            <span class="time-text">Disembark the houseboat by 9am. Transfer to Marari Beach (30 min). Check in to your beach resort. Rest of the morning free to settle in.</span>
+          </div>
+        </div>
+        <div class="time-block">
+          <span class="time-icon">◐</span>
+          <div>
+            <span class="time-label">A F T E R N O O N</span>
+            <span class="time-text">Afternoon at the beach — wide, shallow shoreline safe for children. Kerala cooking class for the family at the resort (optional).</span>
+          </div>
+        </div>
+        <div class="time-block" style="border-bottom:none;">
+          <span class="time-icon">☾</span>
+          <div>
+            <span class="time-label">E V E N I N G</span>
+            <span class="time-text">Dinner at the resort. Last full evening in Kerala — no schedule, just the beach and the family.</span>
+          </div>
+        </div>
+      </div>
+      <div class="day-meta">
+        <div class="meta-item"><span class="meta-key">D R I V E</span><span class="meta-val">Alleppey → Marari · 30 min</span></div>
+        <div class="meta-item"><span class="meta-key">B E A C H</span><span class="meta-val">Marari — family-safe shallow shore</span></div>
+        <div class="meta-item"><span class="meta-key">O P T I O N A L</span><span class="meta-val">Kids’ Kerala cooking class</span></div>
+      </div>
+      <div class="tags"><span class="tag">M A R A R I &nbsp; B E A C H</span><span class="tag">C O O K I N G &nbsp; C L A S S</span><span class="tag">F A M I L Y &nbsp; T I M E</span></div>
+    </div>
+  </div>
   <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
     <div class="day-top">
-      <div class="day-num" style="color:var(--gold);opacity:.55;">05</div>
+      <div class="day-num" style="color:var(--gold);opacity:.55;">06</div>
       <div class="day-info">
         <span class="day-label" style="color:var(--gold);">F A R E W E L L</span>
-        <h3 class="day-title" style="color:var(--ivory);">Alleppey → Marari → Departure</h3>
+        <h3 class="day-title" style="color:var(--ivory);">Marari → Departure</h3>
         <span class="day-hotel" style="color:rgba(240,234,214,.25);">C O C H I N &nbsp; I N T E R N A T I O N A L &nbsp; A I R P O R T</span>
       </div>
     </div>
@@ -3849,7 +3891,7 @@ const PKG_CONTENT = {
           <span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span>
           <div>
             <span class="time-label" style="color:var(--gold);">M O R N I N G</span>
-            <span class="time-text" style="color:rgba(240,234,214,.65);">Disembark by 9am. Transfer to Marari Beach (30 min) for a final morning swim. Kerala cooking class for children at the beach resort (optional). Depart for Cochin airport in time for your flight.</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">Leisurely last morning at Marari — no early alarms. Final swim, late breakfast, then depart for Cochin airport in time for your flight.</span>
           </div>
         </div>
         <div class="time-block" style="border-bottom:none;">
@@ -7694,83 +7736,3 @@ table.pt tr.tot td.v{font-family:"Cormorant Garamond",serif;font-size:30px;font-
     } else {
       win.document.write(html);
       win.document.close();
-    }
-  } catch(e) {
-    console.error('Quote error:', e);
-  }
-}
-
-// ── BOOKING TYPE ────────────────────────────────────────────────────────────
-var bookingType = 'direct'; // 'direct' or 'agent'
-
-function setBookingType(type) {
-  bookingType = type;
-  // Update all toggle buttons
-  ['btnDirect','btnDirectFixed'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.background = type === 'direct' ? 'var(--burgundy)' : 'var(--cream)';
-    el.style.color = type === 'direct' ? 'var(--ivory)' : 'var(--muted)';
-  });
-  ['btnAgent','btnAgentFixed'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.style.background = type === 'agent' ? 'var(--burgundy)' : 'var(--cream)';
-    el.style.color = type === 'agent' ? 'var(--ivory)' : 'var(--muted)';
-  });
-  var note = type === 'direct'
-    ? 'Direct: Akbar branding included in Kerala Curated PDF.'
-    : 'Agent: All Akbar branding removed from Kerala Curated PDF.';
-  ['bookingTypeNote','bookingTypeNoteFixed'].forEach(function(id) {
-    var el = document.getElementById(id);
-    if (el) el.textContent = note;
-  });
-}
-
-function applyBranding(html) {
-  if (bookingType === 'agent') {
-    // Strip all brand references
-    html = html.split('[[BRAND_HEADER]]').join('');
-    html = html.split('[[BRAND_NAV]]').join('');
-    html = html.split('[[BRAND_EYEBROW]]').join('');
-    html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey');
-    html = html.split('[[BRAND_CONTACT]]').join('Contact your travel consultant');
-    html = html.split('[[BRAND_QUOTE]]').join('A journey through Kerala — crafted with care and an intimate knowledge of this singular destination.');
-    html = html.split('[[BRAND_COPYRIGHT]]').join('');
-    html = html.split('[[BRAND_FOOTER]]').join('');
-  } else {
-    // Direct: restore full branding
-    html = html.split('[[BRAND_HEADER]]').join('K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
-    html = html.split('[[BRAND_NAV]]').join('A K B A R &nbsp; K E R A L A &nbsp; D M C');
-    html = html.split('[[BRAND_EYEBROW]]').join('A N &nbsp; A K B A R &nbsp; K E R A L A &nbsp; D M C &nbsp; C U R A T I O N');
-    html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey · Akbar Kerala DMC');
-    html = html.split('[[BRAND_CONTACT]]').join('Contact your Akbar travel consultant');
-    html = html.split('[[BRAND_QUOTE]]').join('From the house of Akbar — a legacy of trust, now dedicated to crafting private journeys across Kerala. Seven days here will remind you why you travel.');
-    html = html.split('[[BRAND_COPYRIGHT]]').join('© &nbsp; A K B A R &nbsp; G R O U P');
-    html = html.split('[[BRAND_FOOTER]]').join('K E R A L A &nbsp;·&nbsp; C O C H I N &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
-  }
-  return html;
-}
-
-function toggleDestDrop(id) {
-  const drop = document.getElementById('destSelDrop_' + id);
-  const isOpen = drop.style.display !== 'none';
-  // Close all other destination dropdowns
-  document.querySelectorAll('[id^="destSelDrop_"]').forEach(d => d.style.display = 'none');
-  drop.style.display = isOpen ? 'none' : 'block';
-}
-
-function selectDest(id, dest) {
-  document.getElementById('destSelText_' + id).textContent = dest;
-  document.getElementById('destSelText_' + id).style.color = 'var(--burgundy)';
-  document.getElementById('destSelText_' + id).style.fontStyle = 'normal';
-  document.getElementById('destSelText_' + id).style.fontWeight = '600';
-  document.getElementById('destSelDrop_' + id).style.display = 'none';
-  // Store value on wrapper for later reading
-  document.getElementById('destSelWrap_' + id).dataset.value = dest;
-  onDestChange(id, dest);
-}
-
-</script>
-</body>
-</html>
