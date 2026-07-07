@@ -7736,3 +7736,45 @@ function applyBranding(html) {
   if (bookingType === 'agent') {
     // Strip all brand references
     html = html.split('[[BRAND_HEADER]]').join('');
+    html = html.split('[[BRAND_NAV]]').join('');
+    html = html.split('[[BRAND_EYEBROW]]').join('');
+    html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey');
+    html = html.split('[[BRAND_CONTACT]]').join('Contact your travel consultant');
+    html = html.split('[[BRAND_QUOTE]]').join('A journey through Kerala — crafted with care and an intimate knowledge of this singular destination.');
+    html = html.split('[[BRAND_COPYRIGHT]]').join('');
+    html = html.split('[[BRAND_FOOTER]]').join('');
+  } else {
+    // Direct: restore full branding
+    html = html.split('[[BRAND_HEADER]]').join('K E R A L A &nbsp; D M C &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
+    html = html.split('[[BRAND_NAV]]').join('A K B A R &nbsp; K E R A L A &nbsp; D M C');
+    html = html.split('[[BRAND_EYEBROW]]').join('A N &nbsp; A K B A R &nbsp; K E R A L A &nbsp; D M C &nbsp; C U R A T I O N');
+    html = html.split('[[BRAND_TITLE]]').join('Kerala · A Private Journey · Akbar Kerala DMC');
+    html = html.split('[[BRAND_CONTACT]]').join('Contact your Akbar travel consultant');
+    html = html.split('[[BRAND_QUOTE]]').join('From the house of Akbar — a legacy of trust, now dedicated to crafting private journeys across Kerala. Seven days here will remind you why you travel.');
+    html = html.split('[[BRAND_COPYRIGHT]]').join('© &nbsp; A K B A R &nbsp; G R O U P');
+    html = html.split('[[BRAND_FOOTER]]').join('K E R A L A &nbsp;·&nbsp; C O C H I N &nbsp;·&nbsp; A K B A R &nbsp; G R O U P');
+  }
+  return html;
+}
+
+function toggleDestDrop(id) {
+  const drop = document.getElementById('destSelDrop_' + id);
+  const isOpen = drop.style.display !== 'none';
+  // Close all other destination dropdowns
+  document.querySelectorAll('[id^="destSelDrop_"]').forEach(d => d.style.display = 'none');
+  drop.style.display = isOpen ? 'none' : 'block';
+}
+
+function selectDest(id, dest) {
+  document.getElementById('destSelText_' + id).textContent = dest;
+  document.getElementById('destSelText_' + id).style.color = 'var(--burgundy)';
+  document.getElementById('destSelText_' + id).style.fontStyle = 'normal';
+  document.getElementById('destSelText_' + id).style.fontWeight = '600';
+  document.getElementById('destSelDrop_' + id).style.display = 'none';
+  // Store value on wrapper for later reading
+  document.getElementById('destSelWrap_' + id).dataset.value = dest;
+  onDestChange(id, dest);
+}
+
+</script>
+</body>
