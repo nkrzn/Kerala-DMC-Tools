@@ -2110,7 +2110,7 @@ function onPkgChange() {
 function autoEndDate(startIso, nights) {
   // Always recalculate - end date is never manually editable
   const end = new Date(startIso);
-  end.setDate(end.getDate() + nights + 1);
+  end.setDate(end.getDate() + nights);
   const iso = end.toISOString().split("T")[0];
   document.getElementById("endDate").value = iso;
   const disp = document.getElementById("disp-end");
@@ -6195,7 +6195,7 @@ const PKG_CONTENT = {
 };
 
 
-const PKG_DEST_COUNT = {"Classic Kerala": 5, "Kerala Honeymoon": 4, "Kerala Family": 4, "Luxury Kerala": 3, "Ayurveda & Wellness": 2, "Monsoon Ayurveda": 2, "Sacred South": 4, "Malabar & Theyyam Trail": 4, "Wild & Offbeat Kerala": 4, "Kerala Short Escape": 3};
+const PKG_DEST_COUNT = {"Classic Kerala": 4, "Kerala Honeymoon": 4, "Kerala Family": 4, "Luxury Kerala": 4, "Ayurveda & Wellness": 2, "Monsoon Ayurveda": 2, "Sacred South": 4, "Malabar & Theyyam Trail": 4, "Wild & Offbeat Kerala": 4, "Kerala Short Escape": 3};
 
 const PKG_INTROS = {
   "Classic Kerala": "There is a corner of India that moves at a different speed. Where colonial-era spice warehouses give way to mirror-still backwaters, where the air thickens with cardamom as you climb into the high ranges, and where a houseboat moored in silence on the Vembanad Lake becomes the most luxurious address you have ever had. This is Kerala \u2014 and this journey moves through its most beautiful chapters.",
