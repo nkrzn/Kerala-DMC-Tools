@@ -2110,7 +2110,7 @@ function onPkgChange() {
 function autoEndDate(startIso, nights) {
   // Always recalculate - end date is never manually editable
   const end = new Date(startIso);
-  end.setDate(end.getDate() + nights);
+  end.setDate(end.getDate() + nights + 1);
   const iso = end.toISOString().split("T")[0];
   document.getElementById("endDate").value = iso;
   const disp = document.getElementById("disp-end");
@@ -2308,7 +2308,12 @@ body { font-family: var(--f-body); background: var(--espresso); color: var(--esp
   display: flex; flex-direction: column;
   position: relative; overflow: hidden;
 }
-/* decorative cover gradient removed — caused unrecoverable print rendering bug across engines */
+.cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(201,168,76,.06) 0%, transparent 65%);
+  pointer-events: none;
+}
 
 .cover-nav {
   display: flex; justify-content: space-between; align-items: center;
@@ -2919,10 +2924,9 @@ h3.day-title { font-style: italic; font-weight: 300; }
 .closing-footer p { font-family: var(--f-caps); font-size: 7px; letter-spacing: .2em; color: rgba(201,168,76,.18); }
 
 @media print {
-  @page { size: 720px auto; margin: 0; }
-  html, body { margin: 0; height: auto; }
-  .wrap { width: 100%; max-width: 720px; }
-  section.days-page, .cover, .chapter-div { break-inside: avoid; page-break-inside: avoid; }
+  @page { margin: 0; }
+  body { margin: 0; }
+  .wrap { width: 100%; }
 }
 </style>
 </head>
@@ -3461,7 +3465,7 @@ const PKG_CONTENT = {
       <div class="day-info">
         <span class="day-label">D A Y &nbsp; F O U R</span>
         <h3 class="day-title">Thekkady — Periyar</h3>
-        <span class="day-hotel">P R E M I U M &nbsp; H O U S E B O A T &nbsp;·&nbsp; A L L E P P E Y</span>
+        <span class="day-hotel">T H E K K A D Y &nbsp;·&nbsp; S P I C E &nbsp; C O U N T R Y</span>
       </div>
     </div>
     <p class="day-mood">"The Periyar Lake boat safari at dawn is one of India's great wildlife experiences — not for the guaranteed sighting, but for the atmosphere."</p>
@@ -3502,6 +3506,58 @@ const PKG_CONTENT = {
   <div class="chapter-div ch-waters-bg">
     <div class="ch-inner">
       <div class="ch-days-lbl">D A Y &nbsp; 0 5</div>
+      <div class="ch-title">The Backwaters</div>
+      <div class="ch-rule"></div>
+      <div class="ch-subs">A L L E P P E Y</div>
+    </div>
+  </div>
+  <div class="day-block-dark">
+    <div class="day-top">
+      <div class="day-num">05</div>
+      <div class="day-info">
+        <span class="day-label">D A Y &nbsp; F I V E</span>
+        <h3 class="day-title">Alleppey Houseboat</h3>
+        <span class="day-hotel">P R E M I U M &nbsp; H O U S E B O A T &nbsp;·&nbsp; A L L E P P E Y</span>
+      </div>
+    </div>
+    <p class="day-mood" style="color:rgba(240,234,214,.5);border-bottom-color:rgba(201,168,76,.08);">"The day you board is the day Kerala reveals its deepest self. Cast off into a world with no roads, no cars, no clocks — only water, paddy fields, and the sound of the pole pushing you gently forward."</p>
+    <div class="day-body">
+      <div class="time-blocks">
+        <div class="time-block">
+          <span class="time-icon">☼</span>
+          <div>
+            <span class="time-label">M O R N I N G</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">Wake to the sound of water. Breakfast on the upper deck as the boat moves through the early morning canals. Village life drifts past — fishermen, schoolchildren, women washing rice.</span>
+          </div>
+        </div>
+        <div class="time-block">
+          <span class="time-icon">◐</span>
+          <div>
+            <span class="time-label">A F T E R N O O N</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">Lunch on board — fresh Kerala fish curry, prawn thoran, red rice, coconut chutney prepared by your cook. Afternoon moored in a quiet canal, away from other boats.</span>
+          </div>
+        </div>
+        <div class="time-block" style="border-bottom-color:rgba(201,168,76,.06);">
+          <span class="time-icon">☾</span>
+          <div>
+            <span class="time-label">E V E N I N G</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">Sundowner cocktails on the upper deck as the sun sets over the paddy fields. Dinner under the stars. Overnight on board.</span>
+          </div>
+        </div>
+      </div>
+      <div class="day-meta" style="border-color:rgba(201,168,76,.1);">
+        <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);"><span class="meta-key" style="color:var(--gold);">E X P E R I E N C E</span><span class="meta-val" style="color:rgba(240,234,214,.6);">Full day on the backwaters</span></div>
+        <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);"><span class="meta-key" style="color:var(--gold);">M E A L S</span><span class="meta-val" style="color:rgba(240,234,214,.6);">All meals on board</span></div>
+        <div class="meta-item"><span class="meta-key" style="color:var(--gold);">H I G H L I G H T</span><span class="meta-val" style="color:rgba(240,234,214,.6);">Sunset from upper deck</span></div>
+      </div>
+      <div class="tags"><span class="tag">B A C K W A T E R S</span><span class="tag">A L L &nbsp; M E A L S &nbsp; O N &nbsp; B O A R D</span><span class="tag">S U N D O W N E R</span><span class="tag">O V E R N I G H T &nbsp; C R U I S E</span></div>
+    </div>
+  </div>
+</section>
+<section class="days-page">
+  <div class="chapter-div ch-waters-bg">
+    <div class="ch-inner">
+      <div class="ch-days-lbl">D A Y &nbsp; 0 6</div>
       <div class="ch-title">The Beach</div>
       <div class="ch-rule"></div>
       <div class="ch-subs">M A R A R I</div>
@@ -3833,54 +3889,12 @@ const PKG_CONTENT = {
       <div class="ch-subs">M A R A R I</div>
     </div>
   </div>
-  <div class="day-block">
-    <div class="day-top">
-      <div class="day-num">05</div>
-      <div class="day-info">
-        <span class="day-label">D A Y &nbsp; F I V E</span>
-        <h3 class="day-title">Alleppey → Marari</h3>
-        <span class="day-hotel">M A R A R I &nbsp; B E A C H &nbsp; R E S O R T &nbsp;·&nbsp; 4 ★ / 5 ★</span>
-      </div>
-    </div>
-    <p class="day-mood">"Marari is the family beach — wide, calm, and safe for children, with the kind of easy afternoons that end a Kerala trip properly."</p>
-    <div class="day-body">
-      <div class="time-blocks">
-        <div class="time-block">
-          <span class="time-icon">☼</span>
-          <div>
-            <span class="time-label">M O R N I N G</span>
-            <span class="time-text">Disembark the houseboat by 9am. Transfer to Marari Beach (30 min). Check in to your beach resort. Rest of the morning free to settle in.</span>
-          </div>
-        </div>
-        <div class="time-block">
-          <span class="time-icon">◐</span>
-          <div>
-            <span class="time-label">A F T E R N O O N</span>
-            <span class="time-text">Afternoon at the beach — wide, shallow shoreline safe for children. Kerala cooking class for the family at the resort (optional).</span>
-          </div>
-        </div>
-        <div class="time-block" style="border-bottom:none;">
-          <span class="time-icon">☾</span>
-          <div>
-            <span class="time-label">E V E N I N G</span>
-            <span class="time-text">Dinner at the resort. Last full evening in Kerala — no schedule, just the beach and the family.</span>
-          </div>
-        </div>
-      </div>
-      <div class="day-meta">
-        <div class="meta-item"><span class="meta-key">D R I V E</span><span class="meta-val">Alleppey → Marari · 30 min</span></div>
-        <div class="meta-item"><span class="meta-key">B E A C H</span><span class="meta-val">Marari — family-safe shallow shore</span></div>
-        <div class="meta-item"><span class="meta-key">O P T I O N A L</span><span class="meta-val">Kids’ Kerala cooking class</span></div>
-      </div>
-      <div class="tags"><span class="tag">M A R A R I &nbsp; B E A C H</span><span class="tag">C O O K I N G &nbsp; C L A S S</span><span class="tag">F A M I L Y &nbsp; T I M E</span></div>
-    </div>
-  </div>
   <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
     <div class="day-top">
-      <div class="day-num" style="color:var(--gold);opacity:.55;">06</div>
+      <div class="day-num" style="color:var(--gold);opacity:.55;">05</div>
       <div class="day-info">
         <span class="day-label" style="color:var(--gold);">F A R E W E L L</span>
-        <h3 class="day-title" style="color:var(--ivory);">Marari → Departure</h3>
+        <h3 class="day-title" style="color:var(--ivory);">Alleppey → Marari → Departure</h3>
         <span class="day-hotel" style="color:rgba(240,234,214,.25);">C O C H I N &nbsp; I N T E R N A T I O N A L &nbsp; A I R P O R T</span>
       </div>
     </div>
@@ -3891,7 +3905,7 @@ const PKG_CONTENT = {
           <span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span>
           <div>
             <span class="time-label" style="color:var(--gold);">M O R N I N G</span>
-            <span class="time-text" style="color:rgba(240,234,214,.65);">Leisurely last morning at Marari — no early alarms. Final swim, late breakfast, then depart for Cochin airport in time for your flight.</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">Disembark by 9am. Transfer to Marari Beach (30 min) for a final morning swim. Kerala cooking class for children at the beach resort (optional). Depart for Cochin airport in time for your flight.</span>
           </div>
         </div>
         <div class="time-block" style="border-bottom:none;">
@@ -5081,54 +5095,12 @@ const PKG_CONTENT = {
       <div class="tags"><span class="tag">S U N R I S E &nbsp; C L I F F</span><span class="tag">V A R K A L A &nbsp; B E A C H</span><span class="tag">A Y U R V E D A &nbsp; S P A</span></div>
     </div>
   </div>
-  <div class="day-block">
-    <div class="day-top">
-      <div class="day-num">05</div>
-      <div class="day-info">
-        <span class="day-label">D A Y &nbsp; F I V E</span>
-        <h3 class="day-title">Varkala → Kovalam</h3>
-        <span class="day-hotel">K O V A L A M &nbsp;·&nbsp; 4 ★ / 5 ★ &nbsp; B E A C H &nbsp; R E S O R T</span>
-      </div>
-    </div>
-    <p class="day-mood">"Kovalam is where the coast softens into something more social — the Lighthouse Beach promenade, the crescent bay, the last easy day before the flight home."</p>
-    <div class="day-body">
-      <div class="time-blocks">
-        <div class="time-block">
-          <span class="time-icon">☼</span>
-          <div>
-            <span class="time-label">M O R N I N G</span>
-            <span class="time-text">Late checkout from Varkala. Drive to Kovalam (1 hr) along the coast. Check in by early afternoon.</span>
-          </div>
-        </div>
-        <div class="time-block">
-          <span class="time-icon">◐</span>
-          <div>
-            <span class="time-label">A F T E R N O O N</span>
-            <span class="time-text">Afternoon at Lighthouse Beach — one of Kerala's most famous stretches of sand. Swim, walk the promenade, or simply rest before the journey home.</span>
-          </div>
-        </div>
-        <div class="time-block" style="border-bottom:none;">
-          <span class="time-icon">☾</span>
-          <div>
-            <span class="time-label">E V E N I N G</span>
-            <span class="time-text">Sunset from the lighthouse. Final dinner at a beachfront restaurant — the last evening of the South Kerala coast.</span>
-          </div>
-        </div>
-      </div>
-      <div class="day-meta">
-        <div class="meta-item"><span class="meta-key">D R I V E</span><span class="meta-val">Varkala → Kovalam · 1 hr</span></div>
-        <div class="meta-item"><span class="meta-key">B E A C H</span><span class="meta-val">Lighthouse Beach, Kovalam</span></div>
-        <div class="meta-item"><span class="meta-key">H I G H L I G H T</span><span class="meta-val">Sunset from the lighthouse</span></div>
-      </div>
-      <div class="tags"><span class="tag">L I G H T H O U S E &nbsp; B E A C H</span><span class="tag">K O V A L A M</span><span class="tag">S U N S E T</span></div>
-    </div>
-  </div>
   <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
     <div class="day-top">
-      <div class="day-num" style="color:var(--gold);opacity:.55;">06</div>
+      <div class="day-num" style="color:var(--gold);opacity:.55;">05</div>
       <div class="day-info">
         <span class="day-label" style="color:var(--gold);">F A R E W E L L</span>
-        <h3 class="day-title" style="color:var(--ivory);">Kovalam → Departure</h3>
+        <h3 class="day-title" style="color:var(--ivory);">Varkala → Kovalam → Departure</h3>
         <span class="day-hotel" style="color:rgba(240,234,214,.25);">T R I V A N D R U M &nbsp; I N T E R N A T I O N A L</span>
       </div>
     </div>
@@ -5139,7 +5111,7 @@ const PKG_CONTENT = {
           <span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span>
           <div>
             <span class="time-label" style="color:var(--gold);">M O R N I N G</span>
-            <span class="time-text" style="color:rgba(240,234,214,.65);">Leisurely last morning at Kovalam — no early rush. Late breakfast, final walk on the beach.</span>
+            <span class="time-text" style="color:rgba(240,234,214,.65);">After breakfast, optional morning at Kovalam beach (1 hr from Varkala) before transfer to Trivandrum airport. The Lighthouse Beach at Kovalam is one of Kerala's most famous.</span>
           </div>
         </div>
         <div class="time-block" style="border-bottom:none;">
@@ -5151,7 +5123,7 @@ const PKG_CONTENT = {
         </div>
       </div>
       <div class="day-meta" style="border-color:rgba(201,168,76,.1);">
-        <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);"><span class="meta-key" style="color:var(--gold);">D R I V E</span><span class="meta-val" style="color:rgba(240,234,214,.6);">Kovalam → Trivandrum Airport · 30 min</span></div>
+        <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);"><span class="meta-key" style="color:var(--gold);">D R I V E</span><span class="meta-val" style="color:rgba(240,234,214,.6);">Varkala → Trivandrum · 1 hr</span></div>
         <div class="meta-item" style="border-right-color:rgba(201,168,76,.08);"><span class="meta-key" style="color:var(--gold);">T I P</span><span class="meta-val" style="color:rgba(240,234,214,.6);">Allow 3 hrs for international check-in</span></div>
         <div class="meta-item"><span class="meta-key" style="color:var(--gold);">P A C K</span><span class="meta-val" style="color:rgba(240,234,214,.6);">Kerala spices and temple prasadam</span></div>
       </div>
@@ -6223,7 +6195,7 @@ const PKG_CONTENT = {
 };
 
 
-const PKG_DEST_COUNT = {"Classic Kerala": 4, "Kerala Honeymoon": 4, "Kerala Family": 4, "Luxury Kerala": 4, "Ayurveda & Wellness": 2, "Monsoon Ayurveda": 2, "Sacred South": 4, "Malabar & Theyyam Trail": 4, "Wild & Offbeat Kerala": 4, "Kerala Short Escape": 3};
+const PKG_DEST_COUNT = {"Classic Kerala": 5, "Kerala Honeymoon": 4, "Kerala Family": 4, "Luxury Kerala": 3, "Ayurveda & Wellness": 2, "Monsoon Ayurveda": 2, "Sacred South": 4, "Malabar & Theyyam Trail": 4, "Wild & Offbeat Kerala": 4, "Kerala Short Escape": 3};
 
 const PKG_INTROS = {
   "Classic Kerala": "There is a corner of India that moves at a different speed. Where colonial-era spice warehouses give way to mirror-still backwaters, where the air thickens with cardamom as you climb into the high ranges, and where a houseboat moored in silence on the Vembanad Lake becomes the most luxurious address you have ever had. This is Kerala \u2014 and this journey moves through its most beautiful chapters.",
@@ -6303,7 +6275,7 @@ const PKG_PRICING_HOTELS = {
 
 const PKG_ROUTES = {
   "Classic Kerala": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">COCHIN</div><div class=\"stop-night\">Night 1</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 2\u20133</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">THEKKADY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 5</div></div>",
-
+  
 "Kerala Honeymoon": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 1\u20132</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">THEKKADY</div><div class=\"stop-night\">Night 3</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MARARI</div><div class=\"stop-night\">Night 5</div></div>",
   "Kerala Family": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">KOCHI</div><div class=\"stop-night\">Night 1</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">MUNNAR</div><div class=\"stop-night\">Nights 2\u20133</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">ALLEPPEY</div><div class=\"stop-night\">Night 4</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">MARARI</div><div class=\"stop-night\">Night 5</div></div>",
   "Luxury Kerala": "<div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">KOCHI</div><div class=\"stop-night\">Nights 1\u20132</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"10\" cy=\"10\" r=\"7\" fill=\"none\" stroke=\"#C9A84C\" stroke-width=\"2\" opacity=\"0.85\"/></svg></div><div class=\"stop-name\">KUMARAKOM</div><div class=\"stop-night\">Nights 3\u20134</div></div><div class=\"route-line\"></div><div class=\"stop\"><div class=\"dot-wrap\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><defs><radialGradient id=\"dg_END\" cx=\"35%\" cy=\"30%\" r=\"65%\"><stop offset=\"0%\" stop-color=\"#f5e090\"/><stop offset=\"60%\" stop-color=\"#C9A84C\"/><stop offset=\"100%\" stop-color=\"#9a7a2e\"/></radialGradient></defs><circle cx=\"10\" cy=\"10\" r=\"8\" fill=\"url(#dg_END)\"/></svg></div><div class=\"stop-name\">HOUSEBOAT</div><div class=\"stop-night\">Night 5</div></div>",
@@ -6782,7 +6754,7 @@ const PACKAGE_HOTELS = {
     {dest:"Munnar", nights:"2N", hotels: ALL_HOTELS["Munnar"]},
     {dest:"Thekkady", nights:"1N", hotels: ALL_HOTELS["Thekkady"]},
     {dest:"Alleppey · Houseboat", nights:"1N", hotels: ["Premium Kettuvallam (2 Bedroom)","Heritage Kettuvallam (1 Bedroom)","The Oberoi Motor Vessel Vrinda"].concat(ALL_HOTELS["Alleppey"])},
-
+   
   ],
   "Kerala Honeymoon": [
     {dest:"Munnar", nights:"2N", hotels: ALL_HOTELS["Munnar"]},
