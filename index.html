@@ -1217,30 +1217,62 @@ const DEST_BANK = {
       {
         "label": "ARRIVAL DAY",
         "route": "Kochi → Munnar",
-        "morning": "Depart Kochi after breakfast. The drive takes 3.5 hours through the Ghats — stop at Cheeyappara Waterfalls en route. The road from Adimali onwards is the most scenic.",
-        "afternoon": "Arrive Munnar by early afternoon. Check in. Rest. The altitude will ask something of you.",
-        "evening": "First walk through the tea estate surrounding the hotel at sunset. Dinner at the resort."
+        "morning": { "parts": [
+          { "text": "Depart Kochi after breakfast. The drive takes 3.5 hours through the Ghats." },
+          { "text": "Stop at Cheeyappara Waterfalls en route — the road from Adimali onwards is the most scenic.", "sight": "Cheeyappara Waterfalls (en route from Kochi)" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Arrive Munnar by early afternoon. Check in. Rest. The altitude will ask something of you." }
+        ]},
+        "evening": { "parts": [
+          { "text": "First walk through the tea estate surrounding the hotel at sunset. Dinner at the resort." }
+        ]}
       },
       {
         "label": "FULL DAY",
         "route": "Munnar — Full Day",
-        "morning": "Early morning tea estate walk before breakfast — the plantation is most beautiful before 8 AM. After breakfast, visit Eravikulam National Park (home of the Nilgiri Tahr) — book tickets online in advance.",
-        "afternoon": "Mattupetty Dam and lake. Tea Museum at Tata Tea Estate — the history of tea in Munnar in one hour.",
-        "evening": "Sunset from Top Station if clear skies. Dinner in town or resort."
+        "morning": { "fallback": "Free morning to rest, or explore the resort grounds at your own pace.", "parts": [
+          { "text": "Early morning tea estate walk before breakfast — the plantation is most beautiful before 8 AM.", "sight": "Tea estate morning walk" },
+          { "text": "After breakfast, visit Eravikulam National Park (home of the Nilgiri Tahr) — book tickets online in advance.", "sight": "Eravikulam National Park (Nilgiri Tahr)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon to rest or explore Munnar town at leisure.", "parts": [
+          { "text": "Mattupetty Dam and lake.", "sight": "Mattupetty Dam" },
+          { "text": "Tea Museum at Tata Tea Estate — the history of tea in Munnar in one hour.", "sight": "Tea Museum — Tata Tea Estate" },
+          { "text": "Stop at the Indo-Swiss Livestock Project — a working dairy farm, a pleasant break between sightseeing stops.", "sight": "Indo-Swiss Livestock Project" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Echo Point on the way — call out and listen for the echo carry across the lake valley.", "sight": "Echo Point" },
+          { "text": "Sunset from Top Station if clear skies.", "sight": "Top Station — highest point" },
+          { "text": "Dinner in town or resort." }
+        ]}
       },
       {
         "label": "SECOND FULL DAY",
         "route": "Munnar — Day Three",
-        "morning": "Sunrise hike to the Lockhart Gap viewpoint. Visit Chinnar Wildlife Sanctuary (60 km) — dry deciduous forest, different ecosystem entirely.",
-        "afternoon": "Kundala Lake and boating. Or revisit the Eravikulam plateau if Tahr herds are active.",
-        "evening": "Spice garden visit and cooking demonstration. Dinner at resort."
+        "morning": { "fallback": "Free morning to rest, or a gentle walk through the estate.", "parts": [
+          { "text": "Sunrise hike to the Lockhart Gap viewpoint.", "sight": "Lockhart Gap viewpoint" },
+          { "text": "Visit Chinnar Wildlife Sanctuary (60 km) — dry deciduous forest, different ecosystem entirely.", "sight": "Chinnar Wildlife Sanctuary" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kundala Lake and boating.", "sight": "Kundala Lake" },
+          { "text": "Or revisit the Eravikulam plateau if Tahr herds are active.", "sight": "Eravikulam National Park (Nilgiri Tahr)" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Spice garden visit and cooking demonstration. Dinner at resort." }
+        ]}
       },
       {
         "label": "THIRD FULL DAY",
         "route": "Munnar — Day Four",
-        "morning": "Kolukumalai — the highest tea estate in the world (2,100m). 4WD jeep required, book the night before. Sunrise from the estate is extraordinary.",
-        "afternoon": "Marayoor Sandal Forest (90 min) — only natural sandalwood forest in Kerala. Dolmens at Marayoor.",
-        "evening": "Final evening at the hotel. Long dinner."
+        "morning": { "fallback": "Free morning to rest before departure preparations.", "parts": [
+          { "text": "Kolukumalai — the highest tea estate in the world (2,100m). 4WD jeep required, book the night before. Sunrise from the estate is extraordinary.", "sight": "Kolukumalai Estate — sunrise" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Marayoor Sandal Forest (90 min) — only natural sandalwood forest in Kerala. Dolmens at Marayoor.", "sight": "Marayoor Sandalwood Forest" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Final evening at the hotel. Long dinner." }
+        ]}
       }
     ],
     "restaurants": [
@@ -7208,7 +7240,7 @@ function onDestChange(id, dest) {
   body.style.display = 'block';
   const sightList = DEST_BANK[dest].sightseeing || [];
   sightDiv.innerHTML = sightList.map((s, i) =>
-    `<label class="custom-sight-item"><input type="checkbox" id="sight_${id}_${i}" checked> ${s}</label>`
+    `<label class="custom-sight-item"><input type="checkbox" id="sight_${id}_${i}"> ${s}</label>`
   ).join('');
   // Hotel selector
   buildHotelSelector(id, dest);
@@ -7406,6 +7438,54 @@ function getCustomPackageData() {
   return { tripName, destinations };
 }
 
+// Renders a day's morning/afternoon/evening block from selected sightseeing.
+// Supports two formats for backward compatibility:
+//  - Legacy: a plain string (always shown as-is, ignores selection — used by destinations not yet migrated)
+//  - New: { parts: [{text, sight?}], fallback? } — each part shows if it has no 'sight' tag (always-on),
+//    or if its 'sight' is in the selected list. If selection empties a block, 'fallback' is shown instead.
+function renderTimeBlock(block, selectedSights) {
+  if (!block) return '';
+  if (typeof block === 'string') return block;
+  const parts = (block.parts || [])
+    .filter(p => !p.sight || selectedSights.indexOf(p.sight) !== -1)
+    .map(p => p.text);
+  if (parts.length === 0) return block.fallback || '';
+  return parts.join(' ');
+}
+
+// Counts how many of a day's fragments match the selected sightseeing (0 for legacy string-format days).
+function countMatchingFragments(day, selectedSights) {
+  const blocks = [day.morning, day.afternoon, day.evening];
+  let score = 0;
+  blocks.forEach(b => {
+    if (b && typeof b === 'object' && b.parts) {
+      b.parts.forEach(p => { if (p.sight && selectedSights.indexOf(p.sight) !== -1) score++; });
+    }
+  });
+  return score;
+}
+
+// Chooses which template days to render for a given night count.
+// Day 0 (arrival) is always kept. For the remaining nights, instead of blindly taking
+// days 1,2,3... in fixed order (which strands content that only lives on e.g. "day 4"
+// when the guest only booked 3 nights), we score each remaining template day by how many
+// of the CHECKED sightseeing items it actually contains, and pick the highest-coverage
+// days — preserving their original relative order so the narrative still flows sensibly.
+function pickDaysForNights(bank, nights, selectedSights) {
+  const days = bank.days || [];
+  if (nights <= 0 || days.length === 0) return [];
+  if (nights >= days.length) {
+    const result = [];
+    for (let n = 0; n < nights; n++) result.push(days[Math.min(n, days.length - 1)]);
+    return result;
+  }
+  const arrival = days[0];
+  const rest = days.slice(1).map((d, idx) => ({ d, idx, score: countMatchingFragments(d, selectedSights) }));
+  rest.sort((a, b) => b.score - a.score || a.idx - b.idx);
+  const chosen = rest.slice(0, nights - 1).sort((a, b) => a.idx - b.idx).map(r => r.d);
+  return [arrival].concat(chosen);
+}
+
 function buildCustomCuratedPDF() {
   const data = getCustomPackageData();
   if (data.destinations.length === 0) { alert('Please add at least one destination.'); return; }
@@ -7421,13 +7501,18 @@ function buildCustomCuratedPDF() {
     if (!bank) return;
     // Collect restaurants
     (bank.restaurants || []).forEach(r => { allRestaurants[r.name] = r; });
-    // Build days
+    // Build days — pick which template days to use based on what's actually selected,
+    // so content isn't stranded on a "4th day" that never renders for a 3-night stay.
+    const allSight = destData.sightseeing.length > 0 ? destData.sightseeing : (bank.sightseeing || []);
+    const chosenDays = pickDaysForNights(bank, destData.nights, allSight);
     for (let n = 0; n < destData.nights; n++) {
       dayNum++;
-      const dayIdx = Math.min(n, bank.days.length - 1);
-      const day = bank.days[dayIdx];
+      const day = chosenDays[n] || bank.days[bank.days.length - 1];
+      // Render each time-block from selected sightseeing (falls back to showing everything if nothing selected)
+      const dayMorning = renderTimeBlock(day.morning, allSight);
+      const dayAfternoon = renderTimeBlock(day.afternoon, allSight);
+      const dayEvening = renderTimeBlock(day.evening, allSight);
       // Build sightseeing tags — rotate through list so each day shows different tags
-      const allSight = destData.sightseeing.length > 0 ? destData.sightseeing : (bank.sightseeing || []);
       const tagStart = (n * 3) % Math.max(allSight.length, 1);
       const dayTags = allSight.slice(tagStart, tagStart + 3).concat(allSight.slice(0, Math.max(0, tagStart + 3 - allSight.length)));
       const tags = dayTags.slice(0, 4).map(s =>
@@ -7449,9 +7534,9 @@ function buildCustomCuratedPDF() {
     </div>
     <div class="day-body">
       <div class="time-blocks">
-        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span><div><span class="time-label" style="color:var(--gold);">M O R N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${day.morning || ''}</span></div></div>
-        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">◐</span><div><span class="time-label" style="color:var(--gold);">A F T E R N O O N</span><span class="time-text" style="color:rgba(240,234,214,.65);">${day.afternoon || ''}</span></div></div>
-        <div class="time-block" style="border-bottom:none;"><span class="time-icon" style="color:rgba(240,234,214,.5);">☾</span><div><span class="time-label" style="color:var(--gold);">E V E N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${day.evening || ''}</span></div></div>
+        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span><div><span class="time-label" style="color:var(--gold);">M O R N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${dayMorning}</span></div></div>
+        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">◐</span><div><span class="time-label" style="color:var(--gold);">A F T E R N O O N</span><span class="time-text" style="color:rgba(240,234,214,.65);">${dayAfternoon}</span></div></div>
+        <div class="time-block" style="border-bottom:none;"><span class="time-icon" style="color:rgba(240,234,214,.5);">☾</span><div><span class="time-label" style="color:var(--gold);">E V E N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${dayEvening}</span></div></div>
       </div>
       <div class="tags">${tags}</div>
     </div>
