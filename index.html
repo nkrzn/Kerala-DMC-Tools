@@ -1148,25 +1148,57 @@ const DEST_BANK = {
     "overview": "Kochi is where Kerala meets the world — and has been for 600 years. The Chinese fishing nets along the waterfront, the Dutch palace, the Portuguese church, the Jewish synagogue, the Mattancherry spice lanes: every century left something behind. Fort Kochi is the rarest kind of place — a town that absorbed empire after empire and emerged with its own unhurried character intact. The air smells of salt and cardamom. The evenings are made for walking.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Fort Kochi",
-        "morning": "Arrive Kochi. Transfer to Fort Kochi (30 min from airport). Check in. Walk to the waterfront — Chinese fishing nets at their most photogenic in the late afternoon light.",
-        "afternoon": "Explore the Fort Kochi heritage precinct on foot — Dutch Cemetery, Santa Cruz Basilica, the colonial bungalow lanes. Stop at a café on Burgher Street.",
-        "evening": "Kathakali performance at Kerala Kathakali Centre (book in advance — 6 PM show recommended). Dinner on Princess Street."
+        "morning": { "parts": [
+          { "text": "Arrive Kochi. Transfer to Fort Kochi (30 min from airport). Check in." }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Fort Kochi heritage walk — the colonial bungalow lanes, the waterfront promenade." },
+          { "text": "Chinese fishing nets at their most photogenic in the late afternoon light.", "sight": "Chinese Fishing Nets" },
+          { "text": "Walk to Santa Cruz Basilica and the Dutch Cemetery nearby.", "sight": "Santa Cruz Basilica" },
+          { "text": "St Francis Church — one of the oldest European-built churches in India.", "sight": "St Francis Church" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Sunset ferry to Ernakulam and back — 15 minutes each way, ₹5.", "sight": "Sunset ferry to Ernakulam" },
+          { "text": "Kathakali performance at Kerala Kathakali Centre (book in advance — 6 PM show recommended).", "sight": "Kathakali Performance" },
+          { "text": "Dinner on Princess Street." }
+        ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Fort Kochi — Full Day",
-        "morning": "Early morning at the Chinese fishing nets before the tourist crowds arrive. Mattancherry Spice Market. Jewish Synagogue (closed Friday and Saturday).",
-        "afternoon": "Kerala Folklore Museum (Thevara) — one of the finest private collections in India. Kochi-Muziris Biennale venues if open.",
-        "evening": "Sunset ferry to Ernakulam and back — 15 minutes each way, ₹5. Dinner at a rooftop on Tower Road."
+        "type": "fullday",
+        "label": "FULL DAY — MATTANCHERRY",
+        "route": "Fort Kochi — Mattancherry",
+        "morning": { "fallback": "Free morning to rest, or wander the Fort Kochi lanes.", "parts": [
+          { "text": "Mattancherry Spice Market — the scent alone is worth the visit.", "sight": "Mattancherry Spice Market" },
+          { "text": "Jewish Synagogue at Paradesi — closed Friday and Saturday, plan accordingly.", "sight": "Jewish Synagogue (Paradesi)" },
+          { "text": "Dutch Palace (Mattancherry) — extraordinary Kerala murals inside.", "sight": "Dutch Palace (Mattancherry)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure in Fort Kochi.", "parts": [
+          { "text": "Kerala Folklore Museum (Thevara) — one of the finest private collections in India.", "sight": "Kerala Folklore Museum" },
+          { "text": "Kochi-Muziris Biennale venues, if open.", "sight": "Kochi-Muziris Biennale venues" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Cooking class at a heritage homestay — Kerala fish curry, appam, stew. Dinner from what you cooked.", "sight": "Cooking class · Kerala cuisine" },
+          { "text": "Dinner at a rooftop on Tower Road." }
+        ]}
       },
       {
-        "label": "DAY THREE",
-        "route": "Kochi — Day Three",
-        "morning": "Cherai Beach (45 min) — the only beach accessible from Kochi worth visiting. Morning swim, fresh catch breakfast at a shack.",
-        "afternoon": "Paradesi Synagogue, Mattancherry Palace (Dutch Palace).",
-        "evening": "Cooking class at a homestay — Kerala fish curry, appam, stew. Dinner from what you cooked."
+        "type": "fullday",
+        "label": "FULL DAY — NORTH KOCHI",
+        "route": "Fort Kochi — Cherai",
+        "morning": { "fallback": "Free morning to rest, or a slow walk to the fishing nets.", "parts": [
+          { "text": "Cherai Beach (45 min north) — the best beach accessible from Kochi. Morning swim, fresh catch breakfast at a shack.", "sight": "Cherai Beach" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kerala Folklore Museum (Thevara) — one of the finest private collections in India.", "sight": "Kerala Folklore Museum" },
+          { "text": "Kochi-Muziris Biennale venues, if open.", "sight": "Kochi-Muziris Biennale venues" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Cooking class at a heritage homestay — Kerala fish curry, appam, stew.", "sight": "Cooking class · Kerala cuisine" },
+          { "text": "Dinner at a Fort Kochi restaurant of your choice." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1215,63 +1247,57 @@ const DEST_BANK = {
     "overview": "At 1,600 metres above sea level, Munnar is where Kerala exhales. The air is cooler here, the light is different — softer, more diffuse — and the landscape rolls in every direction with the particular green that only tea produces. This is the Western Ghats at their most cinematic: endless plantation, morning mist that refuses to lift until noon, and a silence that the modern world has almost entirely forgotten how to make.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "Kochi → Munnar",
         "morning": { "parts": [
           { "text": "Depart Kochi after breakfast. The drive takes 3.5 hours through the Ghats." },
-          { "text": "Stop at Cheeyappara Waterfalls en route — the road from Adimali onwards is the most scenic.", "sight": "Cheeyappara Waterfalls (en route from Kochi)" }
+          { "text": "Stop at Cheeyappara Waterfalls en route — the road from Adimali onwards is the most scenic.", "sight": "Cheeyappara Waterfalls (en route from Kochi)" },
+          { "text": "Stop at Valara Waterfalls just before Cheeyappara.", "sight": "Valara Waterfalls" }
         ]},
         "afternoon": { "parts": [
-          { "text": "Arrive Munnar by early afternoon. Check in. Rest. The altitude will ask something of you." }
+          { "text": "Arrive Munnar by early afternoon. Check in. The altitude will ask something of you." },
+          { "text": "Tea garden photo stop near the hotel — the plantation is most beautiful before sunset.", "sight": "Tea estate morning walk" },
+          { "text": "If arriving before 4 PM, a short visit to the Tea Museum at Tata Tea Estate.", "sight": "Tea Museum — Tata Tea Estate" },
+          { "text": "Blossom Hydel Park if time allows — a pleasant short stop near town.", "sight": "Blossom Hydel Park" }
         ]},
         "evening": { "parts": [
           { "text": "First walk through the tea estate surrounding the hotel at sunset. Dinner at the resort." }
         ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Munnar — Full Day",
+        "type": "fullday",
+        "label": "FULL DAY — LAKE CIRCUIT",
+        "route": "Munnar — Lake Circuit",
         "morning": { "fallback": "Free morning to rest, or explore the resort grounds at your own pace.", "parts": [
-          { "text": "Early morning tea estate walk before breakfast — the plantation is most beautiful before 8 AM.", "sight": "Tea estate morning walk" },
-          { "text": "After breakfast, visit Eravikulam National Park (home of the Nilgiri Tahr) — book tickets online in advance.", "sight": "Eravikulam National Park (Nilgiri Tahr)" }
+          { "text": "Eravikulam National Park (home of the Nilgiri Tahr) — book tickets online in advance.", "sight": "Eravikulam National Park (Nilgiri Tahr)" },
+          { "text": "Tea estate morning walk before breakfast — the plantation is most beautiful before 8 AM.", "sight": "Tea estate morning walk" }
         ]},
-        "afternoon": { "fallback": "Free afternoon to rest or explore Munnar town at leisure.", "parts": [
-          { "text": "Mattupetty Dam and lake.", "sight": "Mattupetty Dam" },
-          { "text": "Tea Museum at Tata Tea Estate — the history of tea in Munnar in one hour.", "sight": "Tea Museum — Tata Tea Estate" },
-          { "text": "Stop at the Indo-Swiss Livestock Project — a working dairy farm, a pleasant break between sightseeing stops.", "sight": "Indo-Swiss Livestock Project" }
+        "afternoon": { "fallback": "Free afternoon to rest or explore Munnar town.", "parts": [
+          { "text": "Mattupetty Dam and the lake — a pleasant stop before Echo Point.", "sight": "Mattupetty Dam" },
+          { "text": "Echo Point — call out and listen for the echo carry across the valley.", "sight": "Echo Point" },
+          { "text": "Stop at the Indo-Swiss Livestock Project on the way.", "sight": "Indo-Swiss Livestock Project" }
         ]},
         "evening": { "parts": [
-          { "text": "Echo Point on the way — call out and listen for the echo carry across the lake valley.", "sight": "Echo Point" },
-          { "text": "Sunset from Top Station if clear skies.", "sight": "Top Station — highest point" },
+          { "text": "Sunset from Top Station if clear skies — the highest motorable point in the region.", "sight": "Top Station — highest point" },
           { "text": "Dinner in town or resort." }
         ]}
       },
       {
-        "label": "SECOND FULL DAY",
-        "route": "Munnar — Day Three",
+        "type": "fullday",
+        "label": "FULL DAY — FAR EXCURSIONS",
+        "route": "Munnar — Far Circuit",
         "morning": { "fallback": "Free morning to rest, or a gentle walk through the estate.", "parts": [
-          { "text": "Sunrise hike to the Lockhart Gap viewpoint.", "sight": "Lockhart Gap viewpoint" },
-          { "text": "Visit Chinnar Wildlife Sanctuary (60 km) — dry deciduous forest, different ecosystem entirely.", "sight": "Chinnar Wildlife Sanctuary" }
+          { "text": "Kolukumalai — the highest tea estate in the world (2,100m). 4WD jeep required, book the night before. Sunrise from the estate is extraordinary.", "sight": "Kolukumalai Estate — sunrise" },
+          { "text": "Chinnar Wildlife Sanctuary (60 km) — dry deciduous forest, different ecosystem entirely.", "sight": "Chinnar Wildlife Sanctuary" }
         ]},
         "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
           { "text": "Kundala Lake and boating.", "sight": "Kundala Lake" },
-          { "text": "Or revisit the Eravikulam plateau if Tahr herds are active.", "sight": "Eravikulam National Park (Nilgiri Tahr)" }
-        ]},
-        "evening": { "parts": [
-          { "text": "Spice garden visit and cooking demonstration. Dinner at resort." }
-        ]}
-      },
-      {
-        "label": "THIRD FULL DAY",
-        "route": "Munnar — Day Four",
-        "morning": { "fallback": "Free morning to rest before departure preparations.", "parts": [
-          { "text": "Kolukumalai — the highest tea estate in the world (2,100m). 4WD jeep required, book the night before. Sunrise from the estate is extraordinary.", "sight": "Kolukumalai Estate — sunrise" }
-        ]},
-        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
           { "text": "Marayoor Sandal Forest (90 min) — only natural sandalwood forest in Kerala. Dolmens at Marayoor.", "sight": "Marayoor Sandalwood Forest" }
         ]},
         "evening": { "parts": [
-          { "text": "Final evening at the hotel. Long dinner." }
+          { "text": "Watch the sunset from Lockhart Gap viewpoint.", "sight": "Lockhart Gap viewpoint" },
+          { "text": "Dinner at resort." }
         ]}
       }
     ],
@@ -1318,25 +1344,55 @@ const DEST_BANK = {
     "overview": "Thekkady is where Kerala meets the wild. The Periyar Tiger Reserve surrounds the town — 925 square kilometres of protected forest where gaur, sambar, wild boar, and elephant move through teak and rosewood at their own pace. The spice gardens that line every road into Thekkady produce cardamom, pepper, vanilla, and cinnamon at source. The air here is heavier with green, thicker with scent.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Thekkady",
-        "morning": "Depart from previous destination. The drive passes through the Ghats — stop at a living spice plantation en route.",
-        "afternoon": "Arrive Thekkady. Check in. Short rest, then a guided walk through the Periyar buffer zone at dusk — best time for wildlife.",
-        "evening": "Traditional Kathakali performance in the village (2 hours). Book through your hotel."
+        "morning": { "parts": [
+          { "text": "Depart from previous destination. The drive passes through the Ghats." },
+          { "text": "Stop at a living spice plantation en route.", "sight": "Living Spice Plantation Tour" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Arrive Thekkady. Check in. Short rest." },
+          { "text": "Walk through the spice market in town and pick up cardamom, pepper, and vanilla at source." },
+          { "text": "Cardamom Hills Village Walk — a short stroll through the local village lanes.", "sight": "Cardamom Hills Village Walk" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Traditional Kathakali performance in the village (2 hours). Book through your hotel.", "sight": "Kathakali Performance" },
+          { "text": "Kalaripayattu martial arts demonstration at 7 PM.", "sight": "Kalaripayattu Performance" },
+          { "text": "Dinner at a spice garden restaurant." }
+        ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Thekkady — Full Day",
-        "morning": "Periyar Lake boat safari at dawn (6:30 AM) — the lake is mirror-still in the morning and elephant herds come to the shore. Book through the Forest Department.",
-        "afternoon": "Spice garden tour — a proper guided walk through a working plantation. Afternoon at leisure.",
-        "evening": "Kalaripayattu martial arts demonstration (7 PM). Dinner at a spice garden restaurant."
+        "type": "fullday",
+        "label": "FULL DAY — PERIYAR LAKE",
+        "route": "Thekkady — Periyar",
+        "morning": { "fallback": "Free morning to rest, or a slow walk around the lake.", "parts": [
+          { "text": "Periyar Lake boat safari at dawn (6:30 AM) — the lake is mirror-still and elephant herds come to the shore. Book through the Forest Department.", "sight": "Periyar Lake Boat Safari (dawn)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure — a short walk around the lake or a rest at the property.", "parts": [
+          { "text": "Spice garden tour — a proper guided walk through a working plantation.", "sight": "Living Spice Plantation Tour" },
+          { "text": "Visit Pandikuzhi waterfalls, a short drive from the property.", "sight": "Pandikuzhi Waterfalls" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Bamboo rafting on Periyar Lake — a slow, quiet way to see the waterline.", "sight": "Bamboo Rafting — Periyar Lake" },
+          { "text": "Dinner at the hotel." }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
-        "route": "Thekkady — Day Three",
-        "morning": "Nature walk inside Periyar Tiger Reserve with a trained naturalist (4 hours, book through Forest Department — limited slots).",
-        "afternoon": "Pandikuzhi waterfalls or cooking class — Kerala spice cuisine.",
-        "evening": "Bamboo rafting on Periyar Lake if available. Farewell dinner at the hotel."
+        "type": "fullday",
+        "label": "FULL DAY — RESERVE",
+        "route": "Thekkady — Tiger Reserve",
+        "morning": { "fallback": "Free morning to rest.", "parts": [
+          { "text": "Nature walk inside Periyar Tiger Reserve with a trained naturalist (4 hours, limited slots — book through Forest Department).", "sight": "Periyar Tiger Reserve Nature Walk" },
+          { "text": "Or Mangaladevi Temple, if open in season (seasonal access only).", "sight": "Mangaladevi Temple (seasonal)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Cardamom Hills Village Walk in the afternoon light.", "sight": "Cardamom Hills Village Walk" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Kalaripayattu martial arts demonstration.", "sight": "Kalaripayattu Performance" },
+          { "text": "Dinner at a spice garden restaurant." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1378,18 +1434,39 @@ const DEST_BANK = {
     "overview": "Alleppey is Kerala's most famous address for good reason — the backwater network here stretches 1,500 kilometres and connects 44 rivers, lakes, and lagoons into a landscape unlike anything else in India. A houseboat on these waters is not a luxury — it is a way of seeing. The canal villages, the toddy shops on stilts, the morning coir-weaving: none of this is visible from a road. It only reveals itself to those who travel on water.",
     "days": [
       {
-        "label": "HOUSEBOAT CHECK-IN",
-        "route": "→ Alleppey · Houseboat",
-        "morning": "Transfer to Alleppey. Board the houseboat at the jetty by noon. Meet your crew — cook, captain, deckhand.",
-        "afternoon": "Afternoon cruise through the village canals. Watch life on the banks — laundry, fishing, children, coconut palms. Anchor in an open lagoon as the sun drops.",
-        "evening": "Sunset from the upper deck. The cook prepares Kerala fish curry, appam, prawn masala — all aboard. Night at anchor in the backwaters."
+        "type": "arrival",
+        "label": "ARRIVAL DAY",
+        "route": "→ Alleppey",
+        "morning": { "parts": [
+          { "text": "Sunrise at Alleppey Beach before heading to the jetty, if arriving early.", "sight": "Alleppey Beach (sunrise)" },
+          { "text": "Transfer to Alleppey. Check in or board the houseboat at the jetty by noon." }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Village canal cruise through the backwater channels.", "sight": "Village canal cruise" },
+          { "text": "Kuttanad — cruise through Kerala's below-sea-level paddy country. Watch life on the banks.", "sight": "Kuttanad — below sea-level paddy fields" },
+          { "text": "Sunset by the lake. The backwater light at dusk is the best in Kerala." }
+        ]},
+        "evening": { "parts": [
+          { "text": "The cook prepares Kerala fish curry, appam, prawn masala — all aboard. Night at anchor in the backwaters." }
+        ]}
       },
       {
-        "label": "HOUSEBOAT DAY",
-        "route": "Alleppey Backwaters — Full Day",
-        "morning": "Dawn on the backwaters — the mist, the fishing boats, the silence. Breakfast on the upper deck. Morning cruise through Vembanad Lake.",
-        "afternoon": "Village stop — walk through a coir village or visit a local toddy shop. Afternoon cruise back toward Alleppey.",
-        "evening": "Disembark at sunset. Transfer onward or overnight in Alleppey town."
+        "type": "fullday",
+        "label": "FULL DAY — VEMBANAD LAKE",
+        "route": "Alleppey — Vembanad",
+        "morning": { "parts": [
+          { "text": "Dawn on the backwaters — the mist, the fishing boats, the silence. Breakfast on the upper deck." },
+          { "text": "Morning houseboat cruise through Vembanad Lake.", "sight": "Houseboat cruise — Vembanad Lake" },
+          { "text": "Punnamada Lake — home of the famous Nehru Trophy boat race.", "sight": "Punnamada Lake" }
+        ]},
+        "afternoon": { "fallback": "Afternoon at leisure on the backwaters.", "parts": [
+          { "text": "Village stop — coir village walk or local toddy shop.", "sight": "Coir Village walk" },
+          { "text": "A stop at Krishnapuram Palace (30 km south) on the way back.", "sight": "Krishnapuram Palace (30 km south)" },
+          { "text": "Extend to Marari Beach (15 km north) — a quieter stretch of coast before transferring onward.", "sight": "Marari Beach (15 km north)" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Disembark at sunset. Transfer onward or overnight in Alleppey town." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1426,25 +1503,53 @@ const DEST_BANK = {
     "overview": "Kumarakom sits on the eastern shore of Vembanad Lake where the backwaters are at their widest and most unhurried. The Bird Sanctuary here draws Siberian storks and egrets from November to February. The heritage properties along the lake edge are some of the finest addresses in Kerala. Kumarakom is for people who want the backwater experience without the bustle of Alleppey.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Kumarakom",
-        "morning": "Transfer to Kumarakom from previous destination. Check in by noon. First afternoon at leisure — the resort will be reason enough.",
-        "afternoon": "Evening boat ride on Vembanad Lake from the resort jetty. Sunset over the water is unhurried here.",
-        "evening": "Dinner at the resort. The backwater properties here have exceptional kitchen teams."
+        "morning": { "parts": [
+          { "text": "Transfer to Kumarakom from previous destination. Check in by noon." },
+          { "text": "Kumarakom Bird Sanctuary at dawn if arriving early (best November to February) — walking trail through the mangroves.", "sight": "Kumarakom Bird Sanctuary" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "First afternoon at leisure — the resort will be reason enough." },
+          { "text": "Evening boat ride on Vembanad Lake from the resort jetty. Sunset over the water is unhurried here.", "sight": "Vembanad Lake sunset cruise" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Dinner at the resort. The backwater properties here have exceptional kitchen teams." }
+        ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Kumarakom — Full Day",
-        "morning": "Kumarakom Bird Sanctuary at dawn (best November to February) — walking trail through the mangroves. Breakfast back at the resort.",
-        "afternoon": "Canoe tour through the narrow village canals — different from the main lake. Village life at close range.",
-        "evening": "Sunset from the resort deck. Ayurvedic treatment at the spa if desired. Long dinner."
+        "type": "fullday",
+        "label": "FULL DAY — BACKWATER CRUISE",
+        "route": "Kumarakom — Backwaters",
+        "morning": { "fallback": "Free morning to rest at the resort.", "parts": [
+          { "text": "Kumarakom Bird Sanctuary at dawn — walking trail through the mangroves.", "sight": "Kumarakom Bird Sanctuary" },
+          { "text": "Or a boat trip to Pathiramanal Island, haven for migratory birds.", "sight": "Pathiramanal Island (migratory birds)" },
+          { "text": "Breakfast back at the resort." }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure at the resort.", "parts": [
+          { "text": "Backwater cruise on Vembanad Lake.", "sight": "Vembanad Lake sunset cruise" },
+          { "text": "Canoe tour through the narrow village canals — different from the main lake.", "sight": "Village canoe tour" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Sunset from the resort deck. Long dinner." }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
-        "route": "Kumarakom — Day Three",
-        "morning": "Sunrise fishing with local fishermen — arranged through the resort. Back for breakfast.",
-        "afternoon": "Day trip to Kottayam town (20 km) — Valiapally Church (1550 AD), Cheriapally Church. Rubber plantation drive.",
-        "evening": "Final evening on the water. Cooking demonstration — Kerala appam and stew."
+        "type": "fullday",
+        "label": "FULL DAY — KOTTAYAM EXCURSION",
+        "route": "Kumarakom — Kottayam",
+        "morning": { "fallback": "Free morning to rest at the resort.", "parts": [
+          { "text": "Sunrise fishing with local fishermen — arranged through the resort. Back for breakfast." }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Day trip to Kottayam town (20 km) — Valiapally Church (1550 AD), Cheriapally Church.", "sight": "Kottayam Churches (Valiapally · Cheriapally)" },
+          { "text": "Rubber plantation drive.", "sight": "Rubber plantation drive" },
+          { "text": "Stop at Aruvikkuzhi Waterfall (20 km) on the way back.", "sight": "Aruvikkuzhi Waterfall (20 km)" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Final evening on the water. Cooking demonstration — Kerala appam and stew." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1455,10 +1560,6 @@ const DEST_BANK = {
       {
         "name": "Coconut Lagoon Restaurant (CGH Earth)",
         "note": "Heritage dining · boat access only · traditional Kerala recipes"
-      },
-      {
-        "name": "The Zuri Kumarakom Restaurant",
-        "note": "Contemporary · poolside and lakefront options · multicuisine"
       },
       {
         "name": "Baker's Street",
@@ -1480,32 +1581,54 @@ const DEST_BANK = {
     "overview": "Wayanad is the Kerala that tourists often miss — a high plateau at 900 metres covered in coffee, cardamom, and dense forest. The Wayanad Wildlife Sanctuary is home to elephant, gaur, and leopard. The tribal communities here have lived in these forests for thousands of years. Wayanad is slower than Munnar, less visited than Thekkady, and completely its own thing.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Wayanad",
-        "morning": "Transfer to Wayanad (3.5 hours from Kozhikode or 4 hours from Mysore). The Thamarassery Ghat road has 13 hairpin bends — stop for tea at the viewpoint.",
-        "afternoon": "Arrive and check in. Short drive to Banasura Sagar Dam — largest earthen dam in India.",
-        "evening": "Dinner at the resort. Wayanad nights are cold — request a bonfire if your property offers it."
+        "morning": { "parts": [
+          { "text": "Transfer to Wayanad (3.5 hours from Kozhikode or 4 hours from Mysore). The Thamarassery Ghat road has 13 hairpin bends." },
+          { "text": "Stop for tea at the Thamarassery viewpoint — the valley drop is dramatic.", "sight": "Thamarassery Ghat viewpoint" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Arrive and check in." },
+          { "text": "Coffee and cardamom plantation walk at the resort or nearby estate.", "sight": "Coffee and cardamom plantation walk" },
+          { "text": "Banasura Sagar Dam — largest earthen dam in India, a short drive from most resorts.", "sight": "Banasura Sagar Dam" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Tribal village craft market in Kalpetta if arriving early enough.", "sight": "Tribal village visit" },
+          { "text": "Dinner at the resort. Wayanad nights are cold — request a bonfire if your property offers it." }
+        ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Wayanad — Full Day",
-        "morning": "Chembra Peak trek (2,100m) — starts at 7 AM, 4-hour return hike, mandatory guide from Forest Department. Heart-shaped lake at the summit.",
-        "afternoon": "Edakkal Caves — Neolithic rock carvings from 5,000 years ago. The climb is 45 minutes. Arrive before 3 PM.",
-        "evening": "Bamboo village or tribal craft market in Kalpetta. Dinner in town or at resort."
+        "type": "fullday",
+        "label": "FULL DAY — ADVENTURE",
+        "route": "Wayanad — Adventure Day",
+        "morning": { "fallback": "Free morning to rest, or a slow walk through the estate.", "parts": [
+          { "text": "Chembra Peak trek (2,100m) — starts at 7 AM, 4-hour return hike, mandatory guide from Forest Department. Heart-shaped lake at the summit.", "sight": "Chembra Peak trek" },
+          { "text": "Kuruva Island (Kabani River) — uninhabited river island accessible only by bamboo raft.", "sight": "Kuruva Island bamboo raft" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Edakkal Caves — Neolithic rock carvings from 5,000 years ago. The climb is 45 minutes. Arrive before 3 PM.", "sight": "Edakkal Caves (Neolithic rock art)" },
+          { "text": "Soochippara (Sentinel Rock) Waterfalls — 100m drop into a pool. Swimming allowed.", "sight": "Soochippara Waterfalls" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Dinner in town or at resort." }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
-        "route": "Wayanad — Day Three",
-        "morning": "Wayanad Wildlife Sanctuary — jeep safari at dawn (Muthanga or Tholpetty range). Best elephant sightings in Kerala outside Periyar.",
-        "afternoon": "Thirunelli Temple (38 km) — one of Kerala's most sacred Vishnu temples, in a valley surrounded by forest.",
-        "evening": "Coffee plantation walk at the resort or nearby estate. Sunset from Vythiri viewpoint."
-      },
-      {
-        "label": "THIRD FULL DAY",
-        "route": "Wayanad — Day Four",
-        "morning": "Kuruva Island (Kabani River) — uninhabited river island accessible only by bamboo raft. Dense forest, birds, river.",
-        "afternoon": "Soochippara (Sentinel Rock) Waterfalls — 100m drop into a pool. Swimming allowed.",
-        "evening": "Local market in Sultan Bathery. Handicrafts, tribal honey, black pepper at source."
+        "type": "fullday",
+        "label": "FULL DAY — WILDLIFE & TEMPLES",
+        "route": "Wayanad — Wildlife Day",
+        "morning": { "fallback": "Free morning to rest before the day ahead.", "parts": [
+          { "text": "Wayanad Wildlife Sanctuary — jeep safari at dawn (Muthanga or Tholpetty range). Best elephant sightings in Kerala outside Periyar.", "sight": "Wayanad Wildlife Sanctuary jeep safari" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Thirunelli Temple (38 km) — one of Kerala's most sacred Vishnu temples, in a valley surrounded by forest.", "sight": "Thirunelli Temple" },
+          { "text": "Tribal village visit — handicrafts, honey, black pepper at source.", "sight": "Tribal village visit" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Coffee plantation walk at sunset.", "sight": "Coffee and cardamom plantation walk" },
+          { "text": "Dinner at resort." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1544,32 +1667,54 @@ const DEST_BANK = {
     "overview": "Kovalam is three beaches separated by rocky headlands. The real Kovalam is found at the edges — the clifftop Ayurveda resorts at Chowara, the rocks at the southern end where the lighthouse stands, the mornings before the beach fills. The Arabian Sea here is calmer than the east coast and warmer than anywhere in North India.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "Trivandrum → Kovalam",
-        "morning": "Arrive Trivandrum airport. Transfer to Kovalam (30 min). Check in. First view of the Arabian Sea.",
-        "afternoon": "Walk the beach crescent to the lighthouse. Swim in the calm water at the northern end. First coconut on the beach.",
-        "evening": "Sunset from the lighthouse rocks. Seafood dinner on the beach."
+        "morning": { "parts": [
+          { "text": "Arrive Trivandrum airport. Transfer to Kovalam (30 min). Check in. First view of the Arabian Sea." }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Walk the beach crescent to the lighthouse. Swim in the calm water at the northern end.", "sight": "Lighthouse Beach" },
+          { "text": "Climb the lighthouse for the view over the three beaches.", "sight": "Kovalam Lighthouse climb" },
+          { "text": "First coconut on the beach." }
+        ]},
+        "evening": { "parts": [
+          { "text": "Watch the sunset from the lighthouse rocks.", "sight": "Kovalam Lighthouse climb" },
+          { "text": "Seafood dinner on the beach." }
+        ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Kovalam — Full Day",
-        "morning": "Padmanabhaswamy Temple, Trivandrum (30 min). Napier Museum and Zoo complex.",
-        "afternoon": "Vizhinjam Mosque and harbour (3 km south). Vizhinjam rock cave temple — 8th century.",
-        "evening": "Ayurvedic treatment at one of the clifftop resorts. Dinner with lighthouse view."
+        "type": "fullday",
+        "label": "FULL DAY — SOUTH COAST",
+        "route": "Kovalam — South Coast",
+        "morning": { "fallback": "Free morning to rest, or relax on the beach.", "parts": [
+          { "text": "Poovar (30 km south) — where the Neyyar River meets the sea. Boat into the estuary.", "sight": "Poovar estuary boat ride" },
+          { "text": "Vizhinjam rock cave temple (3 km south) — 8th century carvings.", "sight": "Vizhinjam Rock Cave Temple" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kanyakumari (90 min) — the southernmost tip of India. Three seas meet. Vivekananda Rock Memorial.", "sight": "Kanyakumari (southernmost tip)" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Ayurvedic treatment at one of the clifftop resorts — book in advance.", "sight": "Ayurvedic treatment at clifftop resort" },
+          { "text": "Dinner with lighthouse view." }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
-        "route": "Kovalam — Day Three",
-        "morning": "Poovar (30 km south) — where the Neyyar River meets the sea through a narrow golden beach. Boat into the estuary.",
-        "afternoon": "Kanyakumari (90 min) — the southernmost tip of India. Three seas meet. Vivekananda Rock Memorial.",
-        "evening": "Back to Kovalam. Long walk on the beach. Final Ayurveda session."
-      },
-      {
-        "label": "THIRD FULL DAY",
-        "route": "Kovalam — Day Four",
-        "morning": "Niraamaya Surya Samudra clifftop walk. Morning yoga if offered.",
-        "afternoon": "Backwater boat ride from Poovar estuary. Halcyon Castle gardens.",
-        "evening": "Sunset on the beach. Last seafood dinner."
+        "type": "fullday",
+        "label": "FULL DAY — WELLNESS & TRIVANDRUM",
+        "route": "Kovalam — Trivandrum",
+        "morning": { "fallback": "Free morning to rest, or relax on the beach.", "parts": [
+          { "text": "Niraamaya Surya Samudra clifftop walk.", "sight": "Clifftop walk — Niraamaya Surya Samudra" },
+          { "text": "Morning yoga session on the clifftop.", "sight": "Morning yoga session" },
+          { "text": "Padmanabhaswamy Temple — men must wear dhoti (available for hire at the gate).", "sight": "Padmanabhaswamy Temple (Trivandrum)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Napier Museum and Zoo complex in Trivandrum.", "sight": "Napier Museum" },
+          { "text": "Ayurvedic treatment at one of the clifftop resorts — book in advance.", "sight": "Ayurvedic treatment at clifftop resort" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Sunset on the beach. Long seafood dinner." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1612,25 +1757,52 @@ const DEST_BANK = {
     "overview": "Varkala is built on a laterite cliff 15 metres above the Arabian Sea, and the cliff is the town. The promenade along the top is lined with cafés, yoga studios, and Ayurveda centres. Below the cliff is a beach of startling beauty — the water is cleaner here than anywhere else on the Kerala coast.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Varkala",
-        "morning": "Transfer to Varkala. Check in to clifftop property. Walk to the cliff edge for the first view.",
-        "afternoon": "Descend to the beach. Swim. Walk south to the black rock outcrop at the southern end.",
-        "evening": "Sunset from the cliff. Dinner at a clifftop café."
+        "morning": { "parts": [
+          { "text": "Transfer to Varkala. Check in to clifftop property." },
+          { "text": "Walk to the cliff edge for the first view.", "sight": "Varkala Cliff promenade walk" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Descend to the beach. Swim.", "sight": "Varkala Beach swim" },
+          { "text": "Walk south to the black rock outcrop at the southern end." }
+        ]},
+        "evening": { "parts": [
+          { "text": "Watch the sunset from the cliff.", "sight": "Sunset from the cliff edge" },
+          { "text": "Dinner at a clifftop café." }
+        ]}
       },
       {
-        "label": "FULL DAY",
+        "type": "fullday",
+        "label": "FULL DAY — TEMPLE & BEACH",
         "route": "Varkala — Full Day",
-        "morning": "Janardhana Swami Temple at sunrise — the 2,000-year-old Vishnu temple on the cliff. Morning puja is at 5:30 AM.",
-        "afternoon": "Kappil Beach (8 km north) — where the Edava-Nadayara Lake meets the sea. Quieter than Varkala. Backwater boat ride.",
-        "evening": "Yoga class on the cliff. Ayurvedic foot massage. Dinner at a restaurant on the north cliff."
+        "morning": { "fallback": "Free morning to rest, or a slow walk along the cliff.", "parts": [
+          { "text": "Janardhana Swami Temple at sunrise — the 2,000-year-old Vishnu temple on the cliff. Morning puja is at 5:30 AM.", "sight": "Janardhana Swami Temple" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kappil Beach (8 km north) — where the Edava-Nadayara Lake meets the sea. Quieter than Varkala. Backwater boat ride.", "sight": "Kappil Beach and backwater" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Yoga class on the clifftop — most hotels can arrange.", "sight": "Morning yoga on the cliff" },
+          { "text": "Ayurvedic foot massage at one of the cliff-edge wellness centres.", "sight": "Ayurveda treatment" },
+          { "text": "Dinner at a restaurant on the north cliff." }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
-        "route": "Varkala — Day Three",
-        "morning": "Anjengo Fort (20 km south) — the first British East India Company outpost in Kerala.",
-        "afternoon": "Sivagiri Mutt (4 km) — the ashram of Sri Narayana Guru, Kerala's great social reformer.",
-        "evening": "Final sunset on the cliff. Long dinner."
+        "type": "fullday",
+        "label": "FULL DAY — HERITAGE",
+        "route": "Varkala — Heritage Day",
+        "morning": { "fallback": "Free morning to rest.", "parts": [
+          { "text": "Anjengo Fort (20 km south) — the first British East India Company outpost in Kerala.", "sight": "Anjengo Fort" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Sivagiri Mutt (4 km) — the ashram of Sri Narayana Guru, Kerala's great social reformer.", "sight": "Sivagiri Mutt" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Final sunset from the cliff edge.", "sight": "Sunset from the cliff edge" },
+          { "text": "Long dinner." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1672,18 +1844,36 @@ const DEST_BANK = {
     "overview": "Kannur is the home of Theyyam — the possession ritual of North Kerala in which performers become gods. From October to May, Theyyam performances happen in temple forecourts across the district every night. Kannur is also a weaving town: the handloom weavers have supplied fabric to the world for centuries.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Kannur",
-        "morning": "Transfer to Kannur. Check in. Walk to Payyambalam Beach — the cleanest beach in Kannur.",
-        "afternoon": "St Angelo Fort — Portuguese fort on the headland (1505). The view north toward Malabar is exceptional.",
-        "evening": "Theyyam inquiry — ask your hotel which temple is performing tonight. Theyyam starts after 10 PM and can run until dawn."
+        "morning": { "parts": [
+          { "text": "Transfer to Kannur. Check in." },
+          { "text": "Walk to Payyambalam Beach — the cleanest beach in Kannur.", "sight": "Payyambalam Beach" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon to rest, or relax on the beach.", "parts": [
+          { "text": "St Angelo Fort — Portuguese fort on the headland (1505). The view north toward Malabar is exceptional.", "sight": "St Angelo Fort" },
+          { "text": "Or a drive along Muzhappilangad — Asia's only drive-in beach (15 km).", "sight": "Muzhappilangad Drive-in Beach (15 km)" }
+        ]},
+        "evening": { "fallback": "Free evening at leisure. Dinner at the hotel.", "parts": [
+          { "text": "Theyyam inquiry — ask your hotel which temple is performing tonight. Theyyam starts after 10 PM and can run until dawn.", "sight": "Theyyam ritual performance (Oct–May)" }
+        ]}
       },
       {
+        "type": "fullday",
         "label": "FULL DAY",
         "route": "Kannur — Full Day",
-        "morning": "Dharmadam Island — uninhabited island 200m off the coast, accessible by foot at low tide. Morning birds and silence.",
-        "afternoon": "Kannur Handloom Weavers' Colony — watch the looms in action. Purchase directly from the weavers.",
-        "evening": "Theyyam performance if available. Dinner at hotel."
+        "morning": { "fallback": "Free morning to rest, or a walk along Payyambalam Beach.", "parts": [
+          { "text": "Dharmadam Island — uninhabited island 200m off the coast, accessible by foot at low tide. Morning birds and silence.", "sight": "Dharmadam Island" },
+          { "text": "Or Parassinikadavu, known for its snake temple and seasonal serpent boat races on the Valapattanam River.", "sight": "Parassinikadavu Serpent Boat Race (seasonal)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kannur Handloom Weavers' Colony — watch the looms in action. Purchase directly from the weavers.", "sight": "Kannur Handloom Weavers' Colony" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Theyyam performance in the evening, if one is happening locally.", "sight": "Theyyam ritual performance (Oct–May)" },
+          { "text": "Dinner at hotel." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1719,18 +1909,35 @@ const DEST_BANK = {
     "overview": "Bekal Fort is the largest fort in Kerala — a 40-acre laterite structure on a headland that juts into the Arabian Sea. The North Kerala coast here is less developed than the south: longer beaches, fewer tourists, and a quieter version of coastal Kerala. The backwaters at Bekal are navigable by small boat and almost entirely undiscovered.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Bekal",
-        "morning": "Transfer to Bekal from Kannur (1 hour). Check in. Walk to Bekal Fort immediately — the afternoon light on the laterite is exceptional.",
-        "afternoon": "Bekal Fort — the keyhole window with the sea view. Walk the ramparts.",
-        "evening": "Kappil Beach backwater — sunset boat ride on the backwater."
+        "morning": { "parts": [
+          { "text": "Transfer to Bekal from Kannur (1 hour). Check in." },
+          { "text": "Walk to Bekal Fort immediately — the afternoon light on the laterite is exceptional.", "sight": "Bekal Fort" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Bekal Fort — the keyhole window with the sea view. Walk the ramparts.", "sight": "Bekal Fort" },
+          { "text": "Pallikere Beach, right beside the fort — a quiet stretch of sand.", "sight": "Pallikere Beach (beside the fort)" }
+        ]},
+        "evening": { "fallback": "Free evening at leisure. Dinner at the resort.", "parts": [
+          { "text": "Kappil Beach backwater — sunset boat ride on the backwater.", "sight": "Kappil Beach backwater sunset" }
+        ]}
       },
       {
+        "type": "fullday",
         "label": "FULL DAY",
         "route": "Bekal — Full Day",
-        "morning": "Nityananda Ashram (Kanhangad, 12 km) — the cave ashram of Swami Nityananda.",
-        "afternoon": "Ananthapura Lake Temple (30 km inland) — the only lake temple in Kerala, on a small island.",
-        "evening": "Bekal Backwater boat ride at sunset. Dinner at the resort — Malabar seafood is the best in Kerala."
+        "morning": { "fallback": "Free morning to rest, or a walk along Pallikere Beach.", "parts": [
+          { "text": "Nityananda Ashram (Kanhangad, 12 km) — the cave ashram of Swami Nityananda.", "sight": "Nityananda Ashram (Kanhangad)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Ananthapura Lake Temple (30 km inland) — the only lake temple in Kerala, on a small island.", "sight": "Ananthapura Lake Temple" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Bekal Backwater boat ride at sunset.", "sight": "Bekal Backwater boat ride" },
+          { "text": "Dinner at the resort — Malabar seafood is the best in Kerala." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1761,25 +1968,51 @@ const DEST_BANK = {
     "overview": "Vagamon is a hill station at 1,100 metres — an elevated plateau of pine forests, meadows, and mist. There are no tea estates here: the landscape is more open than Munnar, more pastoral, and considerably quieter. Vagamon is for people who want altitude without the crowds.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Vagamon",
-        "morning": "Transfer to Vagamon (3.5 hours from Kochi or 2 hours from Kottayam).",
-        "afternoon": "Arrive and check in. Walk to Vagamon Meadows — open grassland with pine forest fringe. The silence is the main attraction.",
-        "evening": "Sunset from the meadows. Dinner at the resort. Vagamon nights are cold."
+        "morning": { "parts": [
+          { "text": "Transfer to Vagamon (3.5 hours from Kochi or 2 hours from Kottayam)." }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Arrive and check in." },
+          { "text": "Walk to Vagamon Meadows — open grassland with pine forest fringe. The silence is the main attraction.", "sight": "Vagamon Meadows walk" },
+          { "text": "Pine forest walk near the resort.", "sight": "Pine forest walk" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Sunset from the meadows. Dinner at the resort. Vagamon nights are cold." }
+        ]}
       },
       {
-        "label": "FULL DAY",
-        "route": "Vagamon — Full Day",
-        "morning": "Murugan Hill trek (2 hours return). Paragliding is available from the meadows from October to May.",
-        "afternoon": "Kurisumala Ashram (6 km) — a Cistercian monastery at 1,300 metres with extraordinary valley views.",
-        "evening": "Pine forest walk at sunset. Dinner and campfire if your property offers it."
+        "type": "fullday",
+        "label": "FULL DAY — ADVENTURE",
+        "route": "Vagamon — Adventure Day",
+        "morning": { "fallback": "Free morning to rest, or a walk through the meadows.", "parts": [
+          { "text": "Murugan Hill trek (2 hours return).", "sight": "Murugan Hill trek" },
+          { "text": "Paragliding is available from the meadows from October to May.", "sight": "Paragliding (Oct–May)" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kurisumala Ashram (6 km) — a Cistercian monastery at 1,300 metres with extraordinary valley views.", "sight": "Kurisumala Ashram" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Pine forest walk at sunset.", "sight": "Pine forest walk" },
+          { "text": "Dinner and campfire if your property offers it." }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
+        "type": "fullday",
+        "label": "SECOND FULL DAY — VIEWPOINTS",
         "route": "Vagamon — Day Three",
-        "morning": "Peerumedu (20 km) — a quieter plateau with cardamom estates and Elappara viewpoint.",
-        "afternoon": "Illikkal Kallu — a monolithic rock formation (1,580m) accessible by jeep and short hike.",
-        "evening": "Last evening in the meadows. Slow dinner."
+        "morning": { "fallback": "Free morning to rest before departure.", "parts": [
+          { "text": "Peerumedu (20 km) — a quieter plateau with cardamom estates and Elappara viewpoint.", "sight": "Peerumedu plateau drive" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Illikkal Kallu — a monolithic rock formation (1,580m) accessible by jeep and short hike.", "sight": "Illikkal Kallu monolith" },
+          { "text": "Or head to Thangalpara Rock, another dramatic viewpoint nearby.", "sight": "Thangalpara Rock viewpoint" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Last evening in the meadows. Slow dinner." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1812,25 +2045,50 @@ const DEST_BANK = {
     "overview": "Marari is a beach that exists before tourism arrived. The fishing village of Mararikulam sits behind it — catamarans at dawn, nets drying on the sand, the smell of smoked fish. The beach itself stretches uninterrupted for several kilometres in both directions, backed by an unbroken line of coconut palms.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Marari Beach",
-        "morning": "Transfer to Marari (15 min from Alleppey or 90 min from Kochi). Check in. Walk to the beach immediately.",
-        "afternoon": "Afternoon on the beach. Swim. Walk south toward the fishing village and watch the boats come in.",
-        "evening": "Sunset on the beach. Dinner at the resort."
+        "morning": { "parts": [
+          { "text": "Transfer to Marari (15 min from Alleppey or 90 min from Kochi). Check in." },
+          { "text": "Walk to the beach immediately.", "sight": "Marari Beach walk" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Afternoon on the beach. Swim.", "sight": "Marari Beach walk" },
+          { "text": "Walk south toward the fishing village and watch the boats come in.", "sight": "Mararikulam fishing village at dawn" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Sunset on the beach. Dinner at the resort." }
+        ]}
       },
       {
-        "label": "FULL DAY",
+        "type": "fullday",
+        "label": "FULL DAY — BEACH & WELLNESS",
         "route": "Marari — Full Day",
-        "morning": "Walk into Mararikulam village at dawn — fishermen sorting the catch, catamarans pulling up on the sand.",
-        "afternoon": "Couples Ayurveda at the resort spa (90 min). Afternoon by the pool or on the beach.",
-        "evening": "Private candlelit beach dinner if arranged through the resort."
+        "morning": { "fallback": "Free morning to rest, or a walk along the beach.", "parts": [
+          { "text": "Walk into Mararikulam village at dawn — fishermen sorting the catch, catamarans pulling up on the sand.", "sight": "Mararikulam fishing village at dawn" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Couples Ayurveda session at the resort spa (90 min) — book ahead.", "sight": "Couples Ayurveda at resort" },
+          { "text": "Afternoon by the pool or on the beach." }
+        ]},
+        "evening": { "fallback": "Free evening at leisure. Dinner at the resort.", "parts": [
+          { "text": "Private candlelit beach dinner if arranged through the resort.", "sight": "Candlelit beach dinner" }
+        ]}
       },
       {
-        "label": "SECOND FULL DAY",
+        "type": "fullday",
+        "label": "SECOND FULL DAY — VILLAGE & ALLEPPEY",
         "route": "Marari — Day Three",
-        "morning": "Bicycle tour through the village lanes — rice paddies, church, toddy shop, coir yard.",
-        "afternoon": "Day trip to Alleppey (15 km) — canal cruise, coir museum, Ambalapuzha temple.",
-        "evening": "Last beach sunset. Long dinner."
+        "morning": { "fallback": "Free morning to rest before departure.", "parts": [
+          { "text": "Bicycle tour through the village lanes — rice paddies, church, toddy shop, coir yard.", "sight": "Bicycle tour through village" },
+          { "text": "A slow walk through the coconut palm groves behind the beach.", "sight": "Coconut palm grove walk" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Day trip to Alleppey (15 km) — canal cruise, coir museum, Ambalapuzha temple.", "sight": "Day trip to Alleppey (15 km)" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Last beach sunset. Long dinner." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1862,11 +2120,23 @@ const DEST_BANK = {
     "overview": "Thiruvananthapuram is the capital of Kerala and one of the few Indian cities where the old centre still has a heartbeat. The Padmanabhaswamy Temple is the most important Vishnu shrine in Kerala. The Napier Museum, the Zoo, the Government Arts College: all are colonial-era buildings of real quality.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL / TRANSIT",
         "route": "Trivandrum",
-        "morning": "Arrive Trivandrum airport. Transfer to hotel (20 min). Check in.",
-        "afternoon": "Padmanabhaswamy Temple — men must wear dhoti (available for hire at the gate). Napier Museum (closes at 5 PM).",
-        "evening": "Museum Road walk. Dinner in the Kowdiar or Vazhuthacaud area."
+        "morning": { "parts": [
+          { "text": "Arrive Trivandrum airport. Transfer to hotel (20 min). Check in." }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Padmanabhaswamy Temple — men must wear dhoti (available for hire at the gate).", "sight": "Padmanabhaswamy Temple" },
+          { "text": "Kuthiramalika Palace Museum, adjoining the temple.", "sight": "Kuthiramalika Palace Museum" },
+          { "text": "Napier Museum — closes at 5 PM, arrive by 3:30 PM.", "sight": "Napier Museum" },
+          { "text": "Trivandrum Zoo, one of the oldest zoological parks in India.", "sight": "Trivandrum Zoo" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Museum Road walk, past the Government Arts College building — a fine example of colonial-era architecture.", "sight": "Kerala Government Arts College building" },
+          { "text": "Or an evening walk along Shanmugham Beach.", "sight": "Shanmugham Beach (evening walk)" },
+          { "text": "Dinner in the Kowdiar or Vazhuthacaud area." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1901,11 +2171,23 @@ const DEST_BANK = {
     "overview": "Poovar is where the Neyyar River meets the Arabian Sea through a narrow lagoon, separated from the ocean by a thin strip of golden beach. The island is accessible only by boat — no roads, no cars. The floating cottages on the river and the beach villas on the sea side are the only accommodation.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Poovar Island",
-        "morning": "Transfer from Kovalam or Trivandrum (30 min by road, then boat). Board the resort boat from the jetty.",
-        "afternoon": "Arrive at the floating cottages or beach villa. Afternoon at leisure — the river is calm enough to swim in, the beach is 200 metres away.",
-        "evening": "Sunset boat ride on the Neyyar estuary. Dinner at the resort."
+        "morning": { "parts": [
+          { "text": "Transfer from Kovalam or Trivandrum (30 min by road, then boat). Board the resort boat from the jetty." },
+          { "text": "If staying beyond the first night, sunrise on the estuary is a highlight worth waking early for.", "sight": "Sunrise on the estuary" }
+        ]},
+        "afternoon": { "parts": [
+          { "text": "Arrive and settle in." },
+          { "text": "The floating cottage or beach villa setting — the river is calm enough to swim in.", "sight": "Floating cottage experience" },
+          { "text": "The beach is 200 metres away, worth the walk.", "sight": "Poovar Golden Beach walk" },
+          { "text": "Or take an optional day trip to Neyyar Dam (20 km inland).", "sight": "Neyyar Dam (20 km inland) — optional day trip" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Sunset boat ride on the Neyyar estuary.", "sight": "Neyyar estuary boat ride" },
+          { "text": "Dinner at the resort." }
+        ]}
       }
     ],
     "restaurants": [
@@ -1931,18 +2213,38 @@ const DEST_BANK = {
     "overview": "Calicut — Kozhikode — was where Vasco da Gama landed in 1498 and found a city that was already the spice capital of the world. The city that remains is a working Malabar port town with a food culture that is arguably the finest in Kerala: the Malabar biryani, the fish molee, the halwa from Sweet Meat Street are all genuinely their own thing.",
     "days": [
       {
+        "type": "arrival",
         "label": "ARRIVAL DAY",
         "route": "→ Kozhikode",
-        "morning": "Arrive Calicut airport. Transfer to hotel (30 min). Check in.",
-        "afternoon": "Kappad Beach (16 km) — the exact point where Vasco da Gama landed on May 20 1498. Small monument marks it.",
-        "evening": "Sweet Meat Street (SM Street) — the spice and halwa market. Dinner at a Malabar biryani restaurant."
+        "morning": { "parts": [
+          { "text": "Arrive Calicut airport. Transfer to hotel (30 min). Check in." }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "Kappad Beach (16 km) — the exact point where Vasco da Gama landed on May 20 1498. Small monument marks it.", "sight": "Kappad Beach — Vasco da Gama landing point" },
+          { "text": "Walk through Sweet Meat Street — Kozhikode's famous spice and halwa market.", "sight": "Sweet Meat Street (SM Street)" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Kozhikode Beach pier walk at sunset.", "sight": "Kozhikode Beach pier walk" },
+          { "text": "Dinner at a Malabar biryani restaurant." }
+        ]}
       },
       {
+        "type": "fullday",
         "label": "FULL DAY",
         "route": "Kozhikode — Full Day",
-        "morning": "Beypore (10 km) — the ancient Arab dhow-building yard. The same families have been building urus here for 1,500 years.",
-        "afternoon": "Pazhassiraja Museum. Tali Temple. Kuttichira Mosque — the 14th century Mishkal Mosque.",
-        "evening": "Kozhikode Beach pier walk. Dinner at Zain's Hotel for the best biryani in Calicut."
+        "morning": { "fallback": "Free morning to rest, or a walk through the old town.", "parts": [
+          { "text": "Beypore (10 km) — the ancient Arab dhow-building yard. The same families have been building urus here for 1,500 years.", "sight": "Beypore dhow-building yard" }
+        ]},
+        "afternoon": { "fallback": "Free afternoon at leisure.", "parts": [
+          { "text": "The Pazhassiraja Museum, dedicated to the history of the Kerala Varma Pazhassi Raja.", "sight": "Pazhassiraja Museum" },
+          { "text": "Tali Temple, one of the oldest Shiva temples in Kozhikode.", "sight": "Tali Temple" },
+          { "text": "The Mishkal Mosque at Kuttichira — a 14th century mosque built without a single nail.", "sight": "Mishkal Mosque (Kuttichira)" },
+          { "text": "Mananchira Square, the traditional green heart of old Kozhikode.", "sight": "Mananchira Square" }
+        ]},
+        "evening": { "parts": [
+          { "text": "Kozhikode Beach pier walk.", "sight": "Kozhikode Beach pier walk" },
+          { "text": "Dinner at Zain's Hotel for the best biryani in Calicut." }
+        ]}
       }
     ],
     "restaurants": [
@@ -7215,6 +7517,7 @@ function addCustomDest() {
   extraInput.className = 'custom-extra-sightseeing';
   extraInput.id = 'destExtra_' + id;
   extraInput.placeholder = 'Add additional sightseeing not listed above...';
+  extraInput.oninput = function() { updateCustomSummary(); };
 
   body.appendChild(sightLabel);
   body.appendChild(sightDiv);
@@ -7240,7 +7543,7 @@ function onDestChange(id, dest) {
   body.style.display = 'block';
   const sightList = DEST_BANK[dest].sightseeing || [];
   sightDiv.innerHTML = sightList.map((s, i) =>
-    `<label class="custom-sight-item"><input type="checkbox" id="sight_${id}_${i}"> ${s}</label>`
+    `<label class="custom-sight-item"><input type="checkbox" id="sight_${id}_${i}" onchange="updateCustomSummary()"> ${s}</label>`
   ).join('');
   // Hotel selector
   buildHotelSelector(id, dest);
@@ -7394,9 +7697,10 @@ function updateCustomSummary() {
   const rows = document.querySelectorAll('.custom-dest-row');
   const summary = document.getElementById('customSummary');
   const summaryText = document.getElementById('customSummaryText');
-  if (rows.length === 0) { summary.style.display = 'none'; return; }
+  if (rows.length === 0) { summary.style.display = 'none'; hideCapacityWarning(); return; }
   let parts = [];
   let totalNights = 0;
+  let warnings = [];
   rows.forEach(row => {
     const id = row.id.replace('destRow_', '');
     const destW = document.getElementById('destSelWrap_' + id);
@@ -7405,11 +7709,41 @@ function updateCustomSummary() {
       const n = parseInt(nights.value) || 1;
       totalNights += n;
       parts.push(destW.dataset.value + ' · ' + n + 'N');
+      const bank = DEST_BANK[destW.dataset.value];
+      const sightBoxes = document.querySelectorAll(`#destSight_${id} input[type=checkbox]:checked`);
+      const selectedSight = Array.from(sightBoxes).map(cb => cb.parentElement.textContent.trim());
+      const unused = getUnusedSightings(bank, n, selectedSight);
+      if (unused.length > 0) {
+        warnings.push(destW.dataset.value + ': <strong>' + unused.join(', ') + '</strong> won\u2019t appear in the itinerary at ' + n + ' night' + (n === 1 ? '' : 's') + ' — add a night or uncheck ' + (unused.length === 1 ? 'it' : 'them') + '.');
+      }
     }
   });
-  if (parts.length === 0) { summary.style.display = 'none'; return; }
+  if (parts.length === 0) { summary.style.display = 'none'; hideCapacityWarning(); return; }
   summary.style.display = 'block';
   summaryText.textContent = parts.join('  →  ') + '  ·  Total: ' + totalNights + ' Nights ' + (totalNights + 1) + ' Days';
+  showCapacityWarning(warnings);
+}
+
+function showCapacityWarning(warnings) {
+  const summary = document.getElementById('customSummary');
+  let warnBox = document.getElementById('customCapacityWarning');
+  if (!warnBox) {
+    warnBox = document.createElement('div');
+    warnBox.id = 'customCapacityWarning';
+    warnBox.style.cssText = 'margin-top:10px;padding:12px 16px;background:#3D0C11;border:1px solid rgba(201,168,76,.4);border-radius:3px;font-family:\'EB Garamond\',serif;font-size:13px;color:#F0EAD6;line-height:1.6;';
+    summary.parentNode.insertBefore(warnBox, summary.nextSibling);
+  }
+  if (warnings.length > 0) {
+    warnBox.style.display = 'block';
+    warnBox.innerHTML = '<span style="font-family:\'Cinzel\',serif;font-size:9px;letter-spacing:1.5px;color:var(--gold);">⚠ WON\u2019T APPEAR IN ITINERARY</span><br>' + warnings.map(w => '&bull; ' + w).join('<br>');
+  } else {
+    warnBox.style.display = 'none';
+  }
+}
+
+function hideCapacityWarning() {
+  const warnBox = document.getElementById('customCapacityWarning');
+  if (warnBox) warnBox.style.display = 'none';
 }
 
 function getCustomPackageData() {
@@ -7465,25 +7799,51 @@ function countMatchingFragments(day, selectedSights) {
   return score;
 }
 
-// Chooses which template days to render for a given night count.
-// Day 0 (arrival) is always kept. For the remaining nights, instead of blindly taking
-// days 1,2,3... in fixed order (which strands content that only lives on e.g. "day 4"
-// when the guest only booked 3 nights), we score each remaining template day by how many
-// of the CHECKED sightseeing items it actually contains, and pick the highest-coverage
-// days — preserving their original relative order so the narrative still flows sensibly.
+// Picks the sequence of days to render for a given night count using the new type model.
+// type:"arrival" — always Day 1, exactly one.
+// type:"fullday" — rotate across nights 2..N, cycling if more nights than fullday templates.
+//   Within each cycle, fullday templates are scored by matching checked sightseeing and
+//   reordered so the highest-coverage template goes first (then 2nd highest, etc.),
+//   ensuring the most relevant activities always surface first across multiple full days.
+// The departure day is generated separately by buildCustomCuratedPDF — not returned here.
 function pickDaysForNights(bank, nights, selectedSights) {
   const days = bank.days || [];
   if (nights <= 0 || days.length === 0) return [];
-  if (nights >= days.length) {
-    const result = [];
-    for (let n = 0; n < nights; n++) result.push(days[Math.min(n, days.length - 1)]);
-    return result;
+  // Separate arrival and fullday templates
+  const arrivalDays = days.filter(d => !d.type || d.type === 'arrival');
+  const fullDays = days.filter(d => d.type === 'fullday');
+  const arrival = arrivalDays[0] || days[0];
+  // nights - 1 = number of full days to generate (departure is rendered separately)
+  const middleCount = Math.max(0, nights - 1);
+  if (middleCount === 0 || fullDays.length === 0) return [arrival];
+  // Score fullday templates by checked sight matches, sort best-first
+  const scored = fullDays.map((d, idx) => ({ d, idx, score: countMatchingFragments(d, selectedSights) }));
+  scored.sort((a, b) => b.score - a.score || a.idx - b.idx);
+  // Cycle through scored fullday templates to fill middleCount slots
+  const middle = [];
+  for (let i = 0; i < middleCount; i++) {
+    middle.push(scored[i % scored.length].d);
   }
-  const arrival = days[0];
-  const rest = days.slice(1).map((d, idx) => ({ d, idx, score: countMatchingFragments(d, selectedSights) }));
-  rest.sort((a, b) => b.score - a.score || a.idx - b.idx);
-  const chosen = rest.slice(0, nights - 1).sort((a, b) => a.idx - b.idx).map(r => r.d);
-  return [arrival].concat(chosen);
+  return [arrival].concat(middle);
+}
+
+// Returns which selected sightseeing items won't actually appear in the generated
+// itinerary for this destination/night-count — because no available fullday template
+// covers them, or there aren't enough nights for all selected activities to surface.
+function getUnusedSightings(bank, nights, selectedSights) {
+  if (!bank || !bank.days || bank.days.length === 0 || selectedSights.length === 0) return [];
+  const isConverted = bank.days.some(d => d.morning && typeof d.morning === 'object');
+  if (!isConverted) return [];
+  const chosenDays = pickDaysForNights(bank, nights, selectedSights);
+  const covered = new Set();
+  chosenDays.forEach(day => {
+    [day.morning, day.afternoon, day.evening].forEach(b => {
+      if (b && typeof b === 'object' && b.parts) {
+        b.parts.forEach(p => { if (p.sight) covered.add(p.sight); });
+      }
+    });
+  });
+  return selectedSights.filter(s => !covered.has(s));
 }
 
 function buildCustomCuratedPDF() {
@@ -7501,24 +7861,21 @@ function buildCustomCuratedPDF() {
     if (!bank) return;
     // Collect restaurants
     (bank.restaurants || []).forEach(r => { allRestaurants[r.name] = r; });
-    // Build days — pick which template days to use based on what's actually selected,
-    // so content isn't stranded on a "4th day" that never renders for a 3-night stay.
+    // Build days — arrival + full days (departure rendered separately at end)
     const allSight = destData.sightseeing.length > 0 ? destData.sightseeing : (bank.sightseeing || []);
     const chosenDays = pickDaysForNights(bank, destData.nights, allSight);
-    for (let n = 0; n < destData.nights; n++) {
+    const isLastDest = data.destinations.indexOf(destData) === data.destinations.length - 1;
+    for (let n = 0; n < chosenDays.length; n++) {
       dayNum++;
-      const day = chosenDays[n] || bank.days[bank.days.length - 1];
-      // Render each time-block from selected sightseeing (falls back to showing everything if nothing selected)
+      const day = chosenDays[n];
       const dayMorning = renderTimeBlock(day.morning, allSight);
       const dayAfternoon = renderTimeBlock(day.afternoon, allSight);
       const dayEvening = renderTimeBlock(day.evening, allSight);
-      // Build sightseeing tags — rotate through list so each day shows different tags
       const tagStart = (n * 3) % Math.max(allSight.length, 1);
       const dayTags = allSight.slice(tagStart, tagStart + 3).concat(allSight.slice(0, Math.max(0, tagStart + 3 - allSight.length)));
-      const tags = dayTags.slice(0, 4).map(s =>
+      const tags = dayTags.slice(0, 3).map(s =>
         `<span class="tag">${s.toUpperCase().replace(/[^A-Z0-9&·\- ]/g,'')}</span>`
       ).join('');
-      // Alternate day background: dark burgundy for arrival/transit days, dark forest for in-destination days
       const dayBg = n === 0
         ? 'background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%)'
         : (n % 2 === 0 ? 'background:linear-gradient(105deg,#1C2E1A 0%,#0f1a0e 100%)' : 'background:linear-gradient(105deg,#1A2535 0%,#0e1520 100%)');
@@ -7539,6 +7896,28 @@ function buildCustomCuratedPDF() {
         <div class="time-block" style="border-bottom:none;"><span class="time-icon" style="color:rgba(240,234,214,.5);">☾</span><div><span class="time-label" style="color:var(--gold);">E V E N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">${dayEvening}</span></div></div>
       </div>
       <div class="tags">${tags}</div>
+    </div>
+  </div>`;
+    }
+    // Auto-generate departure day after the last destination's nights
+    if (isLastDest) {
+      dayNum++;
+      itineraryHTML += `
+  <div class="day-block" style="background:linear-gradient(105deg,#3D0C11 0%,#2a0a0e 100%);padding:22px 40px;">
+    <div class="day-top">
+      <div class="day-num" style="color:var(--gold);opacity:.55;">${String(dayNum).padStart(2,'0')}</div>
+      <div class="day-info">
+        <span class="day-label" style="color:var(--gold);">D E P A R T U R E  D A Y</span>
+        <h3 class="day-title" style="color:var(--ivory);">Farewell → ${destData.dest}</h3>
+        <span class="day-hotel" style="color:rgba(240,234,214,.25);">${destData.dest.toUpperCase()}</span>
+      </div>
+    </div>
+    <div class="day-body">
+      <div class="time-blocks">
+        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">☼</span><div><span class="time-label" style="color:var(--gold);">M O R N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">Breakfast at the hotel. Check out. Final packing.</span></div></div>
+        <div class="time-block"><span class="time-icon" style="color:rgba(240,234,214,.5);">◐</span><div><span class="time-label" style="color:var(--gold);">A F T E R N O O N</span><span class="time-text" style="color:rgba(240,234,214,.65);">Transfer to the airport or railway station. Your Kerala journey ends here — carry it well.</span></div></div>
+        <div class="time-block" style="border-bottom:none;"><span class="time-icon" style="color:rgba(240,234,214,.5);">☾</span><div><span class="time-label" style="color:var(--gold);">E V E N I N G</span><span class="time-text" style="color:rgba(240,234,214,.65);">Onward journey begins.</span></div></div>
+      </div>
     </div>
   </div>`;
     }
